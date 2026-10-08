@@ -1,0 +1,8 @@
+# Local credentials and personal account exports
+.env
+.env.*
+!.env.example
+secrets/
+private-data/
+__pycache__/
+.venv/
