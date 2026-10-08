@@ -1,0 +1,4 @@
+include README.md CHANGELOG.md requirements-tested.txt Run-Demo.cmd Run-Demo.ps1
+recursive-include docs *.md
+recursive-include examples *.csv *.json *.md
+recursive-include tests *.py
