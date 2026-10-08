@@ -49,6 +49,16 @@ def save_report(report,path,output):
     attribution_rows="".join(f"<tr><td>{escape(name)}</td><td>{pct(value)}</td></tr>" for name,value in linked.items()) or "<tr><td colspan='2'>未提供板块输入</td></tr>"
     wealth=modules.get("M6",{}).get("wealth_differences",{})
     trade_rows="".join(f"<tr><td>{escape(name)}</td><td>{value:,.2f}</td></tr>" for name,value in wealth.items()) or "<tr><td colspan='2'>未提供完整订单</td></tr>"
+    quality=safe.get("data_quality",{})
+    supplemental=safe.get("supplemental",{})
+    premium_rows="".join(f"<tr><td>{escape(row['date'])}</td><td>{row['close']:.4f}</td><td>{row['nav']:.4f}</td><td>{pct(row['premium'])}</td></tr>"
+                         for row in supplemental.get("premium",{}).get("rows",[]))
+    lt=supplemental.get("lookthrough",{})
+    look_rows="".join(f"<tr><td>{escape(name)}</td><td>{pct(weight)}</td></tr>" for name,weight in lt.get("leaves",{}).items())
+    supplement_section=""
+    if supplemental:
+        supplement_section=f'''<section><h2>ETF 收盘价与净值对照</h2><p>同日收盘偏离不是盘中 IOPV，也不是可成交价差。</p><table><tr><th>日期</th><th>收盘价</th><th>单位净值</th><th>偏离</th></tr>{premium_rows}</table></section>
+<section><h2>披露持仓穿透</h2><p>已知权重 {pct(lt.get('known_weight'))}；未知权重 {pct(lt.get('unknown_weight'))}。循环、缺少子基金及未披露部分保留为未知，不按零风险处理。</p><table><tr><th>底层身份</th><th>组合权重</th></tr>{look_rows}</table></section>'''
     selected=budget.get("selected") or "无预算通过方案"
     svg=""
     if path is not None:
@@ -64,6 +74,7 @@ def save_report(report,path,output):
 <main><h1>组合决策报告</h1><p>研究引擎 v{escape(safe['engine_version'])} · 费用后净值与风险比较</p>
 <p class="badge">状态：{escape(safe['status'])} · 回撤预算状态：{escape(budget.get('status','not_run'))} · {escape(selected)}</p>
 <p>历史、自举模拟与样本外结果分别展示。模拟分位数不构成未来亏损保证。</p>
+<p>频率：{escape(quality.get('frequency','未登记'))}；年化因子：{quality.get('periods_per_year','—')}；日历状态：{escape(quality.get('calendar_status','未登记'))}。<a href="report-manifest.json">留档清单</a>记录输入、来源快照、报告文件和计算方法。</p>
 <section><h2>已知边界</h2><ul>{warnings}</ul></section>
 <section><h2>配置候选</h2><table><tr><th>方法</th>{headings}</tr>{rows}</table></section>
 <section><h2>回撤预算</h2><p>预算 {pct(budget.get('budget'))}；采用所选块长中的最差 p95；严格模式还检查蒙特卡洛区间上端。</p><table><tr><th>方法</th><th>最差 p95</th><th>误差收敛</th><th>满足预算</th></tr>{budgets}</table></section>
@@ -73,6 +84,7 @@ def save_report(report,path,output):
 <section><h2>情景回放</h2><p>固定配置反事实；合成数据报告中的历史命名窗口不代表真实市场损失。</p><table><tr><th>情景</th><th>最大回撤</th><th>最差月</th><th>谷底至恢复月数</th></tr>{stress_rows}</table></section>
 <section><h2>持仓归因与交易对比</h2><p>板块归因按用户输入与基准计算；交易对比依赖完整订单，不代表择时能力的证明。</p><table><tr><th>多期归因项</th><th>贡献</th></tr>{attribution_rows}</table><table><tr><th>路径财富差</th><th>金额</th></tr>{trade_rows}</table></section>
 <section><h2>风险卡片</h2><table>{risk_rows}</table><p>Sharpe：{escape(str(risk.get('sharpe','—')))}；分块区间：{escape(str(risk.get('sharpe_bootstrap',{}).get('interval','—')))}。有效风险资产数：{escape(str(risk.get('effective_risk_assets','—')))}。</p></section>
+{supplement_section}
 <section><h2>参考配置的全历史描述净值</h2><p>参考方法：{escape(safe.get('reference_method','—'))}。权重使用训练数据估计，本图不是全历史样本外业绩。</p>{svg}</section>
 <section><h2>下载与完整结果</h2><p><a href="report.json">完整 JSON</a> · <a href="ledger.csv">账户账本</a> · <a href="transactions.csv">模拟交易</a></p><details><summary>查看全部模块与假设</summary><pre>{detail}</pre></details></section></main></html>'''
     (out/"report.html").write_text(html,encoding="utf-8")

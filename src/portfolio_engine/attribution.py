@@ -65,7 +65,7 @@ def factor_attribution(excess_returns,factors,lags=None):
             "interpretation":"descriptive exposures, not proof of skill or causality"}
 
 
-def trade_counterfactual(returns,target,orders,cashflows=None,**kwargs):
+def trade_counterfactual(returns,target,orders,cashflows=None,periods=252,**kwargs):
     """Three self-financing paths using identical start, flows and fee rules."""
     if orders is None:
         return {"status":"insufficient_data","reason":"complete signed-notional orders required"}
@@ -76,7 +76,7 @@ def trade_counterfactual(returns,target,orders,cashflows=None,**kwargs):
     mechanical=backtest(returns,target,cashflows=cashflows,rebalance="quarterly",**kwargs)
     paths={"A_actual":actual,"B_hold":held,"C_mechanical":mechanical}
     values={name:float(path.daily.value.iloc[-1]) for name,path in paths.items()}
-    metrics={name:{**summary(path.returns),"terminal_value":values[name],
+    metrics={name:{**summary(path.returns,periods),"terminal_value":values[name],
                    "cost":float(path.daily.cost.sum())} for name,path in paths.items()}
     zero_kwargs={k:v for k,v in kwargs.items() if k not in {"costs","flow_rule"}}
     gross_actual=backtest(returns,target,orders=orders,cashflows=cashflows,rebalance="none",costs=0,**zero_kwargs)

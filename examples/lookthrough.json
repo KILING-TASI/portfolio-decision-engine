@@ -1,0 +1,38 @@
+{
+  "as_of": "2025-12-31",
+  "currency": "CNY",
+  "root": "portfolio",
+  "nodes": {
+    "portfolio": {
+      "currency": "CNY",
+      "source_url": "https://example.org/synthetic-holdings",
+      "report_date": "2025-09-30",
+      "published_at": "2025-10-30",
+      "holdings": [
+        {
+          "kind": "fund",
+          "node": "fund_demo",
+          "weight": 0.7
+        },
+        {
+          "kind": "cash",
+          "id": "cash_demo",
+          "weight": 0.3
+        }
+      ]
+    },
+    "fund_demo": {
+      "currency": "CNY",
+      "source_url": "https://example.org/synthetic-fund",
+      "report_date": "2025-06-30",
+      "published_at": "2025-08-30",
+      "holdings": [
+        {
+          "kind": "stock",
+          "id": "stock_demo",
+          "weight": 0.8
+        }
+      ]
+    }
+  }
+}

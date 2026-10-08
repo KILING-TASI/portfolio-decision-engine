@@ -1,4 +1,6 @@
-# v0.5 使用说明
+# 引擎使用说明（v0.6）
+
+v0.6 增加 [数据接入与留档](data-bridge.md)。旧命令保留，但输出目录必须不存在；失败保留原因，旧报告不覆盖。Windows 快捷入口自动创建唯一报告目录。
 
 ## 输入
 
@@ -38,7 +40,7 @@ data.return_type 必须是 total_return 或 synthetic_total_return；来源与�
 | flow_rule | target：正入金重新按目标配置；cash：保留现金 |
 | rebalance | none/monthly/quarterly/yearly/threshold |
 | threshold | 默认相对目标偏离 0.2，零目标使用绝对偏离 |
-| periods_per_year | 默认 252，影响年化与持有期窗口 |
+| periods_per_year | 日频252/月频12；与频率相冲突拒绝计算 |
 | risk_free_annual | 有效年化无风险收益，默认 0；仅用于指标，账户现金收益为 0 |
 | seed | 默认 42，保留在来源记录 |
 
@@ -46,7 +48,7 @@ data.return_type 必须是 total_return 或 synthetic_total_return；来源与�
 
 XIRR 初始日默认第一行前一天，现金流用行日期记录；这是日内时点的日频近似。有限 log(1+r) 搜索区间中检查符号变化根，无解或多解明确返回；不承诺发现全部重根。
 
-BL 使用 `black_litterman` 对象：market_weights、P、Q、Omega、sources，每个观点一个来源；可设置 tau、risk_aversion。收益与协方差统一为日频，观点为用户输入。风险导向候选保留基础协方差，BL 单列后验预测协方差的效用候选。walk-forward 不验证 BL 观点。
+BL 使用 `black_litterman` 对象：market_weights、P、Q、Omega、sources，每个观点一个来源；可设置 tau、risk_aversion、frequency。观点频率默认daily，月频输入须明确frequency=monthly，收益与协方差同频。风险导向候选保留基础协方差，BL 单列后验预测协方差的效用候选。walk-forward 不验证 BL 观点。
 
 ## M2 预算
 

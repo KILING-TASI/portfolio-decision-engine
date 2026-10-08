@@ -17,6 +17,8 @@ from .migration import plan_migration
 from .risk import summary,concentration
 from .stress import historical_stress
 from .validation import InputError,returns_frame,vector,weights
+from .data_bridge import validate_context,closing_premium,lookthrough
+from .archive import read_json
 
 
 def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
@@ -27,7 +29,7 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
                     "covariance_window","min_weight","max_weight","groups","black_litterman","bootstrap",
                     "require_china_bear_coverage","cashflows","initial_value","rebalance","threshold","flow_rule",
                     "current_holdings","current_cash","new_funds","locked_indices","migration_penalty",
-                    "brinson","factor_csv","orders_csv","initial_weights","input_kind","walk_forward"}
+                    "brinson","factor_csv","orders_csv","initial_weights","input_kind","walk_forward","premium_file","lookthrough_file"}
     if set(config)-allowed_config:
         raise InputError(f"unknown config fields: {sorted(set(config)-allowed_config)}")
     metadata=config.get("data",{})
@@ -36,7 +38,8 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
     if not metadata.get("source") or not metadata.get("currency"):
         raise InputError("declare data source and common currency")
     n=len(frame.columns)
-    periods=config.get("periods_per_year",252)
+    data_quality=validate_context(frame,metadata,config.get("periods_per_year"))
+    periods=data_quality["periods_per_year"]
     if not isinstance(periods,int) or periods<=0:
         raise InputError("periods_per_year must be a positive integer")
     fraction=config.get("train_fraction",.7)
@@ -58,6 +61,8 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
     candidates=allocation["candidates"]
     warnings=["Return-based fractional research model: exchange fills, fund settlement, taxes by date, premium and integer lots are not modeled.",
               "M2 is exploratory training selection; held-out comparison is a single split, not full walk-forward verification."]
+    if data_quality["calendar_status"]=="not_provided":
+        warnings.append("Frequency spacing checked; applicable observation calendar not supplied or verified.")
     if metadata["return_type"]=="synthetic_total_return":
         warnings.append("SYNTHETIC DATA: all returns, scenarios and results are demonstration only.")
     if cov_report["observations"]<config.get("covariance_window",500):
@@ -70,6 +75,8 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
     bl=None
     if config.get("black_litterman"):
         views=config["black_litterman"]
+        if views.get("frequency","daily")!=data_quality["frequency"]:
+            raise InputError("BL view frequency must match return data")
         if not views.get("sources") or len(views["sources"])!=len(views["Q"]):
             raise InputError("BL needs one source per view")
         bl=black_litterman(sigma,views["market_weights"],views["P"],views["Q"],views["Omega"],views.get("tau",.05),views.get("risk_aversion",3))
@@ -81,7 +88,7 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
         # Risk-only methods retain their original covariance; BL is a separate candidate.
         allocation["candidates"]=candidates
         allocation["bl_solver_failures"]=bl_allocation["failures"]
-        warnings.append("BL views are daily return inputs, not model-generated forecasts; risk-only candidates retain base covariance.")
+        warnings.append("BL views match the input return frequency and are user inputs, not model-generated forecasts.")
     boot=dict(config.get("bootstrap",{}))
     allowed={"budget","horizon","paths","block_lengths","rebalance_every","mc_tolerance","max_paths","strict"}
     if set(boot)-allowed:
@@ -90,7 +97,10 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
     coverage={}
     for year in [2015,2018]:
         rows=train.loc[f"{year}-01-01":f"{year}-12-31"]
-        coverage[str(year)]=len(rows)>=200 and rows.index.min()<=pd.Timestamp(f"{year}-01-10") and rows.index.max()>=pd.Timestamp(f"{year}-12-20")
+        if data_quality["frequency"]=="monthly":
+            coverage[str(year)]=len(rows)==12 and rows.index[0].month==1 and rows.index[-1].month==12
+        else:
+            coverage[str(year)]=len(rows)>=200 and rows.index.min()<=pd.Timestamp(f"{year}-01-10") and rows.index.max()>=pd.Timestamp(f"{year}-12-20")
     if config.get("require_china_bear_coverage",True) and not all(coverage.values()):
         budget_report["status"]="insufficient_data"
         budget_report["exploratory_candidate"]=budget_report["selected"]
@@ -157,14 +167,20 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
         order_path=Path(base_dir or ".")/config["orders_csv"]
         orders=pd.read_csv(order_path,parse_dates=["date"]).set_index("date")
         initial=weights(config.get("initial_weights",w),n)
-        trade=trade_counterfactual(frame,initial,orders,cashflows=flows,costs=fees,initial_value=config.get("initial_value",100000))
+        trade=trade_counterfactual(frame,initial,orders,cashflows=flows,costs=fees,initial_value=config.get("initial_value",100000),periods=periods)
         provenance_files["orders_sha256"]=hashlib.sha256(order_path.read_bytes()).hexdigest()
     baseline="equal_weight" if "equal_weight" in candidates else "constrained_equal_reference"
     baseline_score=out_of_sample.get(baseline,{}).get("cagr")
     outperform=out_of_sample[reference]["cagr"]>baseline_score if baseline_score is not None else None
     modules={"M1":{"allocation":allocation,"covariance":cov_report,"black_litterman":bl},
-             "M2":budget_report,"M3":attribution,"M4":migration,"M5":historical_stress(frame,w,costs=fees),
+             "M2":budget_report,"M3":attribution,"M4":migration,"M5":historical_stress(frame,w,costs=fees,periods=periods),
              "M6":trade,"M7":risk}
+    supplemental={}
+    for field,calculator in [("premium_file",closing_premium),("lookthrough_file",lookthrough)]:
+        if config.get(field):
+            file=Path(base_dir or ".")/config[field]
+            supplemental[field.removesuffix("_file")]=calculator(read_json(file))
+            provenance_files[field+"_sha256"]=hashlib.sha256(file.read_bytes()).hexdigest()
     wf_config=config.get("walk_forward",{})
     if not isinstance(wf_config,dict) or set(wf_config)-{"min_train","test_steps"}:
         raise InputError("walk_forward allows min_train and test_steps")
@@ -172,7 +188,7 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
                     lower=config.get("min_weight",0),upper=config.get("max_weight",1),groups=config.get("groups"),
                     costs=fees,periods=periods,**wf_config)
     report={"schema_version":"0.4","engine_version":__version__,"status":"degraded",
-            "data_snapshot_id":snapshot_id,"inputs":config,"assets":frame.columns.tolist(),
+            "data_snapshot_id":snapshot_id,"data_quality":data_quality,"supplemental":supplemental,"inputs":config,"assets":frame.columns.tolist(),
             "sample":{"start":str(frame.index[0].date()),"end":str(frame.index[-1].date()),
                       "train_end":str(train.index[-1].date()),"test_start":str(test.index[0].date())},
             "modules":modules,"reference_method":reference,"historical_comparison":historical,

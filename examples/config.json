@@ -2,7 +2,8 @@
   "data": {
     "return_type": "synthetic_total_return",
     "source": "seeded synthetic demonstration; not market history",
-    "currency": "CNY"
+    "currency": "CNY",
+    "frequency": "daily"
   },
   "seed": 42,
   "train_fraction": 0.75,
@@ -38,6 +39,8 @@
   },
   "factor_csv": "factors.csv",
   "orders_csv": "orders.csv",
+  "premium_file": "premium.json",
+  "lookthrough_file": "lookthrough.json",
   "brinson": {
     "portfolio_weights": [
       [
@@ -83,15 +86,13 @@
   "bootstrap": {
     "budget": 0.3,
     "horizon": 252,
-    "paths": 2000,
-    "max_paths": 8000,
+    "paths": 200,
+    "max_paths": 400,
     "block_lengths": [
       10,
-      20,
-      40,
-      60
+      20
     ],
-    "mc_tolerance": 0.01,
+    "mc_tolerance": 0.03,
     "rebalance_every": 63
   }
 }

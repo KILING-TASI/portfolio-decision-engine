@@ -7,6 +7,7 @@ if (-not (Test-Path -LiteralPath $taskPython)) {
 }
 & $taskPython -m pip install -e .
 if ($LASTEXITCODE -ne 0) { throw 'Dependency installation failed.' }
-& $taskPython -m portfolio_engine demo --fast --out reports/demo
+$taskReportDir = Join-Path 'reports' ('demo-' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + [guid]::NewGuid().ToString('N').Substring(0,6))
+& $taskPython -m portfolio_engine demo --fast --out $taskReportDir
 if ($LASTEXITCODE -ne 0) { throw 'Demo failed. Please read the error above.' }
-Invoke-Item -LiteralPath (Join-Path $PSScriptRoot 'reports/demo/report.html')
+Invoke-Item -LiteralPath (Join-Path $PSScriptRoot (Join-Path $taskReportDir 'report.html'))

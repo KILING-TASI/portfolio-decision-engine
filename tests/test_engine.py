@@ -254,6 +254,7 @@ def test_stress_censored_recovery_and_missing():
 
 
 def test_cli_end_to_end_synthetic_report(tmp_path):
+    tmp_path=tmp_path/"result"
     assert main(["demo","--fast","--out",str(tmp_path)])==0
     report=json.loads((tmp_path/"report.json").read_text(encoding="utf8"))
     assert set(report["modules"])=={f"M{i}" for i in range(1,8)}

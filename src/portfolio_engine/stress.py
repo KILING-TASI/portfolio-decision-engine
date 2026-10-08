@@ -14,7 +14,7 @@ HISTORICAL_SCENARIOS={
 }
 
 
-def historical_stress(returns,target,scenarios=None,costs=.0001):
+def historical_stress(returns,target,scenarios=None,costs=.0001,periods=252):
     frame=returns_frame(returns)
     result={}
     for name,(start,end) in (scenarios or HISTORICAL_SCENARIOS).items():
@@ -38,7 +38,7 @@ def historical_stress(returns,target,scenarios=None,costs=.0001):
         recovered_at=trough+int(recovered[0]) if len(recovered) else None
         monthly=(1+observed.twr_return).resample("ME").prod()-1
         result[name]={"status":"ok","kind":"historical_fixed_target_counterfactual",
-                      **summary(observed.twr_return),"cost":float(observed.cost.sum()),
+                      **summary(observed.twr_return,periods),"cost":float(observed.cost.sum()),
                       "worst_month":float(monthly.min()),
                       "recovery_months_from_trough":(dates[recovered_at]-dates[trough]).days/30.4375 if recovered_at is not None else None,
                       "recovery_status":"recovered" if recovered_at is not None else "right_censored",

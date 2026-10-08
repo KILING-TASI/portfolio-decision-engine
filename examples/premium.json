@@ -1,0 +1,25 @@
+{
+  "code": "gold_demo",
+  "prices": [
+    {
+      "date": "2025-12-30",
+      "close": 2.1
+    },
+    {
+      "date": "2025-12-31",
+      "close": 2.2
+    }
+  ],
+  "nav": [
+    {
+      "date": "2025-12-30",
+      "nav": 2
+    },
+    {
+      "date": "2025-12-31",
+      "nav": 2.05
+    }
+  ],
+  "price_source_url": "https://example.org/synthetic-price",
+  "nav_source_url": "https://example.org/synthetic-nav"
+}
