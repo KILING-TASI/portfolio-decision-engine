@@ -35,3 +35,19 @@ TWR 分段用“本期流前估值 / 上期流后估值”，再链接累计收�
 工作台原观察收益入口没有独立的未来现金压力模型。本批现金需求比较是同输入转交引擎的完整结果一致性检查，而不是两个独立模型的相互验证；也不拿未来条件账本与历史观察收益强作等价。正常、收入中断叠加折价/延期、冻结不能释放以及未知费用/日期的案例分别保留。可选入口失败不删除主包功能，不自动安装依赖或改写历史输出。
 
 联合入口的具体命令、源码摘要与实际结果应另存联调记录；文件内容完整性、数值对照、来源真实性、浏览器验收分别记录。本批不认证真实账户或来源，不执行交易。
+
+
+## 本批实际联调记录
+
+使用工作台本地待审 `scripts/bounded_engine_gateway.py`，方法 `bounded-native-gateway-1`，调用组合引擎提交 `b29116f`。完整入口源码 SHA256 与引擎各方法文件摘要绑定在 [联调回执](../examples/workbench-cashflow-joint-receipt.json)。工作台当时基提交不等于未提交入口源码，回执明确记录这一状态，不能仅凭提交号认证本次调用。
+
+```sh
+python scripts/bounded_engine_gateway.py portfolio-observed --project-dir /path/to/portfolio-decision-engine --engine-python /path/to/engine-python --input /path/to/workbench-observed-cashflow.json --out-dir /path/to/new-observed-output
+python scripts/bounded_engine_gateway.py portfolio-cash-demand --project-dir /path/to/portfolio-decision-engine --engine-python /path/to/engine-python --input /path/to/cash-demand-input.json --out-dir /path/to/new-cash-output
+```
+
+这些是显式提供可信本地项目的可选命令；工作台不下载或安装引擎，不替换已有 cashflow 入口。项目路径、Python 路径、输入和输出均由调用方明确提供。
+
+共 12 次实际入口调用通过：4 组观察收益，4 组现金需求（正常与两种压力、未知费用及释放条件、截止日后到账、未知收支日期），4 组失败（观察费用声明冲突、观察未知方法、未知现金流完整性、现金需求未知方法）。每次保留确切输入字节与原生响应；成功响应与引擎同输入完整对象一致，失败保持 return code 2、blocked、null 响应及原错误，不升级为成功。未知现金需求只输出已解析事件的条件账本，完整现金余额仍未估计。
+
+联调发现工作台现金需求结果文件误写为 `cash-demand-result.json`，已修为原生实际文件 `cash-demand.json`，修正后才验收透传成功。该修正落在工作台待审 PR #6，引擎侧没有新增另一个现金压力模型。最终入口若改变，需以新源码摘要和新输出目录再次验收，历史回执保持冻结。
