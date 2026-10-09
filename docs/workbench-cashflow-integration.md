@@ -56,3 +56,8 @@ python scripts/bounded_engine_gateway.py portfolio-cash-demand --project-dir /pa
 ### 入口摘要更新后的追加复查
 
 工作台入口增加实际源码摘要后，重新实际调用相同 12 案，另存 [第二批联调回执](../examples/workbench-cashflow-joint-receipt-v2.json)，第一批原样保留。每个原生成功或失败响应中的 gatewaySourceSha256 都与本次冻结入口源码一致，调用前后源码不变。四组观察收益还重新调用当时工作台独立观察函数，六个限定字段仍在 1e-6 容差内匹配；现金需求完整对象与失败保留检查也通过。范围仅两个 portfolio 入口，不为此次新增的 BJX 白名单或 rules 回转路径作验收声明。该入口调用时仍为待提交源码，以摘要而非基提交绑定。
+
+
+### 最终工作台提交的验收
+
+入口随后补充规则报告展示字段，实际源码摘要改变；先前回执只代表各自当时的代码，不能拿旧摘要认证最终入口。最终工作台提交 `32e42b41a33688a47decd2540d823ff475b19b44` 的两个 portfolio 入口重新完成同样 12 次实际调用，全部通过。[最终回执](../examples/workbench-cashflow-joint-receipt-final.json) 记录提交号、实际调用文件摘要、Git blob 摘要及每案输入摘要。每次原生响应中的 gatewaySourceSha256 都与本次冻结文件一致；Git 文件仅 CRLF/LF 换行规范化，原始摘要分别记录，不称二者相等。调用期间入口和工作台观察计算文件均未改变。前两批回执及完整输出保持原样。范围只含本引擎的观察收益与现金需求；不为其他独立引擎或规则报告展示签字，不执行交易，未合并发布。
