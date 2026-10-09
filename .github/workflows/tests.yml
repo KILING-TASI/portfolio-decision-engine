@@ -22,11 +22,7 @@ jobs:
             ${{ runner.temp }}/portfolio-standalone/acceptance.json
             ${{ runner.temp }}/portfolio-standalone/command-*.stdout
             ${{ runner.temp }}/portfolio-standalone/command-*.stderr
-            ${{ runner.temp }}/portfolio-standalone/demo/report.html
-            ${{ runner.temp }}/portfolio-standalone/demo/report.json
-            ${{ runner.temp }}/portfolio-standalone/demo/ledger.csv
-            ${{ runner.temp }}/portfolio-standalone/demo/transactions.csv
-            ${{ runner.temp }}/portfolio-standalone/demo/report-manifest.json
+            ${{ runner.temp }}/portfolio-standalone/demo/
           retention-days: 7
   test:
     strategy:
