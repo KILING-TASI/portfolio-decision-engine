@@ -59,7 +59,8 @@ class BacktestResult:
 
 def backtest(returns, target, initial_value=100000.0, costs=0.0001,
              rebalance="quarterly", threshold=0.2, cashflows=None,
-             cash_return=0.0, flow_rule="target", initial_date=None, orders=None, target_schedule=None):
+             cash_return=0.0, flow_rule="target", initial_date=None, orders=None, target_schedule=None,
+             initial_weights=None,rebalance_every_steps=None):
     """Return-based research ledger, not an exchange execution simulator.
 
     Cash flows and scheduled rebalances occur before each row's return.
@@ -76,6 +77,8 @@ def backtest(returns, target, initial_value=100000.0, costs=0.0001,
         raise InputError("invalid cashflow rule or threshold")
     if not np.isfinite(cash_return) or cash_return <= -1:
         raise InputError("invalid cash return")
+    if rebalance_every_steps is not None and (type(rebalance_every_steps) is not int or rebalance_every_steps<0):
+        raise InputError("step rebalance must be a nonnegative integer")
     flows = pd.Series(0.0, index=frame.index)
     if cashflows is not None:
         supplied = pd.Series(cashflows, dtype=float)
@@ -98,7 +101,8 @@ def backtest(returns, target, initial_value=100000.0, costs=0.0001,
     start = pd.Timestamp(initial_date) if initial_date is not None else frame.index[0]-pd.Timedelta(days=1)
     if start >= frame.index[0]:
         raise InputError("initial_date must precede first return")
-    holding, cash = np.zeros(n), float(initial_value)
+    deployed=weights(initial_weights,n) if initial_weights is not None else np.zeros(n)
+    holding, cash = deployed*initial_value, float(initial_value*(1-deployed.sum()))
     nav_unit, records, trades = 1.0, [], []
     investor_flows = [(start, -initial_value)]
     prev_period = None
@@ -126,6 +130,8 @@ def backtest(returns, target, initial_value=100000.0, costs=0.0001,
             trades.append({"date":date,"reason":"withdrawal","notionals":delta.tolist(),"cost":liquidation_cost})
         period = date.to_period(freq[rebalance]) if rebalance in freq else None
         trigger = k==0 or (period is not None and prev_period is not None and period!=prev_period)
+        if rebalance_every_steps is not None:
+            trigger=k==0 or (rebalance_every_steps>0 and k%rebalance_every_steps==0)
         if rebalance=="threshold" and k>0:
             current = holding/(holding.sum()+cash)
             deviations = np.abs(current-target)/np.where(target>0,target,1)

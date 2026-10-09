@@ -18,7 +18,7 @@ def stationary_indices(observations, paths, horizon, block_length, seed=42):
     return indices
 
 
-def path_metrics(returns, indices, target, costs=0.0001, rebalance_every=63, periods=252):
+def path_metrics(returns, indices, target, costs=0.0001, rebalance_every=63, periods=252,initial_weights=None):
     """Vectorized paths: fractional holdings, linear costs, cash and calendar steps.
 
     A step interval is explicit; it is not an exchange quarterly calendar.
@@ -33,8 +33,9 @@ def path_metrics(returns, indices, target, costs=0.0001, rebalance_every=63, per
     if indices.ndim!=2 or indices.shape[1]<1 or (indices<0).any() or (indices>=len(x)).any():
         raise InputError("invalid bootstrap indices")
     b,h=indices.shape
-    holdings=np.zeros((b,len(target)))
-    cash=np.ones(b)
+    deployed=weights(initial_weights,len(target)) if initial_weights is not None else np.zeros(len(target))
+    holdings=np.broadcast_to(deployed,(b,len(target))).copy()
+    cash=np.full(b,1-deployed.sum())
     high=np.ones(b)
     mdd=np.zeros(b)
     cumulative_cost=np.zeros(b)
@@ -79,7 +80,7 @@ def quantile_interval(values,p=.95,confidence=.95):
 
 def drawdown_budget(returns,candidates,budget=.25,horizon=252,paths=2000,
                     block_lengths=(10,20,40,60),costs=.0001,rebalance_every=63,
-                    seed=42,mc_tolerance=.01,max_paths=8000,strict=True,periods=252):
+                    seed=42,mc_tolerance=.01,max_paths=8000,strict=True,periods=252,initial_weights=None):
     frame=returns_frame(returns)
     if not 0<=budget<1 or not np.isfinite(budget) or mc_tolerance<=0 or not np.isfinite(mc_tolerance):
         raise InputError("invalid budget or MC tolerance")
@@ -96,7 +97,7 @@ def drawdown_budget(returns,candidates,budget=.25,horizon=252,paths=2000,
             results={}
             all_converged=True
             for name,target in candidates.items():
-                metrics=path_metrics(x,indices,target,costs,rebalance_every,periods)
+                metrics=path_metrics(x,indices,target,costs,rebalance_every,periods,initial_weights)
                 ci=quantile_interval(metrics["mdd"])
                 converged=(ci[1]-ci[0])/2<=mc_tolerance
                 all_converged &= converged
