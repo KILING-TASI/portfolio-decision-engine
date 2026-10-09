@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "receipt_revision": 2,
+  "engine_commit": "597dd44bf83aab86d9482167034570f75164b617",
+  "workbench_base_commit": "add664afe56e38d1ac681577289f9b282afc906d",
+  "workbench_gateway_state": "local pending PR6; script snapshot and SHA bind actual invocation, commit alone is not its current code",
+  "gateway_method": "bounded-native-gateway-1",
+  "gateway_source_sha256": "a2b80ecefaeaa33671c31dc2809f4c42c4739c21452117679e8bc564c4a252d3",
+  "workbench_observed_source_sha256": {
+    "portfolio_cashflow_review.py": "2154cbb13074407bdee204b8bb17fff8cbe9261909170cf4ec2e8a173ef56a20",
+    "fund_dca.py": "a69f620da4c4b96d2b97756e2b2a8abed350add4275ee21374c90e945e1f325e"
+  },
+  "engine_method_files": {
+    "pyproject.toml": "e0207a0ba577e04955cc44cb29aab8f6ae1567d8e45e4ab352ddc77fefa17038",
+    "src/portfolio_engine/account_exposure.py": "f1cd6c4de342f3796e7e8b2ae9a2244e389f2c38b28d2b178d5b01838ce13b80",
+    "src/portfolio_engine/allocation.py": "5f494202e90da095f8aef30603f3171934bd1184145e0dd5aa9d47ba6b55148b",
+    "src/portfolio_engine/archive.py": "f51d0374a456979a13de8d70a4efbb71b33bd2e0f653fe594af6395e3cc48510",
+    "src/portfolio_engine/attribution.py": "b1bf6b2546c8cc1407a2f03619af20641ad3f3d114e58f139199717e72aa7aef",
+    "src/portfolio_engine/backtest.py": "168f5c9fcbd999b317ca61e52921abb0f59244ff3fd7fd3a6eda0daa841c799c",
+    "src/portfolio_engine/bootstrap.py": "580f743fd4730626f9be8f74e2e19cf5052aa87665a3384b44988734ea59f2db",
+    "src/portfolio_engine/cash_demand.py": "6cff4fcb9e7f3b5ae0edcf8c32287b558f93da199134b6bd53aa3d26a157bc41",
+    "src/portfolio_engine/cash_demand_report.py": "92353405d3814a96d937957a049c2291d2744881f615c78fc0f339186d46086a",
+    "src/portfolio_engine/cli.py": "c3b86fc1b754aa22c10af3e01aa504f8f3b9fa91a40840b3de3b32c8db12f7ab",
+    "src/portfolio_engine/collect.py": "2c47e068654f66a948213a61a5f48aa316db9fb982078e200f3a7e3ccc1bdfaa",
+    "src/portfolio_engine/data_bridge.py": "663ce33d18e6030a75d4dc5526554aeb7c8cc286090365de3af2ca71e9819deb",
+    "src/portfolio_engine/decision.py": "4c3455f084c360ddae52b2a6abcc0f73606df1b9e1baaeec6e55792478297da8",
+    "src/portfolio_engine/disclosure_time.py": "30fdeb42e3ba3ad1b31ab4783b194eddac4e5ddaa97d1d689b2f6900266c046e",
+    "src/portfolio_engine/engine.py": "69a8b17238c98b8f14e718d0a93b05870e6148212c2532ebca5acc42b3c858a2",
+    "src/portfolio_engine/evaluation.py": "2b88a96306b2636a16254f91613ce3803ee54e0730b40f9876f68b037299d96f",
+    "src/portfolio_engine/exposure_report.py": "5e744dc877036b7f9b664a588571b6d0957e2f7fd16c6abefc89859dbfac4d63",
+    "src/portfolio_engine/io.py": "b6a2872c0228d9209ead9b3259631563da9d431b1495be8dca10ba8cb62214b1",
+    "src/portfolio_engine/lookthrough_adapter.py": "02c74b1f7e11f665c5b63f3bccb8cddb9fa9245baf29e1c40ce80c18821ab878",
+    "src/portfolio_engine/m2_evaluation.py": "5447cd056e6a9b6626972d7eb06851a1ad3ddf285cf6703aa90d5641804bba8c",
+    "src/portfolio_engine/m2_report.py": "e413d2c0f8bc18bfd3d89f68a321ff08dd91a711a0fa6ee66122d1106decf725",
+    "src/portfolio_engine/migration.py": "49ab1f6a70d5ca9d1169c2694234328c371da3f1c544a15f0593c4b1c3a39e87",
+    "src/portfolio_engine/report.py": "c80511910bec3ed2b87788fc2be2dc02f4440ba72b65c0705f9bde23f8ad67d0",
+    "src/portfolio_engine/risk.py": "502dfd6232170e51351f6d1281560c6e1aea6ddff50e8ce6754e06605dea7d62",
+    "src/portfolio_engine/statistical_cases.py": "840944ddc420243fe23b851fc48af67641ea642632a99ef633afbeb6d4d5ccd0",
+    "src/portfolio_engine/stress.py": "ce8fc5cd3b237fdbfe92747412feefb1ec37bde45856bea24425e8aa34c7a53a",
+    "src/portfolio_engine/validation.py": "cef3d600a95f0473345927c89853745a6c91736c97e6765145350c3dc87780a7",
+    "src/portfolio_engine/workbench_cashflow.py": "510c471a88760de1be47b6b236c1b3870f31d78d58cedf8ea38eb02383d9b942",
+    "src/portfolio_engine/workbench_contract.py": "c65087bf2dbd5d782aa2b06169f04d661e77e89772c2095c13d3279e2ee6909c",
+    "src/portfolio_engine/__init__.py": "986f1020b6af66c535229a26ee96992ebd426aeacd299fea3757877cba2574ec",
+    "src/portfolio_engine/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d"
+  },
+  "sample_type": "synthetic teaching only",
+  "scope": "portfolio paths only; no BJX/rules claims; no real account/source verification, no browser claim, no merge/release",
+  "previous_receipt": "workbench-cashflow-joint-receipt.json; preserved unchanged",
+  "cases": [
+    {
+      "case": "contribution-and-ending-withdrawal",
+      "comparison": "six observed fields matched current independent workbench calculator; full engine response preserved",
+      "status": "passed",
+      "input_sha256": "8faceac0677f81db1ed0ad266ab845b70580fe6d2c2b0b0b69a33e829798f940"
+    },
+    {
+      "case": "opening-flow",
+      "comparison": "six observed fields matched current independent workbench calculator; full engine response preserved",
+      "status": "passed",
+      "input_sha256": "2f8351f4f58c3cbb924d7f4f03cd393a8cdb7d6f96f7e246a4d18935fa04fd7d"
+    },
+    {
+      "case": "fee-already-in-values",
+      "comparison": "six observed fields matched current independent workbench calculator; full engine response preserved",
+      "status": "passed",
+      "input_sha256": "47a5ca2f58ba68f82e13bb7f591748401dcfe9d773de41cd8adb610e40d36a60"
+    },
+    {
+      "case": "nonconventional",
+      "comparison": "six observed fields matched current independent workbench calculator; full engine response preserved",
+      "status": "passed",
+      "input_sha256": "aff5c9a095a1035c1f5250c1606b22e18671b250ee02cea07ef0c14f327473ef"
+    },
+    {
+      "case": "three-pressure-scenarios",
+      "comparison": "single-model full-result forwarding only, not independent model equivalence",
+      "status": "passed",
+      "input_sha256": "0373341ca079d34b006dfba177151957368c09cba869cc7c2eaa8b6aa65ad548"
+    },
+    {
+      "case": "unknown-fee-and-release",
+      "comparison": "single-model full-result forwarding only, not independent model equivalence",
+      "status": "passed",
+      "input_sha256": "a786a18796fd9c6c6eb809a1e00c8269875ab9454dc785da91b5b6c39b2d4bdb"
+    },
+    {
+      "case": "receipt-after-horizon",
+      "comparison": "single-model full-result forwarding only, not independent model equivalence",
+      "status": "passed",
+      "input_sha256": "4e48b86f6a491c03bd828ee56a32e3bc6146b961184b2c70f7e8d0f40f95feb1"
+    },
+    {
+      "case": "unknown-flow-date",
+      "comparison": "single-model full-result forwarding only, not independent model equivalence",
+      "status": "passed",
+      "input_sha256": "91c559e4442ed2e13d90a024a26cd15886428793aa75d81df12cb48e81675f94"
+    },
+    {
+      "case": "fee_basis",
+      "comparison": "native rejection/error retained",
+      "status": "passed",
+      "input_sha256": "925fca5283f531bbbc17cd17b5f82c705d96f81f17713d6c4c305e63e94f9aac"
+    },
+    {
+      "case": "requested_method_version",
+      "comparison": "native rejection/error retained",
+      "status": "passed",
+      "input_sha256": "9cb7f87a1a21bfe9ea6170c07daf23caf1757e6d22a4d0e1602c793556e0f31f"
+    },
+    {
+      "case": "cashFlowCoverage",
+      "comparison": "native rejection/error retained",
+      "status": "passed",
+      "input_sha256": "2db7828d1d8f1cc92f207c50cff267aa63d6ab8e1d3a3c494c0b1465e7d6f429"
+    },
+    {
+      "case": "cash-method",
+      "comparison": "native rejection/error retained",
+      "status": "passed",
+      "input_sha256": "734cf9e21ee387c088fb7080c0ee3c84fecbf74fe836c6db7197f9cbc08f2bb8"
+    }
+  ]
+}
