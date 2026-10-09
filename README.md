@@ -11,7 +11,7 @@
 需要 Python 3.10+，在已下载的仓库目录执行（安装会获取 NumPy、pandas、SciPy、scikit-learn、statsmodels 及其依赖）：
 
 ```sh
-python -m pip install -e .
+python -m pip install .
 python -m portfolio_engine demo --fast --out reports/demo
 ```
 

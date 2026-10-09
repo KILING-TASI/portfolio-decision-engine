@@ -81,3 +81,16 @@ walk_forward 可设置 min_train=500、test_steps=252；每折仅用此前数据
 M2 状态为 ok/degraded/infeasible/unconverged/insufficient_data；整体当前固定 degraded，因尚无实盘制度适配与完整模型验证。无解时展示的参考权重不是预算解。
 
 真实持仓、数据和密钥放 private-data/。reports/ 被忽略，避免意外上传账户结果。
+
+
+## 单仓安装与最短流程验收（独立有界批次）
+
+标准安装为 `python -m pip install .`（或经审阅wheel），不要求其他自家仓库。完整引擎需要pyproject声明的NumPy、pandas、SciPy、scikit-learn、statsmodels及其普通依赖；dev的pytest/build不是教学报告运行依赖。既有代码归属、版本与待审/发布区别见[迁移说明](workbench-cashflow-integration.md)，不因软件都叫0.7.0认定旧发布包含新模块。
+
+本批只提供本仓待审wheel，在新目录和新venv按声明联网安装普通第三方依赖，清除作者Python/专业仓路径变量并给子进程独立HOME/缓存/临时目录。系统HOME和真实作者缓存不改；宿主仍存在其他仓库，所以这是目录/进程隔离验收，不是全新OS。源码包不含.git、reports、作者数据/缓存，非editable安装；没有复制或安装另一个自家仓库。
+
+运行 `python -m portfolio_engine demo --fast --out NEW` 的同等模块入口并生成完整HTML/JSON/账本，校验seed42、引擎0.7.0、合成总回报输入、已知86%与未知14%守恒、字节/方法清单及本地文件链接。先前标准-m命令和新增runpy模块入口均实跑，后者在报告计算完成后检查sys.path及全部已加载模块origin，不只跑help或测试。已存在输出须拒绝且旧报告不变；指定的可选披露资料缺失须blocked；无dev包和无工作台/专业包时主报告仍能运行。
+
+可重复验收脚本 `tests/standalone_acceptance.py --wheel WHEEL --out NEW` 只用标准库做隔离、普通依赖安装和真实CLI流程。CI新增standalone job仅checkout本仓、构建wheel、新建隔离venv运行；不安装工作台或其他专业库。结果区分程序独立通过与资料/视觉/投资验证；记录包摘要、依赖版本、命令返回码、起始和计算后模块来源及报告检查。普通软件源解析/下载失败单列为环境问题，不临时装其他自家库或恢复重复算法。
+
+本批待审运行范围是教学最短CLI，不含联网真实取数、Windows双击入口、Skill自然语言安装发现或浏览器视觉验收。旧Release本批未运行；前次旧发布资产许可/摘要检查不冒充旧版运行验收。用户现有安装与旧Release资产不改，不合并/发布。此验收明确结案后不继续扩功能或采集。
