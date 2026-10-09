@@ -1,0 +1,1546 @@
+{
+  "source": {
+    "source_repository": "https://github.com/KILING-TASI/research-workbench",
+    "source_commit": "21543ea9a8419c56db8d1844ce8f1e17ae48307d",
+    "original_copyright": "2026 research-workbench contributors",
+    "licence": "MIT; upstream notice retained",
+    "functions": [
+      "portfolio_cashflow_review.number",
+      "portfolio_cashflow_review.calculate",
+      "fund_dca.xirr"
+    ],
+    "files": {
+      "portfolio_cashflow_review.py": "2154cbb13074407bdee204b8bb17fff8cbe9261909170cf4ec2e8a173ef56a20",
+      "fund_dca.py": "a69f620da4c4b96d2b97756e2b2a8abed350add4275ee21374c90e945e1f325e"
+    }
+  },
+  "method_version": "observed-review-workbench-bisection-v1",
+  "comparison": "full original calculate object exact equality, not only six fields",
+  "cases": [
+    {
+      "case": "base",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 15.500000000000025,
+        "xirrPct": 14.484608833963414,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 40.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": 18.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 110.0,
+            "externalFlow": 50.0,
+            "afterFlowValue": 160.0,
+            "periodReturnPct": 10.000000000000009
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 168.0,
+            "externalFlow": -10.0,
+            "afterFlowValue": 158.0,
+            "periodReturnPct": 5.000000000000004
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "thousand",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "thousand",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 0.1,
+              "externalFlow": 0.0,
+              "afterFlowValue": 0.1
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 0.11,
+              "externalFlow": 0.05,
+              "afterFlowValue": 0.16
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 0.168,
+              "externalFlow": -0.01,
+              "afterFlowValue": 0.158
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 15.49999999999998,
+        "xirrPct": 14.484608833963414,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 0.04,
+        "openingValue": 0.1,
+        "endingValue": 0.158,
+        "profit": 0.017999999999999995,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 0.1,
+            "externalFlow": 0.0,
+            "afterFlowValue": 0.1,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 0.11,
+            "externalFlow": 0.05,
+            "afterFlowValue": 0.16,
+            "periodReturnPct": 9.999999999999986
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 0.168,
+            "externalFlow": -0.01,
+            "afterFlowValue": 0.158,
+            "periodReturnPct": 5.000000000000004
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "million",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "million",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 0.0001,
+              "externalFlow": 0.0,
+              "afterFlowValue": 0.0001
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 0.00011,
+              "externalFlow": 5e-05,
+              "afterFlowValue": 0.00016
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 0.000168,
+              "externalFlow": -1e-05,
+              "afterFlowValue": 0.000158
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 15.49999999999998,
+        "xirrPct": 14.484608833963403,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 4e-05,
+        "openingValue": 0.0001,
+        "endingValue": 0.000158,
+        "profit": 1.7999999999999984e-05,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 0.0001,
+            "externalFlow": 0.0,
+            "afterFlowValue": 0.0001,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 0.00011,
+            "externalFlow": 5e-05,
+            "afterFlowValue": 0.00016,
+            "periodReturnPct": 10.000000000000009
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 0.000168,
+            "externalFlow": -1e-05,
+            "afterFlowValue": 0.000158,
+            "periodReturnPct": 4.999999999999982
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "USD-declared-no-conversion",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "USD",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 15.500000000000025,
+        "xirrPct": 14.484608833963414,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 40.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": 18.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 110.0,
+            "externalFlow": 50.0,
+            "afterFlowValue": 160.0,
+            "periodReturnPct": 10.000000000000009
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 168.0,
+            "externalFlow": -10.0,
+            "afterFlowValue": 158.0,
+            "periodReturnPct": 5.000000000000004
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "numeric-strings",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": "100",
+              "externalFlow": "0",
+              "afterFlowValue": "100"
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": "110",
+              "externalFlow": "50",
+              "afterFlowValue": "160"
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": "168",
+              "externalFlow": "-10",
+              "afterFlowValue": "158"
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 15.500000000000025,
+        "xirrPct": 14.484608833963414,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 40.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": 18.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 110.0,
+            "externalFlow": 50.0,
+            "afterFlowValue": 160.0,
+            "periodReturnPct": 10.000000000000009
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 168.0,
+            "externalFlow": -10.0,
+            "afterFlowValue": 158.0,
+            "periodReturnPct": 5.000000000000004
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "metadata-preserved-input",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160,
+              "opaque": "preserved in input only"
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ],
+          "accountLabel": "长期教学账户",
+          "dividends": "reinvested",
+          "opaqueMetadata": {
+            "status": "unknown",
+            "sourceVersion": null
+          }
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 15.500000000000025,
+        "xirrPct": 14.484608833963414,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 40.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": 18.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 110.0,
+            "externalFlow": 50.0,
+            "afterFlowValue": 160.0,
+            "periodReturnPct": 10.000000000000009
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 168.0,
+            "externalFlow": -10.0,
+            "afterFlowValue": 158.0,
+            "periodReturnPct": 5.000000000000004
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "contribution-and-ending-withdrawal",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 15.500000000000025,
+        "xirrPct": 14.484608833963414,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 40.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": 18.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 110.0,
+            "externalFlow": 50.0,
+            "afterFlowValue": 160.0,
+            "periodReturnPct": 10.000000000000009
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 168.0,
+            "externalFlow": -10.0,
+            "afterFlowValue": 158.0,
+            "periodReturnPct": 5.000000000000004
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "opening-flow",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 20,
+              "afterFlowValue": 120
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": -3.749999999999998,
+        "xirrPct": -1.3774736174732183,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 60.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": -2.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 20.0,
+            "afterFlowValue": 120.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 110.0,
+            "externalFlow": 50.0,
+            "afterFlowValue": 160.0,
+            "periodReturnPct": -8.333333333333337
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 168.0,
+            "externalFlow": -10.0,
+            "afterFlowValue": 158.0,
+            "periodReturnPct": 5.000000000000004
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "fee-already-in-values",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 108,
+              "externalFlow": 50,
+              "afterFlowValue": 158
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 14.835443037974683,
+        "xirrPct": 14.484608833963414,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 40.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": 18.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 108.0,
+            "externalFlow": 50.0,
+            "afterFlowValue": 158.0,
+            "periodReturnPct": 8.000000000000007
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 168.0,
+            "externalFlow": -10.0,
+            "afterFlowValue": 158.0,
+            "periodReturnPct": 6.329113924050622
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "nonconventional",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 300,
+              "externalFlow": -200,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-10-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 200,
+              "afterFlowValue": 300
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 300,
+              "externalFlow": 0,
+              "afterFlowValue": 300
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 200.0,
+        "xirrPct": null,
+        "xirrStatus": "unresolved-or-nonconventional-flows",
+        "netExternalFlow": 0.0,
+        "openingValue": 100.0,
+        "endingValue": 300.0,
+        "profit": 200.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 300.0,
+            "externalFlow": -200.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": 200.0
+          },
+          {
+            "date": "2025-10-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 200.0,
+            "afterFlowValue": 300.0,
+            "periodReturnPct": 0.0
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 300.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 300.0,
+            "periodReturnPct": 0.0
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "ordinary",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2023-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2024-01-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 0,
+              "afterFlowValue": 110
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2023-01-01",
+        "end": "2024-01-01",
+        "twrPct": 10.000000000000009,
+        "xirrPct": 10.007181138351056,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 0.0,
+        "openingValue": 100.0,
+        "endingValue": 110.0,
+        "profit": 10.0,
+        "ledger": [
+          {
+            "date": "2023-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2024-01-01",
+            "beforeFlowValue": 110.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 110.0,
+            "periodReturnPct": 10.000000000000009
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "native_lower_search_gap",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2023-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2024-01-01",
+              "beforeFlowValue": 1.5e-07,
+              "externalFlow": 0,
+              "afterFlowValue": 1.5e-07
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2023-01-01",
+        "end": "2024-01-01",
+        "twrPct": -99.99999985,
+        "xirrPct": -99.99999985207299,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 0.0,
+        "openingValue": 100.0,
+        "endingValue": 1.5e-07,
+        "profit": -99.99999985,
+        "ledger": [
+          {
+            "date": "2023-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2024-01-01",
+            "beforeFlowValue": 1.5e-07,
+            "externalFlow": 0.0,
+            "afterFlowValue": 1.5e-07,
+            "periodReturnPct": -99.99999985
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "legacy_upper_search_gap",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2023-01-01",
+              "beforeFlowValue": 1,
+              "externalFlow": 0,
+              "afterFlowValue": 1
+            },
+            {
+              "date": "2024-01-01",
+              "beforeFlowValue": 200000000.0,
+              "externalFlow": 0,
+              "afterFlowValue": 200000000.0
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2023-01-01",
+        "end": "2024-01-01",
+        "twrPct": 19999999900.0,
+        "xirrPct": null,
+        "xirrStatus": "unresolved-or-nonconventional-flows",
+        "netExternalFlow": 0.0,
+        "openingValue": 1.0,
+        "endingValue": 200000000.0,
+        "profit": 199999999.0,
+        "ledger": [
+          {
+            "date": "2023-01-01",
+            "beforeFlowValue": 1.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 1.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2024-01-01",
+            "beforeFlowValue": 200000000.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 200000000.0,
+            "periodReturnPct": 19999999900.0
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "ending-zero",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 0,
+              "externalFlow": 0,
+              "afterFlowValue": 0
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": -100.0,
+        "xirrPct": null,
+        "xirrStatus": "unresolved-or-nonconventional-flows",
+        "netExternalFlow": 50.0,
+        "openingValue": 100.0,
+        "endingValue": 0.0,
+        "profit": -150.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 100.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 110.0,
+            "externalFlow": 50.0,
+            "afterFlowValue": 160.0,
+            "periodReturnPct": 10.000000000000009
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 0.0,
+            "externalFlow": 0.0,
+            "afterFlowValue": 0.0,
+            "periodReturnPct": -100.0
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    },
+    {
+      "case": "zero-opening-funded-at-start",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 0,
+              "externalFlow": 100,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_result": {
+        "type": "portfolio-observed-cashflow-review",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "twrPct": 15.500000000000025,
+        "xirrPct": 14.484608833963414,
+        "xirrStatus": "calculated-conventional-flows",
+        "netExternalFlow": 140.0,
+        "openingValue": 0.0,
+        "endingValue": 158.0,
+        "profit": 18.0,
+        "ledger": [
+          {
+            "date": "2025-01-01",
+            "beforeFlowValue": 0.0,
+            "externalFlow": 100.0,
+            "afterFlowValue": 100.0,
+            "periodReturnPct": null
+          },
+          {
+            "date": "2025-07-01",
+            "beforeFlowValue": 110.0,
+            "externalFlow": 50.0,
+            "afterFlowValue": 160.0,
+            "periodReturnPct": 10.000000000000009
+          },
+          {
+            "date": "2026-01-01",
+            "beforeFlowValue": 168.0,
+            "externalFlow": -10.0,
+            "afterFlowValue": 158.0,
+            "periodReturnPct": 5.000000000000004
+          }
+        ],
+        "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts"
+      }
+    }
+  ],
+  "failures": [
+    {
+      "case": "cashFlowCoverage-unknown",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "unknown",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_error": "需要声明本区间外部现金流完整；未知不能按零处理"
+    },
+    {
+      "case": "basis-",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_error": "请提供账户估值与现金流的依据"
+    },
+    {
+      "case": "currency-cny",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "cny",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_error": "需要三位大写币种声明，不能假定人民币"
+    },
+    {
+      "case": "amountUnit-unknown",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "unknown",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_error": "金额单位须明确为base、thousand或million；不自动缩放"
+    },
+    {
+      "case": "accountLabel- ",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ],
+          "accountLabel": " "
+        }
+      },
+      "expected_error": "账户研究名称须为1至100字单行文字，不必提供真实账号"
+    },
+    {
+      "case": "accountLabel-a\nb",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ],
+          "accountLabel": "a\nb"
+        }
+      },
+      "expected_error": "账户研究名称须为1至100字单行文字，不必提供真实账号"
+    },
+    {
+      "case": "accountLabel-aaaaaaaa",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ],
+          "accountLabel": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected_error": "账户研究名称须为1至100字单行文字，不必提供真实账号"
+    },
+    {
+      "case": "nonfinite-string",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": "NaN",
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_error": "金额须为有限数字"
+    },
+    {
+      "case": "boolean",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": true,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_error": "金额不能是布尔值"
+    },
+    {
+      "case": "unreconciled",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 999
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_error": "外部现金流前后估值不勾稽；交易成本不得伪装成外部出入金"
+    },
+    {
+      "case": "duplicate-date",
+      "input": {
+        "schema": "workbench-observed-review-input-v1",
+        "requested_method_version": "observed-review-workbench-bisection-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "expected_error": "日期须唯一、严格递增且为YYYY-MM-DD"
+    }
+  ]
+}

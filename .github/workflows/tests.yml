@@ -55,3 +55,9 @@ jobs:
         run: |
           python -m portfolio_engine workbench-observed-cashflow --input examples/workbench-observed-cashflow.json --out reports/ci-observed-cashflow
           python -m portfolio_engine verify reports/ci-observed-cashflow
+
+      - name: Original observed review without third-party imports
+        working-directory: src
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python -S -m portfolio_engine.observed_review ../examples/observed-review-demo.json --out ../reports/ci-original-observed

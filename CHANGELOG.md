@@ -96,3 +96,7 @@
 
 ### Pending observed cashflow bridge
 - Add an opt-in CNY/base observed before/after external-flow contract, bound same-input references and timing/fee/frozen/settlement guards. Native simulations and future conditional cash demand remain separate models.
+
+
+### Pending first observed-review migration
+- Move the original workbench observed TWR and bounded 150-step bisection XIRR into a standard-library-only module, with exact legacy result/failure references and retained upstream MIT attribution. Keep native simulation and the original narrow v1 bridge unchanged. Consumer duplicate removal is separately verified in workbench.
