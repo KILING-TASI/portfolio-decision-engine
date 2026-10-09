@@ -1,0 +1,68 @@
+{
+  "schema": "account-exposure-input-v1",
+  "amount_unit": "base",
+  "currency": "CNY",
+  "valuation_date": "2026-09-30",
+  "as_of": "2026-10-09",
+  "data_kind": "教学金额 + 已有真实有限净值身份资料；没有真实持仓披露",
+  "nodes": {},
+  "securities": {},
+  "rate_scenarios": [
+    {
+      "id": "rate_up_100bp",
+      "rate_change": 0.01
+    }
+  ],
+  "limited_real_evidence": {
+    "archive_sha256": "bb7327a02e8410757fcb187c783e1d74c76f1e27a1fb9d4acf11f88b0be17503",
+    "observations": [
+      {
+        "code": "000001",
+        "name": "华夏成长混合",
+        "status": "observed",
+        "observations": 42,
+        "start": "2026-08-03",
+        "end": "2026-09-30",
+        "basis": "nav_with_unverified_events",
+        "source_url": "https://fund.eastmoney.com/pingzhongdata/000001.js",
+        "retrieved_at": "2026-10-09T10:28:30.210941+00:00"
+      },
+      {
+        "code": "110003",
+        "name": "易方达上证50增强A",
+        "status": "observed",
+        "observations": 42,
+        "start": "2026-08-03",
+        "end": "2026-09-30",
+        "basis": "nav_with_unverified_events",
+        "source_url": "https://fund.eastmoney.com/pingzhongdata/110003.js",
+        "retrieved_at": "2026-10-09T10:28:30.386541+00:00"
+      }
+    ],
+    "preparation_status": "blocked_total_return_not_verified",
+    "scope": "real third-party NAV acquisition and incomplete-event rejection only; no performance or historical PIT validation",
+    "account_amounts": "artificial amounts only; not an actual investor account"
+  },
+  "positions": [
+    {
+      "position_id": "teaching-000001",
+      "economic_lot_id": "teaching-000001",
+      "kind": "fund",
+      "node": "000001",
+      "amount": 50000,
+      "currency": "CNY",
+      "valuation_date": "2026-09-30",
+      "source": "https://fund.eastmoney.com/pingzhongdata/000001.js; teaching amount; NAV identity is not a holdings disclosure"
+    },
+    {
+      "position_id": "teaching-110003",
+      "economic_lot_id": "teaching-110003",
+      "kind": "fund",
+      "node": "110003",
+      "amount": 50000,
+      "currency": "CNY",
+      "valuation_date": "2026-09-30",
+      "source": "https://fund.eastmoney.com/pingzhongdata/110003.js; teaching amount; NAV identity is not a holdings disclosure"
+    }
+  ]
+}

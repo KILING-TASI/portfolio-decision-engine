@@ -92,12 +92,22 @@ def main(argv=None):
     m2demo.add_argument("--out",required=True);m2demo.add_argument("--fast",action="store_true")
     compatibility=commands.add_parser("workbench-buy-hold",help="explicit limited workbench historical path contract")
     compatibility.add_argument("--input",required=True);compatibility.add_argument("--reference");compatibility.add_argument("--out",required=True)
+    exposure=commands.add_parser("account-exposure",help="declared account amounts and disclosed all-asset exposure")
+    exposure.add_argument("--input",required=True);exposure.add_argument("--out",required=True)
     args=parser.parse_args(argv)
     try:
         if args.command=="verify":
             result=verify(args.directory);print(json.dumps(result,ensure_ascii=False,indent=2))
             return 0 if result["status"]=="stored_content_verified" else 2
         with atomic_output(args.out) as stage:
+            if args.command=="account-exposure":
+                from .account_exposure import account_exposure
+                from .exposure_report import save_exposure_report
+                spec=read_json(args.input);result=account_exposure(spec)
+                (stage/"source-input.json").write_bytes(Path(args.input).read_bytes())
+                save_exposure_report(spec,result,stage);manifest(stage)
+                print(f"Exposure report: {(Path(args.out)/'exposure-report.html').resolve()}")
+                return 0
             if args.command=="workbench-buy-hold":
                 from .workbench_contract import compatible_history,compare_legacy_reference
                 spec=read_json(args.input);result,path=compatible_history(spec)
