@@ -79,7 +79,7 @@ python -m pip install /path/to/reviewed/portfolio_decision_engine-0.7.0-py3-none
 python -m portfolio_engine.observed_review /path/to/input.json --out /path/to/new-result
 ```
 
-模块可用 `-` 代替输入路径读stdin；stdout为版本化JSON，`result`就是旧calculate返回对象。输出新目录包含 `source-input.json`（确切输入字节）、`observed-review-result.json` 与 `report-manifest.json`。这里的标准库清单为 `observed-review-files-v1`，通过逐文件SHA256校验；不要用需要科学计算依赖的旧CLI verify套用此不同清单。清单只证明字节和方法绑定，不证明资料真实性、计算投资有效性或视觉验收。现有老冻结结果和旧输入不改写、不静默升级。
+模块可用 `-` 代替输入路径读stdin；stdout/stderr均固定UTF-8，stdout为版本化JSON，`result`就是旧calculate返回对象。输出新目录包含 `source-input.json`（确切输入字节）、`observed-review-result.json` 与 `report-manifest.json`。这里的标准库清单为 `observed-review-files-v1`，通过逐文件SHA256校验；不要用需要科学计算依赖的旧CLI verify套用此不同清单。清单只证明字节和方法绑定，不证明资料真实性、计算投资有效性或视觉验收。现有老冻结结果和旧输入不改写、不静默升级。
 
 四项估值/费用/冻结/到账外围声明与原窄桥相同；旧spec放在payload中，保留所有JSON附加元数据，按旧函数原语义解释，不把未知元数据当金额或完整性证明。币种须明确三位大写字母，base/thousand/million单位保留，数值字符串允许，bool/nonfinite拒绝，名称沿用单行1至100字校验；勾稽容差仍为0.01/unit_scale及浮点误差界。计算结果金额仍为输入单位，报告显示基础单位的转换由工作台原publish负责。不换汇、不自动插值、不默认现金流完整。
 

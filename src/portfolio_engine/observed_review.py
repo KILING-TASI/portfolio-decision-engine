@@ -98,10 +98,12 @@ def main(argv=None):
             if destination.exists():
                 raise FileExistsError("output appeared during calculation; nothing overwritten")
             os.rename(stage, destination)
-        print(result_raw.decode("utf8"))
+        # Isolated Python ignores PYTHONIOENCODING; JSON transport is UTF-8
+        # even on a Windows host whose console encoding is different.
+        sys.stdout.buffer.write(result_raw + b"\n")
         return 0
     except (ValueError, TypeError, KeyError, OSError, OverflowError) as error:
-        print("Observed review unavailable: " + str(error), file=sys.stderr)
+        sys.stderr.buffer.write(("Observed review unavailable: " + str(error) + "\n").encode("utf8"))
         return 2
 
 def xirr(flows):

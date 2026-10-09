@@ -80,12 +80,15 @@ def test_standard_library_only_cli_freezes_input_and_does_not_overwrite(tmp_path
 def test_stdin_metadata_snapshot_and_failed_version(tmp_path):
     env = dict(os.environ, PYTHONIOENCODING="utf8")
     case = next(c for c in REFERENCE["cases"] if c["case"] == "metadata-preserved-input")
-    raw = json.dumps(case["input"], ensure_ascii=False).encode("utf8")
+    spec = copy.deepcopy(case["input"])
+    spec["payload"]["basis"] = "教学估值与现金流，不是真实账户"
+    expected = dict(case["expected_result"], basis=spec["payload"]["basis"])
+    raw = json.dumps(spec, ensure_ascii=False).encode("utf8")
     out = tmp_path / "stdin"
     result = subprocess.run(command("-", out), input=raw, capture_output=True, env=env)
     assert result.returncode == 0
     assert (out / "source-input.json").read_bytes() == raw
-    assert_legacy_result(json.loads(result.stdout)["result"], case["expected_result"])
+    assert_legacy_result(json.loads(result.stdout)["result"], expected)
     spec = copy.deepcopy(case["input"])
     spec["requested_method_version"] = "unknown"
     blocked = tmp_path / "blocked"
