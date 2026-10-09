@@ -1,33 +1,27 @@
 # 组合决策引擎 · Portfolio Decision Engine
 
-以回撤预算为中心的可运行组合研究工具，适用于 ETF、基金和跨资产账户。
+用 ETF、基金和跨资产收益序列比较配置的收益与回撤取舍，检查模型回撤预算，并生成可核对的离线报告与账本。
 
-**当前状态：v0.7.0 可运行研究引擎。** 支持 CSV、总回报准备、研究工作台基金档案适配，以及显式联网的基金净值/沪深价格归档。输出离线 HTML、JSON、账本和完整性清单。M1–M7 已有基础实现；实盘制度和全自动总回报数据仍未实现。
+[实际教学预览](docs/report-previews.md)：本例最小方差相对等权回撤减少 **4.54 个百分点**，年化收益也减少 **4.88 个百分点**。这是固定种子的合成数据，不是市场绩效或长期优势。
 
-v0.7 改善迁移方案的多解选择，明确“可执行”和“已达到目标”，量化锁定资产的必要稀释资金下界。报告增加相对基准的收益/回撤取舍与中文结果解释；迁移后的账户不会自动继承目标配置的回撤预算。详见 [决策与迁移解释](docs/decision-interpretation.md)。
+## 两条命令看结果
 
-## 发布与待审状态
-
-公开发行仍为 **v0.7.0**。以下增量以依赖顺序分批待审，尚未合并或发行：
-
-1. [披露适配与时间检查 PR #1](https://github.com/KILING-TASI/portfolio-decision-engine/pull/1)。
-2. [完整 M2 滚动验证 PR #2](https://github.com/KILING-TASI/portfolio-decision-engine/pull/2)，依赖 #1。
-3. 工作台限定兼容契约及文档整理，依赖 #2；见[兼容边界](docs/workbench-contracts.md)。
-
-本文能力表以 v0.7.0 为准。待审分支已有完整 M2 滚动实现，不代表公开版已提供。
-
-## 立即运行
-
-需要 Python 3.10 或以上，在仓库目录执行：
+需要 Python 3.10+，在已下载的仓库目录执行（安装会获取 NumPy、pandas、SciPy、scikit-learn、statsmodels 及其依赖）：
 
 ```sh
 python -m pip install -e .
 python -m portfolio_engine demo --fast --out reports/demo
 ```
 
-打开 `reports/demo/report.html`。输出目录必须尚不存在，旧报告不覆盖。Windows 可双击 `Run-Demo.cmd`，自动创建虚拟环境、安装并打开带唯一日期目录的报告。首次运行需要网络和已安装的 Python。
+打开 `reports/demo/report.html`，可见配置取舍、预算、迁移、风险及未知穿透；同时生成 JSON、账本、输入快照和完整性清单。**输出目录必须不存在，重复运行请换目录名，旧报告不覆盖。** Windows 也可双击 `Run-Demo.cmd` 自动准备环境并打开报告。
 
-示例是固定随机种子生成的**合成数据，不是市场历史**。去掉 `--fast` 使用 2000 起步、最多 8000 条路径与四组块长。
+`--fast` 用于快速教学演示；去掉后采用 2000 起步、最多 8000 条模拟路径与四组块长。完整 demo 不等于真实市场验证。
+
+[![实际报告：配置收益与回撤取舍，合成教学数据](docs/previews/allocation.png)](docs/report-previews.md)
+
+[配置 HTML 节选](docs/previews/allocation.html) · [M2 训练与测试截图](docs/previews/m2-windows.png) · [未知穿透截图](docs/previews/lookthrough.png) · [样本与复现说明](docs/report-previews.md)
+
+截图来自实际生成、已检查的教学 HTML；标明引擎 v0.7.0、2026-10-09 与固定种子。配置留出比较是已发布能力；完整 M2 滚动展示来自待审 #2，不能混为公开版或实盘验证。
 
 自己的数据：
 
@@ -101,3 +95,14 @@ v0.4 文档是目标设计，不代表其中全部能力已经实现。首版的
 ## 免责声明
 
 本项目仅供学习与研究，不构成投资建议或交易指令，不保证收益或结果准确性。请在使用前阅读[免责声明与使用边界](DISCLAIMER.md)，并结合本次数据来源、假设与缺口独立判断。代码许可不包含第三方数据使用授权。
+
+## 发布与待审状态
+
+公开发行仍为 **v0.7.0**。以下增量以依赖顺序分批待审，尚未合并或发行：
+
+1. [披露适配与时间检查 PR #1](https://github.com/KILING-TASI/portfolio-decision-engine/pull/1)。
+2. [完整 M2 滚动验证 PR #2](https://github.com/KILING-TASI/portfolio-decision-engine/pull/2)，依赖 #1。
+3. [工作台限定兼容及教学预览 PR #3](https://github.com/KILING-TASI/portfolio-decision-engine/pull/3)，依赖 #2；见[兼容边界](docs/workbench-contracts.md)。
+
+本文能力表以 v0.7.0 为准。待审分支已有完整 M2 滚动实现，不代表公开版已提供。
+
