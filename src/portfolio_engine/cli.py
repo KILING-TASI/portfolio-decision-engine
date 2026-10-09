@@ -13,6 +13,7 @@ from .validation import InputError
 from .archive import atomic_output,manifest,verify,read_json,digest
 from .data_bridge import prepare_bundle,workbench_adapter,collected_adapter
 from .collect import collect_requests
+from .lookthrough_adapter import cn_lookthrough_input
 
 
 def make_demo(directory,seed=42,fast=False):
@@ -80,12 +81,23 @@ def main(argv=None):
     collect.add_argument("--out",required=True)
     check=commands.add_parser("verify",help="read-only report file/method integrity")
     check.add_argument("directory")
+    conversion=commands.add_parser("convert-lookthrough",help="convert cn-fund-lookthrough v0.1 input, preserving disclosure and mapping evidence")
+    conversion.add_argument("--input",required=True)
+    conversion.add_argument("--out",required=True)
     args=parser.parse_args(argv)
     try:
         if args.command=="verify":
             result=verify(args.directory);print(json.dumps(result,ensure_ascii=False,indent=2))
             return 0 if result["status"]=="stored_content_verified" else 2
         with atomic_output(args.out) as stage:
+            if args.command=="convert-lookthrough":
+                spec=read_json(args.input);value=cn_lookthrough_input(spec)
+                from .data_bridge import lookthrough
+                result=lookthrough(value)
+                (stage/"source-input.json").write_bytes(Path(args.input).read_bytes())
+                write_json(stage/"lookthrough.json",value);write_json(stage/"conversion-result.json",result)
+                manifest(stage);print(f"Converted disclosure: {Path(args.out).resolve()}")
+                return 0
             if args.command=="collect":
                 spec=read_json(args.input);result,raws=collect_requests(spec,args.online)
                 write_json(stage/"input.json",spec);write_json(stage/"source-archive.json",result)

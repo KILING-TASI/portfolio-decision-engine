@@ -1,0 +1,84 @@
+{
+  "asOf": "2026-09-30",
+  "currency": "CNY",
+  "positions": [
+    {
+      "id": "联接基金",
+      "node": "feeder",
+      "weight": 0.6
+    },
+    {
+      "id": "主动基金",
+      "node": "active",
+      "weight": 0.4
+    }
+  ],
+  "nodes": {
+    "feeder": {
+      "currency": "CNY",
+      "source": "教学持仓报告，非真实基金",
+      "reportDate": "2026-06-30",
+      "publishedAt": "2026-07-20",
+      "holdings": [
+        {
+          "kind": "fund",
+          "node": "etf",
+          "weight": 0.9
+        }
+      ]
+    },
+    "etf": {
+      "currency": "CNY",
+      "source": "教学持仓报告，非真实基金",
+      "reportDate": "2026-06-30",
+      "publishedAt": "2026-07-20",
+      "holdings": [
+        {
+          "kind": "stock",
+          "security": "CN-SSE:DEMO-A",
+          "weight": 0.6
+        },
+        {
+          "kind": "stock",
+          "security": "CN-SSE:DEMO-B",
+          "weight": 0.4
+        }
+      ]
+    },
+    "active": {
+      "currency": "CNY",
+      "source": "教学持仓报告，非真实基金",
+      "reportDate": "2026-06-30",
+      "publishedAt": "2026-07-20",
+      "holdings": [
+        {
+          "kind": "stock",
+          "security": "CN-SSE:DEMO-A",
+          "weight": 0.5
+        },
+        {
+          "kind": "stock",
+          "security": "CN-SSE:DEMO-C",
+          "weight": 0.25
+        }
+      ]
+    }
+  },
+  "securities": {
+    "CN-SSE:DEMO-A": {
+      "kind": "stock",
+      "issuer": "教学公司A",
+      "source": "教学证券身份映射"
+    },
+    "CN-SSE:DEMO-B": {
+      "kind": "stock",
+      "issuer": "教学公司B",
+      "source": "教学证券身份映射"
+    },
+    "CN-SSE:DEMO-C": {
+      "kind": "stock",
+      "issuer": "教学公司C",
+      "source": "教学证券身份映射"
+    }
+  }
+}

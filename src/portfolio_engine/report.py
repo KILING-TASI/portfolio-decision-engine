@@ -86,7 +86,7 @@ def save_report(report,path,output):
     supplement_section=""
     if supplemental:
         supplement_section=f'''<section><h2>ETF 收盘价与净值对照</h2><p>同日收盘偏离不是盘中 IOPV，也不是可成交价差。</p><table><tr><th>日期</th><th>收盘价</th><th>单位净值</th><th>偏离</th></tr>{premium_rows}</table></section>
-<section><h2>披露持仓穿透</h2><p>已知权重 {pct(lt.get('known_weight'))}；未知权重 {pct(lt.get('unknown_weight'))}。循环、缺少子基金及未披露部分保留为未知，不按零风险处理。</p><table><tr><th>底层身份</th><th>组合权重</th></tr>{look_rows}</table></section>'''
+<section><h2>披露持仓穿透</h2><p>已知权重 {pct(lt.get('known_weight'))}；未知权重 {pct(lt.get('unknown_weight'))}。循环、缺少子基金及未披露部分保留为未知，不按零风险处理。披露快照不是实时持仓；发行人映射为输入依据，不由部分股票穿透推算全组合风险或事件损失。</p><table><tr><th>底层身份</th><th>组合权重</th></tr>{look_rows}</table></section>'''
     selected=label(budget["selected"]) if budget.get("selected") else "无预算通过方案"
     interpretation=safe.get("decision_summary",{})
     conclusions="".join(f"<li>{escape(text)}</li>" for text in interpretation.get("conclusions",[]))

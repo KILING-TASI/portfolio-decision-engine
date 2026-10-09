@@ -66,6 +66,8 @@ python -m build
 
 ## 阅读入口
 
+- [披露资料接入路线与验收](docs/lookthrough-integration-roadmap.md)：v0.7基础、待审cn-fund-lookthrough输入转换、真实资料与M2样本外验证优先级。
+
 - [完整设计方案 v0.4](docs/design-v0.4.md)：数据、回测、M1–M7、输出契约、验收和路线图。
 - [开源组件与选型](docs/open-source-components.md)：可复用能力、边界和官方来源。
 - [修订记录](CHANGELOG.md)：对 v0.2 方案与 v0.3 补丁的纠错与合并。

@@ -1,5 +1,7 @@
 # v0.6 数据接入与留档
 
+待审增量：`convert-lookthrough`显式转换cn-fund-lookthrough输入v0.1，保留原始字节、披露证据与证券/发行人映射。接口、已有范围、首批验收及后续风险/事件与ETF套利边界见[接入路线](lookthrough-integration-roadmap.md)。不自动切换旧数据、不将局部披露变为实时风险输入。
+
 输出目录均须不存在；失败不发布半份报告，会尽可能保留 failure.json。重复执行需指定新目录。verify 只读取，不联网、不改文件。
 
 ## 1. 准备已有资料

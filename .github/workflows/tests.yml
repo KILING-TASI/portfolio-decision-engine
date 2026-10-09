@@ -23,4 +23,6 @@ jobs:
       - run: python -m pytest -q
       - run: python -m portfolio_engine demo --fast --out reports/ci-demo
       - run: python -m portfolio_engine verify reports/ci-demo
+      - run: python -m portfolio_engine convert-lookthrough --input examples/cn-lookthrough-demo.json --out reports/ci-lookthrough
+      - run: python -m portfolio_engine verify reports/ci-lookthrough
       - run: python -m build
