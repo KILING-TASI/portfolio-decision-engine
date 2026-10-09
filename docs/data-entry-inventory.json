@@ -1,0 +1,395 @@
+{
+  "inventory_status": "implemented/designed/unverified separated; portfolio repository only",
+  "audited_source_commit": "c5d7361",
+  "date": "2026-10-10",
+  "software_version": "0.7.0; pending changes distinct from main/release/installed state",
+  "shared_candidate_status": "local_candidate_not_cross_repo_standard",
+  "shared_candidate_fields": [
+    "record_id",
+    "subject_id",
+    "metric_id",
+    "value",
+    "unit",
+    "currency",
+    "period_start",
+    "period_end",
+    "observation_time",
+    "published_at",
+    "effective_at",
+    "acquired_at",
+    "available_at",
+    "time_precision",
+    "producer",
+    "provider",
+    "interface",
+    "source_url",
+    "raw_sha256",
+    "source_version",
+    "parser_version",
+    "method_version",
+    "verification_status",
+    "missing",
+    "conflicts",
+    "coverage",
+    "rights",
+    "extensions"
+  ],
+  "principles": [
+    "no old schema/input/result upgrade",
+    "preserve original payload and professional extensions",
+    "null+reason where no lossless mapping",
+    "acquisition not historical availability",
+    "original snapshot and source-version semantics distinct from parsed/derived hashes",
+    "download/page found/semantic verification separate",
+    "rights are not conveyed by original-code MIT",
+    "no nine-repository unification claim"
+  ],
+  "entries": [
+    {
+      "entry_id": "fund-nav-http",
+      "commands": [
+        "collect --online",
+        "prepare --archive"
+      ],
+      "modules": [
+        "collect.collect_requests",
+        "collect.embedded",
+        "data_bridge.collected_adapter"
+      ],
+      "implementation": "implemented; offline tests; this batch no live fetch",
+      "original_producer": null,
+      "provider_channel": {
+        "provider": "eastmoney_fund_nav",
+        "channel": "Eastmoney fund pingzhongdata JavaScript endpoint",
+        "publisher_status": "aggregator identified; original fund publisher not independently authenticated"
+      },
+      "interface_library": "urllib.request for explicit online collection; otherwise caller-supplied JSON/CSV",
+      "subject_identity": "request six-digit fund code, response fS_code equality and nonblank fS_name; no share-class/currency/issuer authentication",
+      "fields_units_currency_frequency": {
+        "nav": "positive numeric y; monetary unit/currency not supplied by collector",
+        "distribution_text": "raw unitMoney text, not parsed complete event evidence",
+        "frequency": "observations are date-level; complete trading calendar not established"
+      },
+      "time_roles_and_precision": {
+        "observation": "x Unix milliseconds converted to Asia/Shanghai date; raw timestamp remains in raw bytes",
+        "published": null,
+        "effective": null,
+        "acquired": "retrieved_at UTC offset timestamp, Python clock precision",
+        "available": null,
+        "precision": "normalized day vs raw ms; acquisition is not historical availability"
+      },
+      "versions_and_corrections": {
+        "raw": "response_file+response_sha256",
+        "parser": "source-module SHA, no separate parser version",
+        "source_version": null,
+        "correction_relation": null,
+        "point_in_time": "current revised history, not historical frozen knowledge"
+      },
+      "coverage_and_update": "1..12 explicit requests; window-filtered actual dates/count; <=16MiB, timeout20s; manual new output, no updater",
+      "rights": "provider data rights unknown/not conveyed by MIT; local original response excluded from Git/package",
+      "maintenance": "engine owns bounded transport/archive and adapter; caller/issuer evidence owns semantic/event rights verification",
+      "gaps": [
+        "published/available/vintage absent",
+        "distribution text does not establish complete dividends",
+        "no source revision catalogue"
+      ]
+    },
+    {
+      "entry_id": "cn-price-http",
+      "commands": [
+        "collect --online"
+      ],
+      "modules": [
+        "collect.collect_requests"
+      ],
+      "implementation": "implemented; offline tests; no live fetch this batch",
+      "original_producer": null,
+      "provider_channel": {
+        "provider": "tencent_cn_price",
+        "channel": "Tencent ifzq fqkline/get day response",
+        "publisher_status": "original exchange/redistributor chain not authenticated"
+      },
+      "interface_library": "urllib.request for explicit online collection; otherwise caller-supplied JSON/CSV",
+      "subject_identity": "explicit sh/sz+six-digit code and response quote code; asset class not independently verified",
+      "fields_units_currency_frequency": {
+        "open/close/high/low": "positive raw prices; currency and adjustment rights not authenticated",
+        "volume": "nonnegative raw number; shares/lots unit unknown",
+        "frequency": "day rows; no calendar authentication"
+      },
+      "time_roles_and_precision": {
+        "observation": "provider date, day precision",
+        "published": null,
+        "effective": null,
+        "acquired": "UTC retrieved_at",
+        "available": null
+      },
+      "versions_and_corrections": {
+        "raw": "exact response bytes and SHA256",
+        "source_version": null,
+        "corrections": null,
+        "parser": "collect.py source fingerprint"
+      },
+      "coverage_and_update": "<=366 calendar-day request; detects potentially truncated >=640 rows; manually rerun, no background service",
+      "rights": "market data rights unknown; original response local only",
+      "maintenance": "engine archive/validity; source/exchange chain and licence external",
+      "gaps": [
+        "raw_price rejected by total-return archive adapter",
+        "no intraday, verified adjustment, holiday/calendar collection or currency authentication"
+      ]
+    },
+    {
+      "entry_id": "fund-nav-events",
+      "commands": [
+        "prepare",
+        "prepare --workbench",
+        "prepare --archive"
+      ],
+      "modules": [
+        "data_bridge.total_return_index",
+        "data_bridge.workbench_adapter",
+        "data_bridge.prepare_bundle"
+      ],
+      "implementation": "implemented; same teaching input cross-workbench subset checked",
+      "original_producer": "caller declaration; actual fund original publisher unknown",
+      "provider_channel": "research-bundle/nav_with_events/manual event declarations",
+      "interface_library": "urllib.request for explicit online collection; otherwise caller-supplied JSON/CSV",
+      "subject_identity": "caller code/URL and common currency; no global security-ID normalization",
+      "fields_units_currency_frequency": {
+        "nav": "positive values; event cash per old unit and split new/old ratio",
+        "returns": "normalized reinvest index then fractional interval returns",
+        "currency": "explicit all assets equal; no FX",
+        "frequency": "daily/monthly only for engine; gaps/explicit calendars validated"
+      },
+      "time_roles_and_precision": {
+        "observation": "history date-only",
+        "event": "modeled event day; same-day reinvestment assumption",
+        "published": null,
+        "effective": "actual rights/settlement not authenticated",
+        "acquired": "archive retrieved_at retained when present",
+        "available": null
+      },
+      "versions_and_corrections": {
+        "input": "normalized per-asset input_sha256 is not original-document hash",
+        "raw": "archive response_sha256 when known; workbench input bytes separately frozen",
+        "source_version": null,
+        "correction_relation": null,
+        "method": "same_date_nav_reinvestment basis, source SHA; no separate method version"
+      },
+      "coverage_and_update": "explicit complete event list; exact shared asset dates, no intersection/fill; manual update",
+      "rights": "artificial fixtures original; external NAV/dividend data rights separate",
+      "maintenance": "engine normalization/calculation; workbench retains source/research; source/rights evidence independent",
+      "gaps": [
+        "same-date reinvest only, not delayed cash/DCA/executable receipt",
+        "token declared_complete_for_window differs from workbench verified-complete-for-window; neither proves actual original verification",
+        "neutral missing event components are model assumptions under declared complete list, not new facts",
+        "upstream original payload frozen by CLI but normalized metadata is partial",
+        "workbench normalized adapter does not forward every metadata field, including artificial-example labels; original bytes/sidecar must be retained, no full-metadata-equivalence claim"
+      ]
+    },
+    {
+      "entry_id": "calendar-and-frequency",
+      "commands": [
+        "prepare",
+        "run"
+      ],
+      "modules": [
+        "data_bridge.validate_context"
+      ],
+      "implementation": "implemented declared calendar comparison; no official calendar collector",
+      "original_producer": "caller-supplied calendar producer not authenticated",
+      "provider_channel": "calendar source_url+dates; optional spacing inference",
+      "interface_library": "urllib.request for explicit online collection; otherwise caller-supplied JSON/CSV",
+      "subject_identity": "caller applicability_confirmed and requested asset/date window",
+      "fields_units_currency_frequency": {
+        "calendar": "unique ordered dates/start/end",
+        "annualization": "daily252/monthly12 only in this engine",
+        "shared_candidate": "does not force other repositories to daily/monthly"
+      },
+      "time_roles_and_precision": {
+        "observation": "day dates",
+        "published": null,
+        "effective": "caller calendar interval/applicability declaration",
+        "acquired": null,
+        "available": null
+      },
+      "versions_and_corrections": {
+        "source_version": null,
+        "corrections": null,
+        "method": "source fingerprint; inferred vs declared frequency explicitly distinguished"
+      },
+      "coverage_and_update": "exact missing/extra date check; matched date coverage is not market-calendar truth; manual updates",
+      "rights": "calendar data rights unknown, input source link not licence",
+      "maintenance": "engine applicability/date check; official calendar original and updates external",
+      "gaps": [
+        "no cross-market official calendar/version chain",
+        "date spacing cannot prove exchange sessions"
+      ]
+    },
+    {
+      "entry_id": "disclosure-lookthrough",
+      "commands": [
+        "convert-lookthrough",
+        "run --lookthrough",
+        "account-exposure"
+      ],
+      "modules": [
+        "lookthrough_adapter.cn_lookthrough_input",
+        "data_bridge.lookthrough",
+        "disclosure_time.disclosure_timing"
+      ],
+      "implementation": "implemented cn-fund-lookthrough v0.1 adapter; teaching contract tests",
+      "original_producer": "declared fund disclosure original publisher; not PDF-authenticated",
+      "provider_channel": "source URL/reference, specialist supplied node payload",
+      "interface_library": "urllib.request for explicit online collection; otherwise caller-supplied JSON/CSV",
+      "subject_identity": "fund nodes + security_mapping IDs/issuer evidence; missing nodes/weights stay unknown",
+      "fields_units_currency_frequency": {
+        "weights": "fractions; known+unknown conservation",
+        "currency": "one explicitly declared currency; no FX",
+        "scope": "reported top holdings/disclosure period, not live complete exposure"
+      },
+      "time_roles_and_precision": {
+        "observation": "report_date holdings period",
+        "published": "published_at declaration",
+        "effective": null,
+        "acquired": "retrieved_at declaration",
+        "available": "available_at distinct declaration",
+        "frozen": "frozen_at declaration",
+        "precision": "offset timestamps accepted but cutoff is Asia/Shanghai date-level, not intraday"
+      },
+      "versions_and_corrections": {
+        "source_version": "version_id when supplied",
+        "raw": "source_sha256 declared original-byte hash, not validated PDF here",
+        "correction_relation": null,
+        "parser": "original-page parsing lives specialist library; adapter source SHA separate"
+      },
+      "coverage_and_update": "historical mode requires available/frozen/version/hash by cutoff; declarations not independent authentication; manual new snapshot",
+      "rights": "no fund-report original pages bundled, their rights separate",
+      "maintenance": "specialist owns fund disclosure parsing; engine exposure joining and guards; no fund overall rating",
+      "gaps": [
+        "announcement/PDF download/semantic original checking not this engine",
+        "no intraday point-in-time cutoff or revision chain",
+        "acquired_at alone cannot satisfy availability"
+      ]
+    },
+    {
+      "entry_id": "returns-and-factors-csv",
+      "commands": [
+        "run --returns",
+        "m2-evaluate"
+      ],
+      "modules": [
+        "io.load_returns",
+        "engine.run_engine",
+        "m2_evaluation.m2_walk_forward"
+      ],
+      "implementation": "implemented user-supplied inputs; synthetic demos",
+      "original_producer": "caller; metric origin not verified",
+      "provider_channel": "CSV with config metadata; no designated provider",
+      "interface_library": "urllib.request for explicit online collection; otherwise caller-supplied JSON/CSV",
+      "subject_identity": "date + named asset/factor columns; source code identity declared",
+      "fields_units_currency_frequency": {
+        "returns": "fractional period change, not percent; raw prices optional transform does not prove adjusted total return",
+        "factors": "caller-defined numeric factor extension; macro definition unknown",
+        "frequency": "data metadata daily/monthly; engine validates supported annualization"
+      },
+      "time_roles_and_precision": {
+        "observation": "CSV date index",
+        "published": null,
+        "effective": null,
+        "acquired": null,
+        "available": null
+      },
+      "versions_and_corrections": {
+        "snapshot": "source CSV SHA256",
+        "rule_version": "not applicable",
+        "source_version": null,
+        "macro_vintage_or_revisions": null,
+        "method": "engine source fingerprints and config snapshot"
+      },
+      "coverage_and_update": "unique/increasing finite supported rows; no filling; train/test isolation is calculation scope not data vintage proof; manual input",
+      "rights": "external prices/factors retain own rights; private inputs local",
+      "maintenance": "engine input/calculation validity; publisher/economic interpretation and source rights outside",
+      "gaps": [
+        "CSV hash is not publisher revision or point-in-time evidence",
+        "macro revision ingestion/collector not implemented"
+      ]
+    },
+    {
+      "entry_id": "account-and-cash",
+      "commands": [
+        "account-exposure",
+        "cash-demand",
+        "python -m portfolio_engine.observed_review"
+      ],
+      "modules": [
+        "account_exposure.account_exposure",
+        "cash_demand.cash_demand",
+        "observed_review.review"
+      ],
+      "implementation": "implemented; artificial teaching only; real accounts paused",
+      "original_producer": "user account declaration, not authenticated statement",
+      "provider_channel": "local JSON and configured specialist invocation; no bank/broker API",
+      "interface_library": "urllib.request for explicit online collection; otherwise caller-supplied JSON/CSV",
+      "subject_identity": "root positions, leaf exposures and economic_event_id; no account number requested",
+      "fields_units_currency_frequency": {
+        "amounts": "exposure/cash demand base currency; observed review base/thousand/million preserved",
+        "cash": "available/frozen/book/conditional liquidation separate",
+        "observed_returns": "TWR cumulative; XIRR annual actual days/365.25; future ledger not same model"
+      },
+      "time_roles_and_precision": {
+        "observation": "valuation_date/dated before-after flows",
+        "published": null,
+        "effective": "dated user flows/releases/trades plus explicit conditions",
+        "acquired": null,
+        "available": "cash availability is conditional accounting meaning, not publication availability",
+        "precision": "day; no intraday receipt ordering"
+      },
+      "versions_and_corrections": {
+        "interfaces": "account-exposure-input-v1/cash-demand-input-v1/workbench-observed-review-input-v1",
+        "methods": "declared-account-exposure-v1/conditional-dated-cash-demand-v1/observed-review-workbench-bisection-v1",
+        "source_versions": "exact input and method hashes; no statement authentication"
+      },
+      "coverage_and_update": "manual scenario/snapshot; unknown amount/date/terms unresolved; no auto trade/update",
+      "rights": "private originals isolated in ignored outputs, not published; only synthetic examples in repository",
+      "maintenance": "engine arithmetic/uncertainty; workbench explanation/report/find; user statement rights external",
+      "gaps": [
+        "no actual payment/receipt guarantee",
+        "income interruption/haircut are assumptions, not probabilities",
+        "shared source available_at must not be conflated with spendable cash"
+      ]
+    },
+    {
+      "entry_id": "announcement-and-macro-revision-gap",
+      "commands": [],
+      "modules": [],
+      "implementation": "not implemented here; candidate catalogue only",
+      "original_producer": null,
+      "provider_channel": null,
+      "interface_library": "urllib.request for explicit online collection; otherwise caller-supplied JSON/CSV",
+      "subject_identity": "no authenticated original announcement or macro vintage fixture this batch",
+      "fields_units_currency_frequency": {
+        "announcement": "only upstream reference/parsed declaration through specialist adapters",
+        "macro": "generic factor input is not macro revision series"
+      },
+      "time_roles_and_precision": {
+        "observation": null,
+        "published": null,
+        "effective": null,
+        "acquired": null,
+        "available": null
+      },
+      "versions_and_corrections": {
+        "source_version": null,
+        "correction_relation": null,
+        "shared_schema": "none verified across nine repositories"
+      },
+      "coverage_and_update": "no collector/service/update mechanism added",
+      "rights": "original announcements/research/data rights independent of MIT",
+      "maintenance": "financial originals stay cn-financial-reconcile; macro specialist owns vintages; engine consumes explicit research inputs",
+      "gaps": [
+        "same-original cross-nine verification not performed",
+        "no publication/revision chain inferred from interface documentation"
+      ]
+    }
+  ]
+}

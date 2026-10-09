@@ -56,7 +56,7 @@ CSV 第一列是 date，其余列是资产日收益，1% 写 0.01。配置格式
 - `verify`：核对报告文件、输入快照和计算方法是否变化，不认证来源真实性或视觉效果。
 - 日/月频与 252/12 年化因子一致性检查；可提供明确适用的日历检查缺日，禁止自动填值。
 
-具体字段与完整命令链见 [数据接入指南](docs/data-bridge.md)。代码参考与上游许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+具体字段、完整命令链及本仓库的数据入口目录/候选旁挂范围见 [数据接入指南](docs/data-bridge.md)。代码参考与上游许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 报告整体为 degraded，避免将简化模型当实盘工具。M2 无解时比较参考不会冒充预算解。M1 连续账本 walk-forward 与冻结权重留出比较分别提供，不能称为已验证 M2 筛选。自举误差仅是条件蒙特卡洛误差。
 
