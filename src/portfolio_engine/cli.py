@@ -96,12 +96,22 @@ def main(argv=None):
     exposure.add_argument("--input",required=True);exposure.add_argument("--out",required=True)
     statistics=commands.add_parser("statistics-demo",help="original statistical validation counterexamples, synthetic only")
     statistics.add_argument("--out",required=True)
+    cash=commands.add_parser("cash-demand",help="conditional dated cash needs under explicit user scenarios")
+    cash.add_argument("--input",required=True);cash.add_argument("--out",required=True)
     args=parser.parse_args(argv)
     try:
         if args.command=="verify":
             result=verify(args.directory);print(json.dumps(result,ensure_ascii=False,indent=2))
             return 0 if result["status"]=="stored_content_verified" else 2
         with atomic_output(args.out) as stage:
+            if args.command=="cash-demand":
+                from .cash_demand import cash_demand
+                from .cash_demand_report import save_cash_demand
+                spec=read_json(args.input);result=cash_demand(spec)
+                (stage/"source-input.json").write_bytes(Path(args.input).read_bytes())
+                save_cash_demand(spec,result,stage);manifest(stage)
+                print(f"Cash demand report: {(Path(args.out)/'cash-demand-report.html').resolve()}")
+                return 0
             if args.command=="statistics-demo":
                 from .statistical_cases import statistical_cases,save_statistical_cases
                 result=statistical_cases();save_statistical_cases(result,stage);manifest(stage)
