@@ -83,10 +83,12 @@ def save_report(report,path,output):
                          for row in supplemental.get("premium",{}).get("rows",[]))
     lt=supplemental.get("lookthrough",{})
     look_rows="".join(f"<tr><td>{escape(name)}</td><td>{pct(weight)}</td></tr>" for name,weight in lt.get("leaves",{}).items())
+    timing_rows="".join(f"<tr><td>{escape(name)}</td><td>{escape(record['holdings_period'])}</td><td>{escape(record['published_at'])}</td><td>{escape(record.get('retrieved_at') or '未提供')}</td><td>{escape(record.get('available_at') or '未提供')}</td></tr>"
+                        for name,record in lt.get("disclosure_timing",{}).items() if record.get("record_role")!="account_wrapper")
     supplement_section=""
     if supplemental:
         supplement_section=f'''<section><h2>ETF 收盘价与净值对照</h2><p>同日收盘偏离不是盘中 IOPV，也不是可成交价差。</p><table><tr><th>日期</th><th>收盘价</th><th>单位净值</th><th>偏离</th></tr>{premium_rows}</table></section>
-<section><h2>披露持仓穿透</h2><p>已知权重 {pct(lt.get('known_weight'))}；未知权重 {pct(lt.get('unknown_weight'))}。循环、缺少子基金及未披露部分保留为未知，不按零风险处理。披露快照不是实时持仓；发行人映射为输入依据，不由部分股票穿透推算全组合风险或事件损失。</p><table><tr><th>底层身份</th><th>组合权重</th></tr>{look_rows}</table></section>'''
+<section><h2>披露持仓穿透</h2><p>已知权重 {pct(lt.get('known_weight'))}；未知权重 {pct(lt.get('unknown_weight'))}。循环、缺少子基金及未披露部分保留为未知，不按零风险处理。披露快照不是实时持仓；发行人映射为输入依据，不由部分股票穿透推算全组合风险或事件损失。</p><table><tr><th>底层身份</th><th>组合权重</th></tr>{look_rows}</table><p>本次披露资料截止：{escape(lt.get('evaluated_as_of','未登记'))}。采集日晚于历史截止日不证明该版本当时可得；跨期持仓差异不能还原买卖。</p><table><tr><th>披露节点</th><th>持仓期</th><th>披露日</th><th>采集时间</th><th>版本可得时间</th></tr>{timing_rows}</table></section>'''
     selected=label(budget["selected"]) if budget.get("selected") else "无预算通过方案"
     interpretation=safe.get("decision_summary",{})
     conclusions="".join(f"<li>{escape(text)}</li>" for text in interpretation.get("conclusions",[]))

@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 
 from .validation import InputError,returns_frame
+from .disclosure_time import disclosure_timing,observation_day
 
 
 def source_url(value):
@@ -193,13 +194,20 @@ def closing_premium(spec):
                             "NAV belonging date does not establish historical publication availability"]}
 
 
-def lookthrough(spec):
+def lookthrough(spec,research_as_of=None,historical=False):
     if not isinstance(spec,dict):raise InputError("lookthrough input must be an object")
-    nodes=spec["nodes"];root=spec["root"];cutoff=pd.Timestamp(spec["as_of"])
+    nodes=spec["nodes"];root=spec["root"]
+    cutoffs=[observation_day(spec["as_of"])]
+    if research_as_of is not None:cutoffs.append(observation_day(research_as_of))
+    if spec.get("evaluation_as_of") is not None:cutoffs.append(observation_day(spec["evaluation_as_of"]))
+    cutoff=min(cutoffs).isoformat()
+    stored_historical=spec.get("historical_mode",False)
+    if not isinstance(stored_historical,bool) or not isinstance(historical,bool):raise InputError("historical mode must be boolean")
+    historical=historical or stored_historical
     depth=spec.get("max_depth",10)
     if not isinstance(nodes,dict) or root not in nodes or type(depth) is not int or not 1<=depth<=20:
         raise InputError("invalid lookthrough nodes or depth")
-    leaves={};kinds={};unknown=[];traces=[];visits=0
+    leaves={};kinds={};unknown=[];traces=[];visits=0;timing={}
     wrapper=spec.get("root_is_account_wrapper",False)
     if not isinstance(wrapper,bool):raise InputError("root wrapper marker must be boolean")
     def walk(key,weight,path,root_position=None):
@@ -217,9 +225,10 @@ def lookthrough(spec):
         elif not isinstance(node.get("source_reference"),str) or not node["source_reference"].strip():
             raise InputError("disclosure requires a source URL or explicit source reference")
         if node.get("currency")!=spec["currency"]: raise InputError("lookthrough currency mismatch")
-        report=pd.Timestamp(node["report_date"]);published=pd.Timestamp(node["published_at"])
-        if pd.isna(report) or pd.isna(published) or not report<=published<=cutoff:
-            raise InputError("lookthrough report/publication exceeds cutoff")
+        proof=disclosure_timing(node,cutoff,historical and not (key==root and wrapper))
+        proof["record_role"]="account_wrapper" if key==root and wrapper else "disclosure"
+        timing[key]=proof
+        report=observation_day(node["report_date"]);published=observation_day(node["published_at"])
         total=0;seen=set()
         for holding in node.get("holdings",[]):
             if not isinstance(holding,dict):raise InputError("holding must be an object")
@@ -236,7 +245,8 @@ def lookthrough(spec):
                 if ident in kinds and kinds[ident]!=kind: raise InputError("conflicting leaf kind")
                 kinds[ident]=kind;leaves[ident]=leaves.get(ident,0)+weight*w
                 traces.append({"path":path+[key,ident],"security":ident,"kind":kind,"weight":weight*w,
-                    "report_date":str(report.date()),"published_at":str(published.date()),"currency":node["currency"],
+                    "report_date":report.isoformat(),"published_at":published.isoformat(),"currency":node["currency"],
+                    "retrieved_at":node.get("retrieved_at"),"available_at":node.get("available_at"),"version_id":node.get("version_id"),
                     "source_reference":node.get("source_reference",node.get("source_url")),
                     "issuer":holding.get("issuer"),"mapping_source":holding.get("mapping_source"),"root_position":root_position})
             else: raise InputError("unknown holding kind")
@@ -255,6 +265,9 @@ def lookthrough(spec):
             "issuer_exposure":issuer_exposure,"unmapped_stock_issuer_weight":unmapped,
             "disclosure_evidence":spec.get("disclosure_evidence",{}),"security_metadata":spec.get("security_metadata",{}),
             "root_positions":spec.get("root_positions",[]),"adapter":spec.get("adapter"),
+            "evaluated_as_of":cutoff,"historical_mode":historical,"disclosure_timing":timing,
             "analysis_scope":"disclosed security structure only; no full-portfolio risk or event impact inference",
             "known_weight":sum(leaves.values()),"unknown_weight":sum(r["weight"] for r in unknown),
-            "limitations":["disclosed snapshots, not current positions or actual trades; mixed report dates retained per path"]}
+            "limitations":["disclosed snapshots, not current positions or actual trades; mixed report dates retained per path",
+                           "cross-period holding differences do not reconstruct buys/sells",
+                           "frozen availability is an input declaration; original version bytes not independently authenticated"]}

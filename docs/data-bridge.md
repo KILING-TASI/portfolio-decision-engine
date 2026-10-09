@@ -2,6 +2,8 @@
 
 待审增量：`convert-lookthrough`显式转换cn-fund-lookthrough输入v0.1，保留原始字节、披露证据与证券/发行人映射。接口、已有范围、首批验收及后续风险/事件与ETF套利边界见[接入路线](lookthrough-integration-roadmap.md)。不自动切换旧数据、不将局部披露变为实时风险输入。
 
+接续检查支持convert-lookthrough的--as-of/--historical与run的lookthrough_historical。组合截止取data.as_of（缺省收益末日），晚于截止日的披露或声明的版本可得日会在优化前拒绝。持仓期、发布日期、采集日期和可得时点分开；历史模式要求当时可得且冻结的来源版本声明，仍不认证PDF原件真实性。
+
 输出目录均须不存在；失败不发布半份报告，会尽可能保留 failure.json。重复执行需指定新目录。verify 只读取，不联网、不改文件。
 
 ## 1. 准备已有资料

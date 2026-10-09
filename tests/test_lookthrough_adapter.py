@@ -121,7 +121,7 @@ def test_disclosed_structure_does_not_change_allocator_or_risk(tmp_path):
     from portfolio_engine.engine import run_engine
     from portfolio_engine.io import write_json
     data=pd.DataFrame(np.random.default_rng(1).normal(.0001,.003,(120,2)),index=pd.bdate_range("2020-01-01",periods=120),columns=["a","b"])
-    config={"data":{"return_type":"synthetic_total_return","source":"test","currency":"CNY","frequency":"daily"},
+    config={"data":{"return_type":"synthetic_total_return","source":"test","currency":"CNY","frequency":"daily","as_of":"2026-09-30"},
             "require_china_bear_coverage":False,"bootstrap":{"paths":100,"max_paths":100,"horizon":20,"block_lengths":[10],"budget":.9}}
     before,_=run_engine(data,config)
     disclosure=tmp_path/"lookthrough.json";write_json(disclosure,cn_lookthrough_input(fixture()))
@@ -140,3 +140,65 @@ def test_account_wrapper_does_not_collide_with_missing_fund_reference():
     assert value["root"]!="__cn_account_root__"
     result=lookthrough(value)
     assert any(row["reason"]=="missing_child" and row["root_position"]=="联接基金" for row in result["unknown"])
+
+
+def frozen_fixture():
+    spec=fixture()
+    for node in spec["nodes"].values():
+        node.update(retrievedAt="2026-10-09T10:00:00+08:00",availableAt="2026-07-20",frozenAt="2026-07-21",
+                    versionId="original-report",sourceSha256="a"*64)
+    return spec
+
+
+def test_historical_frozen_declaration_and_current_acquisition_separate():
+    converted=cn_lookthrough_input(frozen_fixture());result=lookthrough(converted,historical=True)
+    assert result["unknown_weight"]==pytest.approx(.16)
+    proof=result["disclosure_timing"]["etf"]
+    assert proof["holdings_period"]=="2026-06-30"
+    assert proof["published_at"]=="2026-07-20"
+    assert proof["retrieved_at"].startswith("2026-10-09")
+    assert proof["available_at"]=="2026-07-20"
+    assert proof["point_in_time_status"]=="frozen_version_declared_not_independently_verified"
+
+
+def test_historical_mode_requires_version_and_freeze_evidence():
+    with pytest.raises(InputError,match="historical input requires"):
+        lookthrough(cn_lookthrough_input(fixture()),historical=True)
+    for field,value in [("frozenAt","2026-10-02"),("versionId",None),("sourceSha256",None)]:
+        spec=frozen_fixture();spec["nodes"]["etf"][field]=value
+        with pytest.raises(InputError):lookthrough(cn_lookthrough_input(spec),historical=True)
+
+
+def test_late_revised_version_and_early_acquisition_are_rejected():
+    spec=frozen_fixture();spec["nodes"]["etf"]["availableAt"]="2026-10-02"
+    with pytest.raises(InputError,match="availability exceeds"):cn_lookthrough_input(spec)
+    spec=frozen_fixture();spec["nodes"]["etf"]["retrievedAt"]="2026-06-01"
+    with pytest.raises(InputError,match="acquisition predates"):cn_lookthrough_input(spec)
+
+
+def test_additional_research_cutoff_cannot_be_extended_by_source_input():
+    with pytest.raises(InputError,match="cutoff"):
+        lookthrough(cn_lookthrough_input(fixture()),research_as_of="2026-06-30")
+
+
+def test_engine_cutoff_rejects_later_disclosure_file(tmp_path):
+    import numpy as np
+    import pandas as pd
+    from portfolio_engine.engine import run_engine
+    from portfolio_engine.io import write_json
+    file=tmp_path/"disclosure.json";write_json(file,cn_lookthrough_input(fixture()))
+    returns=pd.DataFrame(np.random.default_rng(1).normal(0,.002,(120,2)),index=pd.bdate_range("2020-01-01",periods=120),columns=["a","b"])
+    config={"data":{"return_type":"synthetic_total_return","source":"test","currency":"CNY","frequency":"daily","as_of":"2026-06-30"},
+            "require_china_bear_coverage":False,"lookthrough_file":str(file),
+            "bootstrap":{"paths":100,"max_paths":100,"horizon":20,"block_lengths":[10]}}
+    from unittest.mock import patch
+    with patch("portfolio_engine.engine.estimate_covariance",side_effect=AssertionError("late input should reject before optimization")):
+        with pytest.raises(InputError,match="cutoff"):run_engine(returns,config)
+
+
+def test_historical_cli_converts_declared_version_without_claiming_authentication(tmp_path):
+    source=tmp_path/"frozen.json";source.write_text(json.dumps(frozen_fixture(),ensure_ascii=False),encoding="utf8")
+    output=tmp_path/"converted"
+    assert main(["convert-lookthrough","--input",str(source),"--out",str(output),"--historical","--as-of","2026-09-30"])==0
+    assert read_json(output/"conversion-result.json")["historical_mode"]
+    assert verify(output)["source_verification"]=="not_verified"

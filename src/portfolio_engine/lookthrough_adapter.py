@@ -6,6 +6,7 @@ import json
 import math
 
 from .validation import InputError
+from .disclosure_time import disclosure_timing
 
 
 def day(value):
@@ -81,6 +82,11 @@ def cn_lookthrough_input(spec):
                        "raw_metadata":raw_meta}
         converted[key]={"currency":currency,"report_date":node["reportDate"],"published_at":node["publishedAt"],
                         "source_reference":node["source"],"holdings":rows}
+        timing_fields={"retrievedAt":"retrieved_at","availableAt":"available_at","frozenAt":"frozen_at",
+                       "versionId":"version_id","sourceSha256":"source_sha256"}
+        for upstream,local in timing_fields.items():
+            if upstream in node:converted[key][local]=node[upstream]
+        evidence[key]["timing"]=disclosure_timing(converted[key],spec["asOf"])
         if node.get("disclosureScope") in {"top10","top_ten"}:warnings.append(f"{key}: top-ten disclosure; weights were not normalized")
     root="__cn_account_root__"
     reserved=set(converted)|{p["node"] for p in positions}

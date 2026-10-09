@@ -84,6 +84,8 @@ def main(argv=None):
     conversion=commands.add_parser("convert-lookthrough",help="convert cn-fund-lookthrough v0.1 input, preserving disclosure and mapping evidence")
     conversion.add_argument("--input",required=True)
     conversion.add_argument("--out",required=True)
+    conversion.add_argument("--as-of",help="additional research cutoff, cannot extend upstream input cutoff")
+    conversion.add_argument("--historical",action="store_true",help="require declared source version available and frozen by cutoff")
     args=parser.parse_args(argv)
     try:
         if args.command=="verify":
@@ -92,8 +94,10 @@ def main(argv=None):
         with atomic_output(args.out) as stage:
             if args.command=="convert-lookthrough":
                 spec=read_json(args.input);value=cn_lookthrough_input(spec)
+                if args.as_of:value["evaluation_as_of"]=args.as_of
+                value["historical_mode"]=args.historical
                 from .data_bridge import lookthrough
-                result=lookthrough(value)
+                result=lookthrough(value,research_as_of=args.as_of,historical=args.historical)
                 (stage/"source-input.json").write_bytes(Path(args.input).read_bytes())
                 write_json(stage/"lookthrough.json",value);write_json(stage/"conversion-result.json",result)
                 manifest(stage);print(f"Converted disclosure: {Path(args.out).resolve()}")
