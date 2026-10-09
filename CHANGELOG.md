@@ -92,3 +92,7 @@
 - 增加未恢复时间删失、数据快照、输出状态、验收规范与开源组件来源。
 
 本次仅完成文档修订及发布准备；未实现引擎、未运行金融回测。
+
+
+### Pending observed cashflow bridge
+- Add an opt-in CNY/base observed before/after external-flow contract, bound same-input references and timing/fee/frozen/settlement guards. Native simulations and future conditional cash demand remain separate models.

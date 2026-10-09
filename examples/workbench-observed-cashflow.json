@@ -1,0 +1,35 @@
+{
+  "schema": "workbench-observed-cashflow-input-v1",
+  "requested_method_version": "observed-flow-link-and-native-xirr-v1",
+  "valuation_timing": "before-and-after-external-flow",
+  "fee_basis": "included-in-observed-values",
+  "frozen_basis": "included-in-total-value-not-available-cash",
+  "settlement_basis": "observed-values-not-guaranteed-receipts",
+  "payload": {
+    "exampleType": "teaching-only",
+    "cashFlowCoverage": "declared-complete",
+    "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+    "currency": "CNY",
+    "amountUnit": "base",
+    "observations": [
+      {
+        "date": "2025-01-01",
+        "beforeFlowValue": 100,
+        "externalFlow": 0,
+        "afterFlowValue": 100
+      },
+      {
+        "date": "2025-07-01",
+        "beforeFlowValue": 110,
+        "externalFlow": 50,
+        "afterFlowValue": 160
+      },
+      {
+        "date": "2026-01-01",
+        "beforeFlowValue": 168,
+        "externalFlow": -10,
+        "afterFlowValue": 158
+      }
+    ]
+  }
+}
