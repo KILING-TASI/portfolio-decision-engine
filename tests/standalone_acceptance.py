@@ -26,6 +26,8 @@ def main():
     for key in list(env):
         if key.startswith(("PYTHON", "RESEARCH_WORKBENCH_")) or any(
             token in key for token in ("CODEX", "WORKBUDDY", "PORTFOLIO", "LOOKTHROUGH", "FINANCIAL")
+        ) or key.startswith(("AUTHOR_", "SPECIALIST_")) or key.endswith(
+            ("_DATA_DIR", "_DATA_ROOT", "_COMPONENT_DIR", "_COMPONENT_ROOT", "_CACHE_DIR", "_CACHE_ROOT")
         ) or key in {"PIP_TARGET", "PIP_PREFIX", "PIP_USER"}:
             env.pop(key, None)
     env.update(HOME=str(home), USERPROFILE=str(home), APPDATA=str(home / "appdata"),
