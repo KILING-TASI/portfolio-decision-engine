@@ -20,7 +20,7 @@ portfolio-engine = "portfolio_engine.cli:main"
 where = ["src"]
 
 [tool.setuptools.data-files]
-"share/portfolio-decision-engine" = ["THIRD_PARTY_NOTICES.md"]
+"share/portfolio-decision-engine" = ["THIRD_PARTY_NOTICES.md", "DISCLAIMER.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
