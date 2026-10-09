@@ -19,6 +19,7 @@ from .stress import historical_stress
 from .validation import InputError,returns_frame,vector,weights
 from .data_bridge import validate_context,closing_premium,lookthrough
 from .archive import read_json
+from .decision import decision_summary
 
 
 def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
@@ -148,6 +149,17 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
                    penalty=config.get("migration_penalty",1.0)) for mode in ["buy_only","minimum_trade","one_step"]}
         if budget_report["selected"] is None:
             migration["warning"]="Illustrative migration to comparison reference; M2 returned no budget solution."
+        current=np.asarray(config["current_holdings"],float)
+        current_total=current.sum()+config.get("current_cash",0)
+        for plan in migration.values():
+            if not isinstance(plan,dict) or plan.get("status")!="ok":continue
+            final_weights=np.asarray(plan["final_weights"])
+            current_weights=current/current_total if current_total>0 else np.zeros(n)
+            plan["risk_change"]={"current_annual_volatility":float(np.sqrt(current_weights@sigma@current_weights*periods)),
+                "final_annual_volatility":float(np.sqrt(final_weights@sigma@final_weights*periods)),
+                "target_annual_volatility":float(np.sqrt(w@sigma@w*periods)),
+                "scope":"same training covariance estimate, not forecast or actual account drawdown",
+                "budget_status":"not_revalidated_after_migration"}
     attribution={"status":"insufficient_data","reason":"segment history/factors not supplied"}
     provenance_files={}
     if config.get("brinson"):
@@ -203,4 +215,5 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
                   "bootstrap step-based rebalancing differs from dated historical calendar"],
             "provenance":{"seed":seed,"library_versions":{name:version(name) for name in
                            ["numpy","pandas","scipy","scikit-learn","statsmodels"]},**provenance_files}}
+    report["decision_summary"]=decision_summary(report)
     return report,path

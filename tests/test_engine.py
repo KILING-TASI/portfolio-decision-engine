@@ -265,6 +265,13 @@ def test_cli_end_to_end_synthetic_report(tmp_path):
     assert report["modules"]["M3"]["brinson"]["reconciliation_residual"]==pytest.approx(0,abs=1e-12)
     assert report["modules"]["M6"]["status"]=="ok"
     assert report["modules"]["M2"]["historical_coverage"]=={"2015":True,"2018":True}
+    plan=report["modules"]["M4"]["minimum_trade"]
+    assert plan["buy"][1]>10000 and plan["buy"][2]>1000
+    assert not plan["target_reached"]
+    html=(tmp_path/"report.html").read_text(encoding="utf8")
+    assert "可执行，尚未达到目标" in html
+    assert "相对基准的收益与风险取舍" in html
+    assert "回撤预算尚未重新校验" in " ".join(report["decision_summary"]["conclusions"])
 
 
 def test_coverage_gate_does_not_return_budget_solution():
