@@ -56,7 +56,7 @@
         "collect.embedded",
         "data_bridge.collected_adapter"
       ],
-      "implementation": "implemented; offline tests; this batch no live fetch",
+      "implementation": "implemented; offline tests; existing local real-response byte binding checked; no new live fetch this batch",
       "original_producer": null,
       "provider_channel": {
         "provider": "eastmoney_fund_nav",
@@ -92,7 +92,18 @@
         "published/available/vintage absent",
         "distribution text does not establish complete dividends",
         "no source revision catalogue"
-      ]
+      ],
+      "existing_real_sample_scope": {
+        "instruments": "two public funds; research sample, not real account holdings",
+        "requested_window": "2026-08-01..2026-09-30",
+        "actual_window": "2026-08-03..2026-09-30",
+        "observations_each": 42,
+        "recorded_acquisition_UTC": "2026-10-09T10:28:30Z",
+        "stored_response_hash_matches": true,
+        "events_and_calendar": "unverified",
+        "publisher_page_semantics_and_historical_availability": "not independently verified",
+        "raw_originals": "local ignored reports only; no values or response files published"
+      }
     },
     {
       "entry_id": "cn-price-http",
