@@ -93,14 +93,14 @@ python -m portfolio_engine.observed_review /path/to/input.json --out /path/to/ne
 
 | 入口/函数 | 独立端与消费者职责 | 本批状态 |
 |---|---|---|
-| portfolio_cashflow_review.calculate | 独立模块保存旧算术；工作台旧名字只转发result | 独立端已实现；消费者移除/转发待工作台实际提交和联调 |
-| portfolio_cashflow_review.publish / start cashflow | 解释、报告、找回保持工作台；通过旧名字调用 | 消费者负责验证输出和接续 |
-| account_benchmark_review | 沿用旧import取账户收益；经营/差异解释留工作台 | 消费者负责联动验证，不重复搬判断逻辑 |
+| portfolio_cashflow_review.calculate | 独立模块保存旧算术；工作台旧名字只转发result | 已实现并联调；工作台cef5a40已物理移除旧算术，旧名字仅兼容转发 |
+| portfolio_cashflow_review.publish / start cashflow | 解释、报告、找回保持工作台；通过旧名字调用 | 原报告、找回与接续9项测试通过，报告层保留 |
+| account_benchmark_review | 沿用旧import取账户收益；经营/差异解释留工作台 | 沿用旧import转发，6项测试通过；比较和解释仍工作台 |
 | fund_dca.xirr / industry_exit_scenarios | 本批不改独立定投与退出调用路径 | 暂未迁移，保留原函数，不宣称已去重 |
 | 原生回测/原窄桥 | 时点与根方法不同 | 不替代观察函数，保持原版本 |
 | cash-demand 可选入口 | 透传现有未来条件账本 | 已联调；无工作台重复现金压力算法可移除 |
 
-缺可信独立项目、入口或Python时，消费者须明确不可用并给安装/源码配置指引，不自动下载安装，不静默回原重复算法。用户明确配置 `RESEARCH_WORKBENCH_PORTFOLIO_DIR` 和 `RESEARCH_WORKBENCH_PORTFOLIO_PYTHON` 后隔离调用；具体消费者代码和默认行为在工作台自身提交，独立库不修改其工作区。
+缺可信独立项目、入口或Python时，消费者须明确不可用并给安装/源码配置指引，不自动下载安装，不静默回原重复算法。用户明确配置 `RESEARCH_WORKBENCH_PORTFOLIO_DIR`，或使用当前解释器已安装的独立包；当前消费者以同进程独立命名空间调用专业模块，解释器由运行工作台的Python决定；具体消费者代码和默认行为在工作台自身提交，独立库不修改其工作区。
 
 本批教学强对照绑定工作台提交21543ea9：15个完整结果对象精确相等、11个原失败消息相等，含单位/币种/字符串/名称/未知元数据/首末流/费用/非传统和根边界；另验证版本错误、stdin快照、已有目录拒绝和-I/-S标准库运行。源文件摘要和完整夹具在 [搬迁参考](../examples/observed-review-reference.json)。真实账户暂停，数据真实性、实际到账、投资有效性和新报告视觉未验收，CI或空闲状态不代表这些完成。
 
@@ -110,3 +110,12 @@ python -m portfolio_engine.observed_review /path/to/input.json --out /path/to/ne
 跨平台复查说明：旧函数原样搬迁，在同一环境下15案完整结果对象精确相等。Linux与Windows的libm在少数XIRR计算中有最后几位差异（例如14.484608833963398%与14.484608833963403%）；跨平台冻结参考仅对XIRR允许8 * ulp(max(1, abs(1+r))) * 100个百分点（r为小数年化率，按增长因子量级界定浮点误差），其余字段、状态、null与账本仍精确一致。这不是更换算法、放宽root选择或用通用百分比误差掩盖差异。
 
 Python3.10中接近零的年化率转换为百分点后，按百分点自身计算ULP会放大末位差异的计数；上述界限在增长因子1+r的量级设定后转回百分点。其余字段/未知状态仍严格比较，迁移算法三函数AST与固定上游提交一致。
+
+
+### 本批结案记录
+
+独立端功能提交5465f94、工作台消费者提交cef5a408a503dd8be453c2871c3faa6838e9ca93完成本批范围。消费者旧calculate只构造版本信封并返回专业模块result，原TWR链接、账户损益、现金流聚合和旧XIRR调用已物理移除；number保留为报告与比较字段的基础校验。报告、解释、找回和接续仍在主包，基金定投/退出XIRR明确暂未迁移，不宣称整体组合去重完成。
+
+[最终迁移回执](../examples/observed-migration-receipt.json) 绑定消费者实际源摘要与专业方法摘要：15完整结果、11原失败及缺工具拒绝通过；消费者本范围报告/接续9项、账户基准6项通过。专业模块206项测试及Linux3.10/3.12、Windows3.12检查通过，实际可信源码与独立wheel两种调用方式均验收。新建测试venv安装审阅wheel（不联网、不装科学依赖），-I独立运行并读取已安装包成功；UTF8中文输入输出和错误、原始快照、版本拒绝以及24份许可文件核验通过，23第三方文本保留原样。真实账户、投资有效性、资料真实性及本批新浏览器视觉未验收；CI不代表这些完成。
+
+本批原PR顺序保持，引擎[PR #9](https://github.com/KILING-TASI/portfolio-decision-engine/pull/9)依赖#8，工作台继续自身[PR #6](https://github.com/KILING-TASI/research-workbench/pull/6)。不合并、不发新版、不替换旧Release或用户安装；只在独立新测试环境安装验证。许可证main/待审/旧包的分别核验已登记原PR #4，旧发布资产未替换。本批结案后，数据目录和共用记录小批次另行审阅，保持旧输入和旧冻结结果，不扩成自动采集或全市场重构。

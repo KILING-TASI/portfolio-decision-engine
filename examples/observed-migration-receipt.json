@@ -1,0 +1,185 @@
+{
+  "status": "passed",
+  "producer_commit": "5465f940c3ee111cec9c150ce3f60ece27b2b2be",
+  "consumer_commit": "cef5a408a503dd8be453c2871c3faa6838e9ca93",
+  "consumer_source_sha256": {
+    "portfolio_cashflow_review.py": "2a560e0810d461e2c609ea2692a5ad15478c8941ec34d4d75a5b5f53de635f22",
+    "specialist_loader.py": "f8f21225388aae606a50140a6e49388d8bcd269ce123f2c5700e57fe4a6b91df"
+  },
+  "source_binding": "committed sources match invoked sources after CRLF/LF normalization; actual bytes frozen",
+  "cases": [
+    {
+      "case": "base",
+      "status": "passed"
+    },
+    {
+      "case": "thousand",
+      "status": "passed"
+    },
+    {
+      "case": "million",
+      "status": "passed"
+    },
+    {
+      "case": "USD-declared-no-conversion",
+      "status": "passed"
+    },
+    {
+      "case": "numeric-strings",
+      "status": "passed"
+    },
+    {
+      "case": "metadata-preserved-input",
+      "status": "passed"
+    },
+    {
+      "case": "contribution-and-ending-withdrawal",
+      "status": "passed"
+    },
+    {
+      "case": "opening-flow",
+      "status": "passed"
+    },
+    {
+      "case": "fee-already-in-values",
+      "status": "passed"
+    },
+    {
+      "case": "nonconventional",
+      "status": "passed"
+    },
+    {
+      "case": "ordinary",
+      "status": "passed"
+    },
+    {
+      "case": "native_lower_search_gap",
+      "status": "passed"
+    },
+    {
+      "case": "legacy_upper_search_gap",
+      "status": "passed"
+    },
+    {
+      "case": "ending-zero",
+      "status": "passed"
+    },
+    {
+      "case": "zero-opening-funded-at-start",
+      "status": "passed"
+    },
+    {
+      "case": "cashFlowCoverage-unknown",
+      "status": "rejected_as_original",
+      "error": "需要声明本区间外部现金流完整；未知不能按零处理"
+    },
+    {
+      "case": "basis-",
+      "status": "rejected_as_original",
+      "error": "请提供账户估值与现金流的依据"
+    },
+    {
+      "case": "currency-cny",
+      "status": "rejected_as_original",
+      "error": "需要三位大写币种声明，不能假定人民币"
+    },
+    {
+      "case": "amountUnit-unknown",
+      "status": "rejected_as_original",
+      "error": "金额单位须明确为base、thousand或million；不自动缩放"
+    },
+    {
+      "case": "accountLabel- ",
+      "status": "rejected_as_original",
+      "error": "账户研究名称须为1至100字单行文字，不必提供真实账号"
+    },
+    {
+      "case": "accountLabel-a\nb",
+      "status": "rejected_as_original",
+      "error": "账户研究名称须为1至100字单行文字，不必提供真实账号"
+    },
+    {
+      "case": "accountLabel-aaaaaaaa",
+      "status": "rejected_as_original",
+      "error": "账户研究名称须为1至100字单行文字，不必提供真实账号"
+    },
+    {
+      "case": "nonfinite-string",
+      "status": "rejected_as_original",
+      "error": "金额须为有限数字"
+    },
+    {
+      "case": "boolean",
+      "status": "rejected_as_original",
+      "error": "金额不能是布尔值"
+    },
+    {
+      "case": "unreconciled",
+      "status": "rejected_as_original",
+      "error": "外部现金流前后估值不勾稽；交易成本不得伪装成外部出入金"
+    },
+    {
+      "case": "duplicate-date",
+      "status": "rejected_as_original",
+      "error": "日期须唯一、严格递增且为YYYY-MM-DD"
+    }
+  ],
+  "provider": {
+    "provider": "portfolio_engine",
+    "module": "observed_review",
+    "function": "review",
+    "methodFiles": {
+      "__init__.py": "986f1020b6af66c535229a26ee96992ebd426aeacd299fea3757877cba2574ec",
+      "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "account_exposure.py": "f1cd6c4de342f3796e7e8b2ae9a2244e389f2c38b28d2b178d5b01838ce13b80",
+      "allocation.py": "5f494202e90da095f8aef30603f3171934bd1184145e0dd5aa9d47ba6b55148b",
+      "archive.py": "f51d0374a456979a13de8d70a4efbb71b33bd2e0f653fe594af6395e3cc48510",
+      "attribution.py": "b1bf6b2546c8cc1407a2f03619af20641ad3f3d114e58f139199717e72aa7aef",
+      "backtest.py": "168f5c9fcbd999b317ca61e52921abb0f59244ff3fd7fd3a6eda0daa841c799c",
+      "bootstrap.py": "580f743fd4730626f9be8f74e2e19cf5052aa87665a3384b44988734ea59f2db",
+      "cash_demand.py": "6cff4fcb9e7f3b5ae0edcf8c32287b558f93da199134b6bd53aa3d26a157bc41",
+      "cash_demand_report.py": "92353405d3814a96d937957a049c2291d2744881f615c78fc0f339186d46086a",
+      "cli.py": "c3b86fc1b754aa22c10af3e01aa504f8f3b9fa91a40840b3de3b32c8db12f7ab",
+      "collect.py": "2c47e068654f66a948213a61a5f48aa316db9fb982078e200f3a7e3ccc1bdfaa",
+      "data_bridge.py": "663ce33d18e6030a75d4dc5526554aeb7c8cc286090365de3af2ca71e9819deb",
+      "decision.py": "4c3455f084c360ddae52b2a6abcc0f73606df1b9e1baaeec6e55792478297da8",
+      "disclosure_time.py": "30fdeb42e3ba3ad1b31ab4783b194eddac4e5ddaa97d1d689b2f6900266c046e",
+      "engine.py": "69a8b17238c98b8f14e718d0a93b05870e6148212c2532ebca5acc42b3c858a2",
+      "evaluation.py": "2b88a96306b2636a16254f91613ce3803ee54e0730b40f9876f68b037299d96f",
+      "exposure_report.py": "5e744dc877036b7f9b664a588571b6d0957e2f7fd16c6abefc89859dbfac4d63",
+      "io.py": "b6a2872c0228d9209ead9b3259631563da9d431b1495be8dca10ba8cb62214b1",
+      "lookthrough_adapter.py": "02c74b1f7e11f665c5b63f3bccb8cddb9fa9245baf29e1c40ce80c18821ab878",
+      "m2_evaluation.py": "5447cd056e6a9b6626972d7eb06851a1ad3ddf285cf6703aa90d5641804bba8c",
+      "m2_report.py": "e413d2c0f8bc18bfd3d89f68a321ff08dd91a711a0fa6ee66122d1106decf725",
+      "migration.py": "49ab1f6a70d5ca9d1169c2694234328c371da3f1c544a15f0593c4b1c3a39e87",
+      "observed_review.py": "02c7028d876db9fd4f39148abcce69e6913dca2db89f4fb2c7af5f161eb4c6e9",
+      "report.py": "c80511910bec3ed2b87788fc2be2dc02f4440ba72b65c0705f9bde23f8ad67d0",
+      "risk.py": "502dfd6232170e51351f6d1281560c6e1aea6ddff50e8ce6754e06605dea7d62",
+      "statistical_cases.py": "840944ddc420243fe23b851fc48af67641ea642632a99ef633afbeb6d4d5ccd0",
+      "stress.py": "ce8fc5cd3b237fdbfe92747412feefb1ec37bde45856bea24425e8aa34c7a53a",
+      "validation.py": "cef3d600a95f0473345927c89853745a6c91736c97e6765145350c3dc87780a7",
+      "workbench_cashflow.py": "510c471a88760de1be47b6b236c1b3870f31d78d58cedf8ea38eb02383d9b942",
+      "workbench_contract.py": "c65087bf2dbd5d782aa2b06169f04d661e77e89772c2095c13d3279e2ee6909c"
+    },
+    "selection": "explicit-project-or-installed-package"
+  },
+  "duplicate_calculate_arithmetic_removed": true,
+  "compatibility_forwarder": "original calculate name preserved; result fields unchanged",
+  "report_and_continuation_tests": {
+    "portfolio_cashflow_review": 9,
+    "account_benchmark_review": 6,
+    "status": "passed against same final consumer source"
+  },
+  "installed_consumer": "independently installed final wheel success, no scientific imports required",
+  "unavailable_provider": "rejected with install/config guidance, no fallback",
+  "not_migrated": [
+    "fund_dca.xirr",
+    "industry_exit_scenarios XIRR"
+  ],
+  "number_helper": "local report/comparison field validation retained",
+  "sample_type": "teaching-only",
+  "real_account_and_visual_review": "not performed this batch",
+  "merged": false,
+  "released": false,
+  "producer_semantics": "original three function AST unchanged from workbench21543ea9"
+}
