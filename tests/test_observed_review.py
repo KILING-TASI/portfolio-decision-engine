@@ -1,6 +1,7 @@
 import copy
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -14,9 +15,20 @@ ROOT = Path(__file__).parents[1]
 REFERENCE = json.loads((ROOT / "examples/observed-review-reference.json").read_text("utf8"))
 
 
+def assert_legacy_result(actual, expected):
+    actual, expected = dict(actual), dict(expected)
+    a, b = actual.pop("xirrPct"), expected.pop("xirrPct")
+    assert actual == expected
+    assert type(a) is type(b)
+    if a is not None:
+        # The original math.exp/log1p algorithm varies by a few libm ULPs
+        # across OSes; only this field gets a narrow, magnitude-aware bound.
+        assert abs(a-b) <= 8 * max(math.ulp(a), math.ulp(b))
+
+
 @pytest.mark.parametrize("case", REFERENCE["cases"], ids=lambda c: c["case"])
 def test_full_original_observed_result_is_preserved(case):
-    assert review(case["input"])["result"] == case["expected_result"]
+    assert_legacy_result(review(case["input"])["result"], case["expected_result"])
 
 
 @pytest.mark.parametrize("case", REFERENCE["failures"], ids=lambda c: c["case"])
@@ -55,7 +67,7 @@ def test_standard_library_only_cli_freezes_input_and_does_not_overwrite(tmp_path
     completed = subprocess.run(command(source, out), capture_output=True, env=env)
     assert completed.returncode == 0, completed.stderr.decode("utf8")
     result = json.loads(completed.stdout)
-    assert result["result"] == REFERENCE["cases"][0]["expected_result"]
+    assert_legacy_result(result["result"], REFERENCE["cases"][0]["expected_result"])
     assert (out / "source-input.json").read_bytes() == source.read_bytes()
     assert result["input_sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
     manifest = json.loads((out / "report-manifest.json").read_text("utf8"))
@@ -72,7 +84,7 @@ def test_stdin_metadata_snapshot_and_failed_version(tmp_path):
     result = subprocess.run(command("-", out), input=raw, capture_output=True, env=env)
     assert result.returncode == 0
     assert (out / "source-input.json").read_bytes() == raw
-    assert json.loads(result.stdout)["result"] == case["expected_result"]
+    assert_legacy_result(json.loads(result.stdout)["result"], case["expected_result"])
     spec = copy.deepcopy(case["input"])
     spec["requested_method_version"] = "unknown"
     blocked = tmp_path / "blocked"
