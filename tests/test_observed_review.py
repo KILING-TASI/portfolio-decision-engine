@@ -21,9 +21,10 @@ def assert_legacy_result(actual, expected):
     assert actual == expected
     assert type(a) is type(b)
     if a is not None:
-        # The original math.exp/log1p algorithm varies by a few libm ULPs
-        # across OSes; only this field gets a narrow, magnitude-aware bound.
-        assert abs(a-b) <= 8 * max(math.ulp(a), math.ulp(b))
+        # Compare at the 1+r scale before converting back to percentage
+        # points. Small rates amplify ULP counts if measured at r itself.
+        growth_scale = max(1., abs(1+a/100), abs(1+b/100))
+        assert abs(a-b) <= 8 * math.ulp(growth_scale) * 100
 
 
 @pytest.mark.parametrize("case", REFERENCE["cases"], ids=lambda c: c["case"])
