@@ -28,3 +28,8 @@ jobs:
       - run: python -m portfolio_engine m2-demo --fast --out reports/ci-m2
       - run: python -m portfolio_engine verify reports/ci-m2
       - run: python -m build
+
+      - name: Workbench compatibility example
+        run: |
+          python -m portfolio_engine workbench-buy-hold --input examples/workbench-buy-hold.json --reference examples/workbench-buy-hold-reference.json --out reports/workbench-comparison
+          python -m portfolio_engine verify reports/workbench-comparison
