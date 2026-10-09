@@ -105,6 +105,7 @@ def m2_walk_forward(returns,config):
             "fit_observations":len(fitted),"calibration_observations":len(calibration),"test_observations":len(window),
             "selection_status":screened["status"],"selection_reason":screened.get("reason"),"selected":selected,
             "target_weights":target,"initial_deployed_weights":current_weights,"candidate_weights":candidates,
+            "local_selection_audit":screened.get("selection_audit",{"candidate_count":len(candidates),"final_candidate_block_evaluations":0,"candidate_batch_evaluations":0,"scope":"candidates generated, budget screening not run"}),
             "selected_calibration":selected_result,"all_calibration_candidates":screened.get("candidates",{}),
             "coverage":coverage,"covariance":cov_info,"seed":seed+fold_id*1009,
             "decision_as_of":str(frame.index[start-1].date()),
@@ -131,6 +132,13 @@ def m2_walk_forward(returns,config):
     actual=join(daily,trades);baseline=join(base_daily,base_trades)
     failures=sum(f["selected"] is None for f in folds)
     result={"schema_version":"m2-walk-forward-v1","status":"degraded","data_quality":context,"inputs":config,
+            "statistical_validation_version":"conditional-error-and-local-selection-v1",
+            "selection_audit":{"generated_candidates_across_folds":sum(len(f["candidate_weights"]) for f in folds),
+                "candidate_block_evaluations":sum(f["local_selection_audit"]["final_candidate_block_evaluations"] for f in folds),
+                "candidate_batch_evaluations":sum(f["local_selection_audit"]["candidate_batch_evaluations"] for f in folds),
+                "independent_research_trials":None,"cross_run_trial_history":"not_supplied",
+                "deflated_sharpe":{"status":"not_estimable","probability":None,"reason":"local rolling/candidate counts are not a complete research trial history; independent count and moment inputs not supplied; DSR not implemented"},
+                "test_reuse_policy":"a fold's next test cannot select its target; earlier test observations may enter subsequent training windows"},
             "folds":folds,"selection_frequency":dict(selection_counter),"selection_status_counts":dict(state_counter),
             "no_solution_rate":failures/len(folds),"budget_breach_count":breaches,"budget_eligible_full_windows":eligible,
             "budget_breach_rate":breaches/eligible if eligible else None,"attempted_candidate_sets":len(folds),

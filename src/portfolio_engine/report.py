@@ -69,7 +69,8 @@ def save_report(report,path,output):
                       [("max_drawdown","历史最大回撤"),("annual_volatility","年化波动"),("cagr","时间加权年化收益")])
     for key,tail_label in [("tail95","95% 损失 ES"),("tail90","90% 损失 ES")]:
         tail=risk.get(key,{})
-        risk_rows+=f"<tr><td>{tail_label}</td><td>{pct(tail.get('es'))}（尾部观测质量：{tail.get('tail_mass_observations',0):.1f}）</td></tr>"
+        tail_status="样本不足" if tail.get("tail_sample_status")=="insufficient_data" else "未认证独立性"
+        risk_rows+=f"<tr><td>{tail_label}</td><td>{pct(tail.get('es'))}（原始尾部质量：{tail.get('tail_mass_observations',0):.1f} 个等权观测；{tail_status}）</td></tr>"
     wf=safe.get("walk_forward",{})
     wf_rows="".join(f"<tr><td>{label(name)}</td><td>{pct(v['cagr'])}</td><td>{pct(v['max_drawdown'])}</td><td>{v['cost']:,.2f}</td></tr>"
                     for name,v in wf.get("results",{}).items())
@@ -104,14 +105,14 @@ def save_report(report,path,output):
     detail=escape(json.dumps(safe,ensure_ascii=False,indent=2))
     html=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>组合决策报告</title>
 <style>body{{font-family:system-ui,"Microsoft YaHei",sans-serif;background:#f2f6f8;color:#19333e;margin:0}}main{{max-width:1050px;margin:auto;padding:32px}}h1{{margin-bottom:8px}}section{{background:white;border-radius:12px;padding:24px;margin:20px 0}}.badge{{background:#fff2d6;padding:10px;border-radius:6px}}table{{width:100%;border-collapse:collapse}}th,td{{text-align:right;padding:12px;border-bottom:1px solid #e5edef}}th:first-child,td:first-child{{text-align:left}}svg{{width:100%;max-height:300px}}pre{{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}}li{{margin:10px 0}}a{{color:#117467}}</style>
-<main><h1>组合决策报告</h1><p>研究引擎 v{escape(safe['engine_version'])} · 费用后净值与风险比较</p>
+<main><h1>组合决策报告</h1><p>研究引擎 v{escape(safe['engine_version'])} · 显式模拟交易费后净值与风险比较</p>
 <p class="badge">整体：{label(safe['status'])} · 回撤预算：{label(budget.get('status','not_run'))} · {selected}</p>
 <section><h2>本次结果怎样理解</h2><ul>{conclusions}</ul></section>
 <p>历史、自举模拟与样本外结果分别展示。模拟分位数不构成未来亏损保证。</p>
 <p>频率：{escape(quality.get('frequency','未登记'))}；年化因子：{quality.get('periods_per_year','—')}；日历状态：{escape(quality.get('calendar_status','未登记'))}。<a href="report-manifest.json">留档清单</a>记录输入、来源快照、报告文件和计算方法。</p>
 <section><h2>已知边界</h2><ul>{warnings}</ul></section>
 <section><h2>配置候选</h2><table><tr><th>方法</th>{headings}</tr>{rows}</table></section>
-<section><h2>回撤预算</h2><p>预算 {pct(budget.get('budget'))}。p95表示模型模拟中约95%的路径回撤不超过该数值，不能当未来亏损上限。比较采用所选块长中的最差p95；严格模式还检查其蒙特卡洛区间上端。</p><table><tr><th>方法</th><th>最差 p95</th><th>误差收敛</th><th>模拟条件满足预算</th></tr>{budgets}</table></section>
+<section><h2>回撤预算</h2><p>模拟误差只描述所声明模型和历史样本下的随机抽样精度，不覆盖模型、数据或选择偏差；p95收敛不代表p99尾部充足。</p><p>预算 {pct(budget.get('budget'))}。p95表示模型模拟中约95%的路径回撤不超过该数值，不能当未来亏损上限。比较采用所选块长中的最差p95；严格模式还检查其蒙特卡洛区间上端。</p><table><tr><th>方法</th><th>最差 p95</th><th>误差收敛</th><th>模拟条件满足预算</th></tr>{budgets}</table></section>
 <section><h2>冻结权重后的留出区间比较</h2><table><tr><th>方法</th><th>年化收益</th><th>最大回撤</th><th>年化波动</th></tr>{comparison}</table><p>单次留出比较不代表长期优化有效。</p></section>
 <section><h2>相对基准的收益与风险取舍</h2><table><tr><th>方法</th><th>年化收益差（百分点）</th><th>回撤减少（百分点）</th><th>观察结论</th></tr>{tradeoff_rows}</table><p>比较结果不代表统计显著性或长期优势。</p></section>
 <section><h2>M1 滚动样本外比较</h2><p>{len(wf.get('folds',[]))} 个窗口；新权重使用此前数据，连续账本计入换仓费用。本表不验证 M2 筛选。</p><table><tr><th>方法</th><th>年化收益</th><th>最大回撤</th><th>模拟累计费用</th></tr>{wf_rows}</table></section>
@@ -121,6 +122,6 @@ def save_report(report,path,output):
 <section><h2>风险卡片</h2><table>{risk_rows}</table><p>Sharpe：{escape(str(risk.get('sharpe','—')))}；分块区间：{escape(str(risk.get('sharpe_bootstrap',{}).get('interval','—')))}。有效风险资产数：{escape(str(risk.get('effective_risk_assets','—')))}。</p></section>
 {supplement_section}
 <section><h2>参考配置的全历史描述净值</h2><p>参考方法：{label(safe.get('reference_method','—'))}。权重使用训练数据估计，本图不是全历史样本外业绩。</p>{svg}</section>
-<section><h2>下载与完整结果</h2><p><a href="report.json">完整 JSON</a> · <a href="ledger.csv">账户账本</a> · <a href="transactions.csv">模拟交易</a></p><details><summary>查看全部模块与假设</summary><pre>{detail}</pre></details></section></main></html>'''
+<section><h2>下载与完整结果</h2><p>费用仅为输入声明的线性模拟交易费，不表示所有实际费用已包含，也不是 GIPS 合规或净费后认证。</p><p><a href="report.json">完整 JSON</a> · <a href="ledger.csv">账户账本</a> · <a href="transactions.csv">模拟交易</a></p><details><summary>查看全部模块与假设</summary><pre>{detail}</pre></details></section></main></html>'''
     (out/"report.html").write_text(html,encoding="utf-8")
     return out/"report.html"

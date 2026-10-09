@@ -40,3 +40,8 @@ jobs:
           python -m portfolio_engine verify reports/ci-account-exposure
           python -m portfolio_engine account-exposure --input examples/account-exposure-limited-real.json --out reports/ci-account-limited
           python -m portfolio_engine verify reports/ci-account-limited
+
+      - name: Original statistical counterexamples
+        run: |
+          python -m portfolio_engine statistics-demo --out reports/ci-statistics
+          python -m portfolio_engine verify reports/ci-statistics

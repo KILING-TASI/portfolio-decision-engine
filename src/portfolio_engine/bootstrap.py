@@ -69,9 +69,11 @@ def path_metrics(returns, indices, target, costs=0.0001, rebalance_every=63, per
 def quantile_interval(values,p=.95,confidence=.95):
     """Conditional MC interval by binomial/order-statistic inversion."""
     x=np.sort(np.asarray(values,float))
-    if len(x)<20 or not 0<p<1 or not 0<confidence<1:
+    if x.ndim!=1 or len(x)<20 or not np.isfinite(x).all() or not 0<p<1 or not 0<confidence<1:
         raise InputError("quantile interval needs >=20 paths and valid probabilities")
     n=len(x); tail=(1-confidence)/2
+    if p**n>tail or (1-p)**n>tail:
+        raise InputError("too few paths for a finite two-sided order-statistic interval; do not clamp unsupported bounds")
     # 1-indexed order bounds K_low and K_high+1; clamp endpoints.
     low=max(0,int(binom.ppf(tail,n,p))-1)
     high=min(n-1,int(binom.ppf(1-tail,n,p)))
@@ -92,7 +94,9 @@ def drawdown_budget(returns,candidates,budget=.25,horizon=252,paths=2000,
     records={name:{"blocks":[]} for name in candidates}
     for block in block_lengths:
         count=paths
+        batches=[]
         while True:
+            batches.append(count)
             indices=stationary_indices(len(x),count,horizon,block,seed+int(block))
             results={}
             all_converged=True
@@ -109,6 +113,9 @@ def drawdown_budget(returns,candidates,budget=.25,horizon=252,paths=2000,
                 results[name]={"block_length":block,"paths":count,"horizon_steps":horizon,
                     "p95":float(np.quantile(metrics["mdd"],.95)),"p99":float(np.quantile(metrics["mdd"],.99)),
                     "p95_mc_interval":ci,"p95_mc_standard_error":float(np.std(quantiles,ddof=1)),
+                    "mc_error_scope":"conditional p95 simulation precision only; not p99, model or historical-sample uncertainty",
+                    "p99_tail_mass_paths":count*.01,"p99_tail_sample_status":"insufficient_data" if count*.01<30 else "raw_mass_policy_met",
+                    "simulation_batch_path_counts":list(batches),
                     "converged":bool(converged),"budget_exceedance":float(np.mean(metrics["mdd"]>budget)),
                     "median_annualized_return":float(np.median(metrics["terminal_nav"]**(periods/horizon)-1)),
                     "holding_period_distributions":checkpoints}
@@ -135,6 +142,12 @@ def drawdown_budget(returns,candidates,budget=.25,horizon=252,paths=2000,
             "selected":selected,"budget":budget,"strict_mc_upper_bound":strict,"candidates":records,
             "least_risk_candidate":min(records,key=lambda name:records[name]["worst_p95"]),
             "seed":seed,"rebalance_every_steps":rebalance_every,
+            "selection_audit":{"candidate_count":len(candidates),"predeclared_block_count":len(block_lengths),
+                "final_candidate_block_evaluations":len(candidates)*len(block_lengths),
+                "candidate_batch_evaluations":sum(len(row["simulation_batch_path_counts"]) for record in records.values() for row in record["blocks"]),
+                "scope":"local operational counts; repeated/correlated candidates and MC batches are not independent research trials",
+                "cross_run_trial_history":"not_supplied",
+                "deflated_sharpe":{"status":"not_estimable","probability":None,"reason":"complete attempted/rejected research trials, dependence, cross-trial Sharpe dispersion and selected-return moments are not supplied; DSR is not implemented"}},
             "error_scope":"conditional Monte Carlo only; excludes model and historical-sample uncertainty",
             "selection_scope":"in-sample exploratory; independent walk-forward evidence required"}
 
