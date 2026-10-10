@@ -72,9 +72,9 @@ research-workbench 可以调用本引擎，并继续负责资料组织、公司�
 |---|---|
 | 当前 `main` 源码 | 已集成原 PR #1–#11：披露转换、完整 M2 滚动检验、统计反例、账户敞口、现金需求、观察收益迁移、数据目录、独立安装验收及七组实例 |
 | [旧 Release v0.7.0](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.7.0) | 保持原资产；不包含后续新增的全部模块和资源，不能按当前首页推断旧包支持范围 |
-| 新发布包 | 尚未发布；当前新增能力请使用 `main` 源码安装，不把未发布的构建包称为已经下载可用 |
+| v0.8.0 候选 | 正在准备，尚未发布；当前新增能力请使用 `main` 源码安装。发布后使用下方对应 tag 与资产，发布前不视为已可下载 |
 
-源码中的包版本仍为 `0.7.0`，因此仅看这个数字不足以区分旧包和新源码。核对实际模块、接口／方法版本及输入记录；旧报告、截图和发行资产保持原样。历史验收文档中的“待审”是当时记录，当前源码状态以上表为准。
+候选源码的包版本为 `0.8.0`，现有已发布安装包仍为 `0.7.0`。核对实际模块、接口／方法版本及输入记录；旧报告、截图和发行资产保持原样。历史验收文档中的“待审”是当时记录，当前源码状态以上表为准。
 
 ## 验证、许可与来源
 
@@ -90,3 +90,12 @@ python -m pip install ".[dev]"
 python -m pytest -q
 python -m build
 ```
+
+## v0.8.0 发布后的下载与安装
+
+以下是发布后的使用说明；当前候选资产尚未上线。总调度将核对最终 main，创建新 tag，再发布对应文件。
+
+- [v0.8.0 发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.0)：发布后下载 wheel，或包含文档、测试及教学场景的干净源码 ZIP。
+- wheel 安装：`python -m pip install portfolio_decision_engine-0.8.0-py3-none-any.whl`，然后运行 `python -m portfolio_engine demo --fast --out reports/demo-03`。安装需要联网获取上述普通依赖；教学运行离线。
+- 源码 ZIP：解压后进入包含 `pyproject.toml` 的目录，执行首页的源码安装命令；七组场景脚本在 `examples` 中。
+- [中文发布说明](docs/release-v0.8.0.md)列出新增能力、保留限制与安装方式。
