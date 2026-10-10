@@ -13,7 +13,7 @@ jobs:
       - run: python -m pip install build
       - run: python -m build
       - name: Install only this wheel in a clean venv and run minimum demo
-        run: python tests/standalone_acceptance.py --wheel dist/portfolio_decision_engine-0.7.0-py3-none-any.whl --out "$RUNNER_TEMP/portfolio-standalone" --scenario-resources examples
+        run: python tests/standalone_acceptance.py --wheel dist/portfolio_decision_engine-0.8.0-py3-none-any.whl --out "$RUNNER_TEMP/portfolio-standalone" --scenario-resources examples
       - uses: actions/upload-artifact@v4
         if: always()
         with:
