@@ -125,8 +125,9 @@ def main():
     for name, losses in [("fees-monthly-rebalance", False), ("budget-no-solution", True)]:
         folder = root / name
         folder.mkdir()
-        values = [[-.0099, -.0101] if i % 2 else [-.0101, -.0099] for i in range(80)] if losses else [
-            [.001, -.001] if i % 2 else [-.001, .001] for i in range(80)]
+        values = [[-.01 + (.0001 if i % 2 else -.0001),
+                   -.01 + (.0001 if i % 4 < 2 else -.0001)] for i in range(80)] if losses else [
+            [.001 if i % 2 else -.001, .001 if i % 4 < 2 else -.001] for i in range(80)]
         if not losses:
             values[56:] = [[.1, 0], [0, .2]] + [[0, 0]] * 22
         csv_path = folder / "returns.csv"
@@ -163,7 +164,7 @@ def main():
             assert row["date"] == ref["date"] and abs(float(row["value"])-ref["value"]) < 1e-8
             assert abs(float(row["cost"])-ref["fee"]) < 1e-8
         if losses:
-            assert actual["modules"]["M1"]["status"] == "ok"
+            assert actual["modules"]["M1"]["allocation"]["status"] == "ok"
             assert actual["modules"]["M2"]["status"] == "infeasible" and actual["modules"]["M2"]["selected"] is None
             assert "not a budget solution" in actual["modules"]["M7"]["scope"]
         save(folder / "expected.json", {"basis": "closed-form fee and cash conservation; fixed declared50/50 weights",
@@ -172,7 +173,7 @@ def main():
         cases.append({"id": name, "status": "passed", "command": command,
                       "expected_final_value": expected[-1]["value"], "actual_final_value": float(ledger[-1]["value"]),
                       "budget_status": actual["modules"]["M2"]["status"], "selected": actual["modules"]["M2"]["selected"],
-                      "calibration_status": actual["modules"]["M1"]["status"],
+                      "calibration_status": actual["modules"]["M1"]["allocation"]["status"],
                       "report": str((output / "report.html").relative_to(root)),
                       "engine_version": actual["engine_version"],
                       "method_manifest": json.loads((output / "report-manifest.json").read_text("utf8"))})
