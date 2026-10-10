@@ -7,3 +7,5 @@ recursive-include tests *.py
 
 include LICENSE
 recursive-include licenses *.txt *.md *.json
+
+include SKILL.md

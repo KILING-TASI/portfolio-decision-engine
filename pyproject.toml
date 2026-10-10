@@ -23,7 +23,7 @@ portfolio-engine = "portfolio_engine.__main__:main"
 where = ["src"]
 
 [tool.setuptools.data-files]
-"share/portfolio-decision-engine" = ["THIRD_PARTY_NOTICES.md", "DISCLAIMER.md"]
+"share/portfolio-decision-engine" = ["SKILL.md", "THIRD_PARTY_NOTICES.md", "DISCLAIMER.md"]
 "share/portfolio-decision-engine/docs" = ["docs/license-scope.md"]
 "share/portfolio-decision-engine/licenses" = ["licenses/dependency-license-snapshot.json"]
 

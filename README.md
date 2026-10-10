@@ -17,7 +17,7 @@ python -m venv .venv
 .\.venv\Scripts\portfolio-decision-engine.exe demo --out-dir reports/demo --auto-name
 ```
 
-工具名与仓库名相同；在已激活的环境中可以直接输入工具名。Linux/macOS 使用 `.venv/bin/python` 和 `.venv/bin/portfolio-decision-engine`。教学结果写入当前工作目录；`--auto-name` 自动另选新名字，旧结果保留。不加该参数时，教学入口拒绝已有目录。`portfolio-decision-engine run --help` 查看原生参数，原来的命令继续兼容。本仓是独立 CLI，不提供可直接发现的 Skill 安装入口。安装可能需要联网获取普通构建依赖；组合计算需要 NumPy、pandas、SciPy、scikit-learn、statsmodels；首次下载耗时取决于网络，已安装的环境无需重复下载。教学离线。下面保留原生入口及此前发行记录，本轮安装和版本以本节为准。
+工具名与仓库名相同；在已激活的环境中可以直接输入工具名。Linux/macOS 使用 `.venv/bin/python` 和 `.venv/bin/portfolio-decision-engine`。教学结果写入当前工作目录；`--auto-name` 自动另选新名字，旧结果保留。不加该参数时，教学入口拒绝已有目录。`portfolio-decision-engine run --help` 查看原生参数，原来的命令继续兼容。本仓提供独立 CLI，并新增 [Skill 调用指引](SKILL.md)；Skill 使用须保留完整仓库资源，pip 不会自动注册。安装可能需要联网获取普通构建依赖；组合计算需要 NumPy、pandas、SciPy、scikit-learn、statsmodels；首次下载耗时取决于网络，已安装的环境无需重复下载。教学离线。下面保留原生入口及此前发行记录，本轮安装和版本以本节为准。
 
 ## 先跑一个例子
 
@@ -73,7 +73,7 @@ python -m portfolio_engine demo --fast --out reports/demo-02
 
 ## 独立使用与其他仓库的关系
 
-这是一个**独立 Python 计算引擎和 CLI**，命令入口为 `python -m portfolio_engine`，安装后也提供 `portfolio-engine`。本仓库没有 `SKILL.md`，不把它称为可直接安装发现的 Skill。
+这是一个**独立 Python 计算引擎和 CLI**，命令入口为 `python -m portfolio_engine`，安装后也提供 `portfolio-engine`。本仓另提供 [Skill 调用指引](SKILL.md)，完整资源注册与 CLI 安装分别完成。
 
 生成主报告不需要安装 research-workbench 或其他自家专业仓库；普通科学计算依赖按本仓声明安装。开发用的 `pytest`、`build` 属于 `dev` 可选依赖。这里没有 PDF 解析 extra：原页字段解析由对应专业工具负责，本引擎消费明确提供的 JSON／CSV 和披露记录。
 
@@ -118,3 +118,7 @@ v0.8.0 已于 2026-10-10 发布。安装依赖需要联网，教学演示离线�
 ## 输出目录参数
 
 原生子命令统一支持 `--out-dir`，旧 `--out` 保留为兼容别名，两者只能指定一个。参数接受新目录，不是文件名；例如 `portfolio-decision-engine run convert-lookthrough --input holdings.json --out-dir reports/lookthrough-first`。结果JSON和来源底稿保存在该目录中；重复运行换新目录，或在仓库名入口加 `--auto-name`。
+
+## 自然语言使用
+
+向已注册本仓 Skill 的助手直接提问。助手整理输入、调用计算并先回答能确定的部分，再解释依据和缺口；无需安装工作台。新增指引在当前 main，旧发行包保持原样，未包含这次 Skill 文件。
