@@ -202,3 +202,15 @@ def test_historical_cli_converts_declared_version_without_claiming_authenticatio
     assert main(["convert-lookthrough","--input",str(source),"--out",str(output),"--historical","--as-of","2026-09-30"])==0
     assert read_json(output/"conversion-result.json")["historical_mode"]
     assert verify(output)["source_verification"]=="not_verified"
+
+
+def test_cli_directory_alias_matches_and_rejects_ambiguous_output(tmp_path):
+    source=Path(__file__).parents[1]/"examples/cn-lookthrough-demo.json"
+    old=tmp_path/"old";new=tmp_path/"new"
+    assert main(["convert-lookthrough","--input",str(source),"--out",str(old)])==0
+    assert main(["convert-lookthrough","--input",str(source),"--out-dir",str(new)])==0
+    assert read_json(old/"conversion-result.json")==read_json(new/"conversion-result.json")
+    with pytest.raises(SystemExit) as error:
+        main(["convert-lookthrough","--input",str(source),"--out",str(tmp_path/"a"),"--out-dir",str(tmp_path/"b")])
+    assert error.value.code==2
+    assert not (tmp_path/"a").exists() and not (tmp_path/"b").exists()

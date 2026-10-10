@@ -114,3 +114,7 @@ v0.8.0 已于 2026-10-10 发布。安装依赖需要联网，教学演示离线�
 - wheel 安装：`python -m pip install portfolio_decision_engine-0.8.0-py3-none-any.whl`，然后运行 `python -m portfolio_engine demo --fast --out reports/demo-03`。安装需要联网获取上述普通依赖；教学运行离线。
 - 源码 ZIP：解压后进入包含 `pyproject.toml` 的目录，执行首页的源码安装命令；七组场景脚本在 `examples` 中。
 - [中文发布说明](docs/release-v0.8.0.md)列出新增能力、保留限制与安装方式。
+
+## 输出目录参数
+
+原生子命令统一支持 `--out-dir`，旧 `--out` 保留为兼容别名，两者只能指定一个。参数接受新目录，不是文件名；例如 `portfolio-decision-engine run convert-lookthrough --input holdings.json --out-dir reports/lookthrough-first`。结果JSON和来源底稿保存在该目录中；重复运行换新目录，或在仓库名入口加 `--auto-name`。
