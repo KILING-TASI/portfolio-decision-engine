@@ -1,126 +1,92 @@
-# 组合决策引擎 · Portfolio Decision Engine
+# 组合决策引擎
 
-[![Original code: MIT](https://img.shields.io/badge/original_code-MIT-green.svg)](LICENSE)
+[![原创代码 MIT](https://img.shields.io/badge/原创代码-MIT-green)](LICENSE)
 
-用 ETF、基金和跨资产收益序列比较配置的收益与回撤取舍，检查模型回撤预算，并生成可核对的离线报告与账本。
+比较不同配置的收益与回撤，核对资金进出，计算不同条件下的现金缺口。输出可打开的报告、逐日账本和输入记录，方便检查每个结论怎么算出来。
 
-[实际教学预览](docs/report-previews.md)：本例最小方差相对等权回撤减少 **4.54 个百分点**，年化收益也减少 **4.88 个百分点**。这是固定种子的合成数据，不是市场绩效或长期优势。
+## 先跑一个例子
 
-## 两条命令看结果
+需要 **Python 3.10 或以上**。下载或克隆本仓库，在仓库目录打开终端。安装时需要联网获取 NumPy、pandas、SciPy、scikit-learn、statsmodels 及其依赖；下面的教学演示离线运行，不获取真实行情。
 
-需要 Python 3.10+，在已下载的仓库目录执行（安装会获取 NumPy、pandas、SciPy、scikit-learn、statsmodels 及其依赖）：
+Windows PowerShell：
+
+```powershell
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install .
+.\.venv\Scripts\python.exe -m portfolio_engine demo --fast --out reports/demo-01
+```
+
+打开 `reports/demo-01/report.html`。同一目录里还有完整 JSON、账本、模拟交易和输入记录。**再次运行时，把 `demo-01` 换成新名字；已有结果不会覆盖。**
+
+已有 Python 环境时，也可使用：
 
 ```sh
 python -m pip install .
-python -m portfolio_engine demo --fast --out reports/demo
+python -m portfolio_engine demo --fast --out reports/demo-02
 ```
 
-打开 `reports/demo/report.html`，可见配置取舍、预算、迁移、风险及未知穿透；同时生成 JSON、账本、输入快照和完整性清单。**输出目录必须不存在，重复运行请换目录名，旧报告不覆盖。** Windows 也可双击 `Run-Demo.cmd` 自动准备环境并打开报告。
+`--fast` 是快速教学模式。自己的数据格式、错误处理和完整命令见[使用说明](docs/usage.md)。
 
-`--fast` 用于快速教学演示；去掉后采用 2000 起步、最多 8000 条模拟路径与四组块长。完整 demo 不等于真实市场验证。
+## 实际结果示例
 
-[![实际报告：配置收益与回撤取舍，合成教学数据](docs/previews/allocation.png)](docs/report-previews.md)
+**回撤变小，也可能以更低收益为代价。**下面这份固定种子的历史教学报告中，等权组合年化收益为 6.29%、最大回撤为 9.41%；最小方差组合分别为 1.41% 和 4.87%。它展示配置取舍，不证明某个方案长期更好。
 
-[配置 HTML 节选](docs/previews/allocation.html) · [M2 训练与测试截图](docs/previews/m2-windows.png) · [未知穿透截图](docs/previews/lookthrough.png) · [样本与复现说明](docs/report-previews.md)
+[![历史教学报告：配置收益与回撤取舍](docs/previews/allocation.png)](docs/report-previews.md)
 
-截图来自实际生成、已检查的教学 HTML；标明引擎 v0.7.0、2026-10-09 与固定种子。配置留出比较是已发布能力；完整 M2 滚动展示来自待审 #2，不能混为公开版或实盘验证。
+截图来自 2026-10-09 实际生成并检查的合成数据报告。[预览与复现记录](docs/report-previews.md)保留了当时的代码版本、输入和限制；这不是市场绩效，也不是对新版本的视觉验收。
 
-自己的数据：
+想看入金、解冻、延迟到账和预算无解时会怎样，在装好本仓之后运行：
 
-```sh
-python -m portfolio_engine run --returns your_returns.csv --config your_config.json --out reports/my-portfolio
+```powershell
+.\.venv\Scripts\python.exe examples/run_scenarios.py --out reports/scenarios-01
 ```
 
-CSV 第一列是 date，其余列是资产日收益，1% 写 0.01。配置格式、数据口径及失败状态见 [使用说明](docs/usage.md)，完整合成输入见 [examples](examples)。配置数组顺序须与 CSV 资产列一致。
+打开 `reports/scenarios-01/scenario-index.html`，可分别查看预期、实际和报告。[七组场景索引](examples/scenario-index.json)说明复用了哪些手算和反例。例如，入金 1000 后资产从 1000 变为 2000，投资收益仍为零；缺少费用或到账依据时，完整现金余额保留为未知。脚本和样例由源码及源包提供，运行模块由本仓安装包提供。
 
-## 当前能力与边界
+## 能做什么，暂时不能做什么
 
-| 模块 | 已实现 | 尚未实现 |
+| 你要检查的问题 | 当前源码能做的事 | 需要保留的限制 |
 |---|---|---|
-| M1 | Ledoit–Wolf、等权/受约束参考、GMV、ERC、最大分散、显式观点 BL 效用、资产/组别约束 | 常数相关目标、整数约束 |
-| M2 | 联合平稳自举、路径内费用与再平衡、p95/p99、MC 区间/标准误、块长敏感性、无解拒绝、候选经验前沿 | 完整 M2 筛选的 walk-forward、多重选择检验、制度联合抽样 |
-| M3 | Brinson–Fachler、Cariño、多期对账、输入因子 HAC/VIF | 因子自动构建、Frongello、风格漂移告警 |
-| M4 | 金额 LP、现金守恒、新增资金、三方案、锁定不可卖、情景回本期 API | 整数份额、最低佣金、非线性冲击、确认状态 |
-| M5 | 历史固定配置回放、恢复时间与删失、久期/凸性情景 API | 通胀/信用联合情景、代理映射 |
-| M6 | 完整订单输入的 A/B/C、净财富差、全交易毛净贡献与成本复利拖累 | 逐笔精确择时/换仓分解 |
-| M7 | MDD、ES/VaR、尾部样本、Sharpe 分块区间、集中度、负风险贡献边界、CF API、历史持有期分布 | Student-t、自动危机相关性、统计校准置信等级 |
+| 配置是否值得调整 | 比较等权、最小方差、风险平价等方案的收益、回撤和费用 | 不保证更优，也不生成实际交易指令 |
+| 回撤预算能否满足 | 模拟路径、筛选候选；滚动重新估计并在下一段数据检验 | 无解就报告无解，参考组合不冒充预算解；模拟误差不是投资有效认证 |
+| 入金后是不是赚了更多 | 分开核对投入、损益、累计 TWR 和年化 XIRR | 观察估值与收益路径模拟的时点、求根方法不同，不能只看名称替换 |
+| 钱什么时候够用 | 分开记录可用现金、冻结资金和条件变现款，计算首次缺口和最大缺口 | 不确认实际成交、到账、借款或未来收入，不给缺口概率 |
+| 基金是否持有同一批资产 | 汇总披露支持的底层资产、发行人和未知部分 | 披露并非实时完整持仓，也不是基金综合评价 |
+| 数据能不能直接用于收益分析 | 核对净值、分红拆分声明、币种、日期和缺失情况 | 原始价格、累计净值及不完整事件不能直接当复利总回报 |
 
-底座支持线性双边费用、现金流、TWR/XIRR、日历/阈值再平衡、预先给定的研究订单。v0.6 新增 ETF 同日收盘偏离观察、披露持仓递归穿透和未知权重。**未适配真实成交、盘中 QDII IOPV、基金确认、涨跌停及税率日历。**
+真实成交、整数份额、最低佣金、基金确认、盘中 QDII 估值、税率日历和通胀／信用联合情景尚未完整适配。详细方法和支持范围见[设计与实现说明](docs/design-v0.4.md)、[现金需求说明](docs/cash-demand.md)和[数据接入指南](docs/data-bridge.md)。设计目标不等于全部已实现。
 
-## v0.6 数据接入与留档
+## 独立使用与其他仓库的关系
 
-- `prepare`：将总回报指数或有明确完整事件声明的净值转换为收益；拒绝未复权价格冒充总回报。
-- `prepare --workbench`：适配 research-workbench 的基金 research-bundle；需要独立分红/拆分声明。
-- `collect --online`：有限范围归档天天基金净值或腾讯沪深未复权价格，保留原始响应、证券身份、时间和摘要；成功取数不等于数据齐全。
-- `prepare --archive`：校验采集档案和原始响应摘要后准备基金总回报输入。
-- `verify`：核对报告文件、输入快照和计算方法是否变化，不认证来源真实性或视觉效果。
-- 日/月频与 252/12 年化因子一致性检查；可提供明确适用的日历检查缺日，禁止自动填值。
+这是一个**独立 Python 计算引擎和 CLI**，命令入口为 `python -m portfolio_engine`，安装后也提供 `portfolio-engine`。本仓库没有 `SKILL.md`，不把它称为可直接安装发现的 Skill。
 
-具体字段、完整命令链及本仓库的数据入口目录/候选旁挂范围见 [数据接入指南](docs/data-bridge.md)。代码参考与上游许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+生成主报告不需要安装 research-workbench 或其他自家专业仓库；普通科学计算依赖按本仓声明安装。开发用的 `pytest`、`build` 属于 `dev` 可选依赖。这里没有 PDF 解析 extra：原页字段解析由对应专业工具负责，本引擎消费明确提供的 JSON／CSV 和披露记录。
 
-报告整体为 degraded，避免将简化模型当实盘工具。M2 无解时比较参考不会冒充预算解。M1 连续账本 walk-forward 与冻结权重留出比较分别提供，不能称为已验证 M2 筛选。自举误差仅是条件蒙特卡洛误差。
+research-workbench 可以调用本引擎，并继续负责资料组织、公司经营与估值判断、基金综合评价、解释和报告接续；能被工作台调用不等于本引擎依赖工作台运行。[两仓分工及旧调用兼容范围](docs/workbench-cashflow-integration.md)说明了已经搬迁和暂未搬迁的计算。当前定投与行业退出的后续迁移仍在契约盘点阶段，不能称已经完成。
 
-## 测试与构建
+需要联网取数时，必须明确使用 `collect --online`；演示和已有输入分析不会自动打开采集。取得响应不代表事件齐全、原文核验或历史可得时间已经确认。
+
+## 当前源码与旧发布包
+
+| 你使用的内容 | 实际状态 |
+|---|---|
+| 当前 `main` 源码 | 已集成原 PR #1–#11：披露转换、完整 M2 滚动检验、统计反例、账户敞口、现金需求、观察收益迁移、数据目录、独立安装验收及七组实例 |
+| [旧 Release v0.7.0](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.7.0) | 保持原资产；不包含后续新增的全部模块和资源，不能按当前首页推断旧包支持范围 |
+| 新发布包 | 尚未发布；当前新增能力请使用 `main` 源码安装，不把未发布的构建包称为已经下载可用 |
+
+源码中的包版本仍为 `0.7.0`，因此仅看这个数字不足以区分旧包和新源码。核对实际模块、接口／方法版本及输入记录；旧报告、截图和发行资产保持原样。历史验收文档中的“待审”是当时记录，当前源码状态以上表为准。
+
+## 验证、许可与来源
+
+- 现有 206 项回归测试，以及单仓隔离安装、CLI 报告和七组教学场景已经验证。CI 检查可在 [Actions](https://github.com/KILING-TASI/portfolio-decision-engine/actions) 查看；首页文案改动的最新检查以对应 PR 为准。
+- [独立安装与验证范围](docs/usage.md)、[场景输入与资源](examples/README.md)、[统计方法与反例](docs/statistical-validation-methods.md)分别记录通过范围。CLI 成功不代表真实资料、投资效果、自然语言发现或视觉验收通过。
+- 有限真实响应只核对了两只基金各 42 条净值档案的字节记录；完整事件、历史可得和真实 M2 正向验证仍有缺口，详见[数据目录与来源差异](docs/data-bridge.md)。真实账户和原始材料不在公共包中。
+- 原创代码及有权授权的原创说明采用 [MIT](LICENSE)。第三方代码、公告、研报、行情和字体继续适用各自权利；见[许可范围](docs/license-scope.md)、[第三方说明](THIRD_PARTY_NOTICES.md)和[使用边界](DISCLAIMER.md)。
+
+开发者测试与构建：
 
 ```sh
-python -m pip install -e ".[dev]"
+python -m pip install ".[dev]"
 python -m pytest -q
 python -m build
 ```
-
-首版直接使用 NumPy、pandas、SciPy、scikit-learn、statsmodels，未集成 skfolio/Riskfolio/arch。平稳自举在仓库内实现并测试，配置/迁移用 SciPy，收缩用 scikit-learn。验证环境见 [requirements-tested.txt](requirements-tested.txt)。
-
-## 验证范围
-
-v0.7.0 基线为 65 项测试；待审 #1 为 86 项、#2 为 94 项，本分支为 102 项。测试涵盖失败状态、费用和连续账本、前置窗口因果性及限定兼容对照。它们不构成投资效果验证。
-
-有限真实取数取得两只基金各 42 个净值观察，但缺少完整分红/拆分声明，准备环节正确拒绝将其用作总回报。尚未完成真实数据的正向 M2 验证。详见[验收记录](docs/m2-walk-forward.md)。
-
-## 阅读入口
-
-- [现金需求压力情景](docs/cash-demand.md)：待审增量，有日期现金账、冻结释放、条件变现与未知项，不产生卖出指令。
-
-- [统计验证方法卡与两个反例](docs/statistical-validation-methods.md)：待审增量，区分模拟/模型误差、尾部不足和重复择优；无试验史不报 DSR 概率。
-
-- [声明账户敞口与现金占用](docs/account-exposure.md)：待审增量，普通债/转债与未知分开，支持排序、筛选及情景另存。
-
-- [披露资料接入路线与验收](docs/lookthrough-integration-roadmap.md)：v0.7 基础、待审 cn-fund-lookthrough 输入转换、真实资料与 M2 样本外验证优先级。
-- [M2完整滚动验证首版](docs/m2-walk-forward.md)：待审独立批次；每折重新生成候选、预算筛选并冻结，不将M1滚动比较冒充M2。
-
-- [工作台职责与版本契约](docs/workbench-contracts.md)：费用、现金流、时间、单位和不等价边界。
-- [完整设计方案 v0.4](docs/design-v0.4.md)：数据、回测、M1–M7、输出契约、验收和路线图。
-- [开源组件与选型](docs/open-source-components.md)：可复用能力、边界和官方来源。
-- [修订记录](CHANGELOG.md)：对 v0.2 方案与 v0.3 补丁的纠错与合并。
-
-## 建设原则
-
-默认采用风险导向配置；公平比较等权基准；显式记录成本、现金流、数据缺口和估计误差；无解明确报告；区分历史结果、模型模拟与用户观点。
-
-v0.4 文档是目标设计，不代表其中全部能力已经实现。首版的实际范围以上表和使用说明为准。
-
-原创代码及有权授权的原创说明采用 [MIT](LICENSE)。第三方代码保留原许可；公告、研报、行情、字体及其他资料不随根 MIT 授权。详见 [许可范围](docs/license-scope.md) 和 [第三方说明](THIRD_PARTY_NOTICES.md)。
-
-## 免责声明
-
-本项目仅供学习与研究，不构成投资建议或交易指令，不保证收益或结果准确性。请在使用前阅读[免责声明与使用边界](DISCLAIMER.md)，并结合本次数据来源、假设与缺口独立判断。代码许可不包含第三方数据使用授权。
-
-## 发布与待审状态
-
-公开发行仍为 **v0.7.0**。以下增量以依赖顺序分批待审，尚未合并或发行：
-
-1. [披露适配与时间检查 PR #1](https://github.com/KILING-TASI/portfolio-decision-engine/pull/1)。
-2. [完整 M2 滚动验证 PR #2](https://github.com/KILING-TASI/portfolio-decision-engine/pull/2)，依赖 #1。
-3. [工作台限定兼容及教学预览 PR #3](https://github.com/KILING-TASI/portfolio-decision-engine/pull/3)，依赖 #2；见[兼容边界](docs/workbench-contracts.md)。
-
-本文能力表以 v0.7.0 为准。待审分支已有完整 M2 滚动实现，不代表公开版已提供。
-
-
-许可收尾是依赖 #3 的独立待审批次；公开 v0.7.0 的历史发行包不因本次分支修改而重新发布。
-
-
-第一批旧观察收益计算迁移使用独立标准库模块，版本契约、安装与消费者去重清单统一见 [工作台现金迁移说明](docs/workbench-cashflow-integration.md)。报告、公司经营判断与综合评价仍由工作台负责；观察账本不等于交易或未来到账模拟。
-
-
-## 情景实例短入口
-
-安装本仓后，从本仓源码/源包目录运行 `python examples/run_scenarios.py --out reports/scenarios-NEW`，打开生成的scenario-index.html。[场景索引与已有覆盖](examples/scenario-index.json)列明入金零收益、解冻/延迟/缺口/unknown、费用月度再平衡和预算无解。复用已有手算与反例，保存输入/预期/实际/方法；全部教学，不当真实覆盖。输出目录必须新建，旧结果不改。
