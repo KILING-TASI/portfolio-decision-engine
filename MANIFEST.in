@@ -12,7 +12,7 @@ include SKILL.md
 
 include try_demo.py Start-Demo.cmd Start-Demo.sh BEGINNER.md
 
-include USER_SCENARIOS.md EXPANSION.md
+include EXPANSION.md
 recursive-include examples/expansion-teaching *.json
 
 include FORMAT_SCOPE.md
