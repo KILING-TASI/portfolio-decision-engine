@@ -15,6 +15,7 @@ def check():
             assert result.returncode==expected,(args,result.stdout,result.stderr)
             return result
         assert '--auto-name' in run(['--help']).stdout
+        assert '需要一个明确' in run(['run','--out-dir=a','--out-dir=b','--auto-name'],2).stderr
         first=run(['demo','--out-dir','reports/demo'])
         def hashes():
             return {str(p.relative_to(root/'reports/demo')):hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'reports/demo').rglob('*') if p.is_file()}

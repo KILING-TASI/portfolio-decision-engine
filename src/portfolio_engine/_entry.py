@@ -117,12 +117,22 @@ def main(argv=None):
             args.pop(0)
         if '--auto-name' in args:
             args.remove('--auto-name')
-            flags = [flag for flag in dict.fromkeys([OUTPUT_FLAG, '--out-dir', '--output-dir', '--out', '--output']) if flag in args]
-            if len(flags) != 1 or args.index(flags[0]) + 1 >= len(args):
+            choices = list(dict.fromkeys([OUTPUT_FLAG, '--out-dir', '--output-dir', '--out', '--output']))
+            positions = [(i, flag) for i, value in enumerate(args) for flag in choices if value == flag or value.startswith(flag + '=')]
+            if len(positions) != 1:
                 raise ValueError('--auto-name 需要一个明确的输出参数；不改输入、数据库或历史记录。')
-            index = args.index(flags[0]) + 1
-            args[index] = str(fresh_name(args[index]))
-            print('本次新输出：' + str(Path(args[index]).resolve()), file=sys.stderr)
+            index, flag = positions[0]
+            if args[index].startswith(flag + '='):
+                output = args[index].split('=', 1)[1]
+                if not output: raise ValueError('输出路径不能为空。')
+                target = fresh_name(output)
+                args[index] = flag + '=' + str(target)
+            else:
+                if index + 1 >= len(args) or args[index + 1].startswith('--'):
+                    raise ValueError('输出参数缺少路径。')
+                target = fresh_name(args[index + 1])
+                args[index + 1] = str(target)
+            print('本次新输出：' + str(target.resolve()), file=sys.stderr)
         return native(resources() if MODE == 'script' else None, args, selected)
     except ModuleNotFoundError as error:
         if (error.name or '').split('.')[0] not in {'numpy','pandas','scipy','sklearn','statsmodels','joblib','dateutil','patsy','pdfplumber','pypdf'}:
