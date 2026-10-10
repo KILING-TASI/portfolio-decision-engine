@@ -86,7 +86,7 @@ assert all(allowed(p) for p in sys.path if p)
     assert verified["status"] == "stored_content_verified"
     report = json.loads((demo / "report.json").read_text("utf8"))
     assert report["inputs"]["data"]["return_type"] == "synthetic_total_return"
-    assert report["provenance"]["seed"] == 42 and report["engine_version"] == "0.8.0"
+    assert report["provenance"]["seed"] == 42 and report["engine_version"] == "0.8.1"
     exposure = report["supplemental"]["lookthrough"]
     assert abs(exposure["unknown_weight"] - .14) < 1e-12
     assert abs(exposure["known_weight"] + exposure["unknown_weight"] - 1) < 1e-12

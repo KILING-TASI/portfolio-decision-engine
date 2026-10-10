@@ -4,6 +4,21 @@
 
 比较不同配置的收益与回撤，核对资金进出，计算不同条件下的现金缺口。输出可打开的报告、逐日账本和输入记录，方便检查每个结论怎么算出来。
 
+## 安装和首次试用
+
+本轮对应[发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.1)；下载时以实际上传的完整源码、wheel、sdist 与校验清单为准。源码按下面步骤安装；下载 wheel 后，将安装命令末尾的 `.` 换成该 wheel 文件路径。pip 安装不会自动注册 AI 工具中的 Skill。
+
+本轮源码版本为 `0.8.1`。统一安装入口需要 Python 3.10 或以上。在完整源码目录新建自己的 Python 环境，下面的 Windows 命令不需要激活脚本：
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install .
+.\.venv\Scripts\portfolio-decision-engine.exe --help
+.\.venv\Scripts\portfolio-decision-engine.exe demo --out-dir reports/demo --auto-name
+```
+
+工具名与仓库名相同；在已激活的环境中可以直接输入工具名。Linux/macOS 使用 `.venv/bin/python` 和 `.venv/bin/portfolio-decision-engine`。教学结果写入当前工作目录；`--auto-name` 自动另选新名字，旧结果保留。不加该参数时，教学入口拒绝已有目录。`portfolio-decision-engine run --help` 查看原生参数，原来的命令继续兼容。本仓是独立 CLI，不提供可直接发现的 Skill 安装入口。安装可能需要联网获取普通构建依赖；组合计算需要 NumPy、pandas、SciPy、scikit-learn、statsmodels；首次下载耗时取决于网络，已安装的环境无需重复下载。教学离线。下面保留原生入口及此前发行记录，本轮安装和版本以本节为准。
+
 ## 先跑一个例子
 
 需要 **Python 3.10 或以上**。下载或克隆本仓库，在仓库目录打开终端。安装时需要联网获取 NumPy、pandas、SciPy、scikit-learn、statsmodels 及其依赖；下面的教学演示离线运行，不获取真实行情。
@@ -74,7 +89,7 @@ research-workbench 可以调用本引擎，并继续负责资料组织、公司�
 | [旧 Release v0.7.0](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.7.0) | 保持原资产；不包含后续新增的全部模块和资源，不能按当前首页推断旧包支持范围 |
 | [Release v0.8.0](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.0) | 已发布，来源提交 `84afe336ac521bf35d39d91428783d7a64f87418`；安装包与源码下载见下方 |
 
-当前源码及新发布包版本为 `0.8.0`，旧 `v0.7.0` 安装包仍保留。核对实际模块、接口／方法版本及输入记录；旧报告、截图和发行资产保持原样。历史验收文档中的“待审”是当时记录，当前源码状态以上表为准。
+此前发行包版本为 `0.8.0`，旧 `v0.7.0` 安装包仍保留。核对实际模块、接口／方法版本及输入记录；旧报告、截图和发行资产保持原样。历史验收文档中的“待审”是当时记录，当前源码状态以上表为准。
 
 ## 验证、许可与来源
 

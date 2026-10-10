@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "portfolio-decision-engine"
-version = "0.8.0"
+version = "0.8.1"
 description = "Transparent portfolio research with drawdown budgets"
 readme = "README.md"
 license = "MIT"
@@ -16,7 +16,8 @@ dependencies = ["numpy>=1.26,<3", "pandas>=2.2,<4", "scipy>=1.12,<2", "scikit-le
 dev = ["pytest>=8,<10", "build>=1,<2"]
 
 [project.scripts]
-portfolio-engine = "portfolio_engine.cli:main"
+portfolio-decision-engine = "portfolio_engine._entry:main"
+portfolio-engine = "portfolio_engine.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
