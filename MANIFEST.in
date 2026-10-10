@@ -4,3 +4,6 @@ include DISCLAIMER.md
 recursive-include docs *.md *.html *.json *.png
 recursive-include examples *.csv *.json *.md *.py
 recursive-include tests *.py
+
+include LICENSE
+recursive-include licenses *.txt *.md *.json

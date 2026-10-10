@@ -1,0 +1,53 @@
+[
+  {
+    "distribution": "numpy",
+    "tested_version": "2.5.3",
+    "original_license_files": [
+      "licenses/dependencies/numpy/licenses/LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/_core/include/numpy/libdivide/LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/common/pythoncapi-compat/COPYING.txt",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/highway/LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/multiarray/dragon4_LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/npysort/x86-simd-sort/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/_core/src/umath/svml/LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/fft/pocketfft/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/linalg/lapack_lite/LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/ma/LICENSE.txt",
+      "licenses/dependencies/numpy/licenses/numpy/random/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/distributions/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/mt19937/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/pcg64/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/philox/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/sfc64/LICENSE.md",
+      "licenses/dependencies/numpy/licenses/numpy/random/src/splitmix64/LICENSE.md"
+    ]
+  },
+  {
+    "distribution": "pandas",
+    "tested_version": "3.0.6",
+    "original_license_files": [
+      "licenses/dependencies/pandas/LICENSE.txt"
+    ]
+  },
+  {
+    "distribution": "scipy",
+    "tested_version": "1.18.1",
+    "original_license_files": [
+      "licenses/dependencies/scipy/LICENSE.txt"
+    ]
+  },
+  {
+    "distribution": "scikit-learn",
+    "tested_version": "1.9.1",
+    "original_license_files": [
+      "licenses/dependencies/scikit-learn/licenses/COPYING.txt"
+    ]
+  },
+  {
+    "distribution": "statsmodels",
+    "tested_version": "0.15.0",
+    "original_license_files": [
+      "licenses/dependencies/statsmodels/licenses/LICENSE.txt"
+    ]
+  }
+]
