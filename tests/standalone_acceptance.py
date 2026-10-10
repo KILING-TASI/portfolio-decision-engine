@@ -47,7 +47,7 @@ def main():
         return completed.stdout
     run([sys.executable, "-m", "venv", str(root / "venv")])
     py = root / "venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
-    run([str(py), "-m", "pip", "install", "--no-cache-dir", str(wheel)])
+    run([str(py), "-m", "pip", "install", "--no-cache-dir", str(wheel)+"[analysis]"])
     probe = r'''
 import sys,json,pathlib,importlib.util,importlib.metadata
 import portfolio_engine.cli

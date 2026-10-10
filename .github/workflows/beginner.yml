@@ -1,0 +1,27 @@
+name: Beginner source flow
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  source:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Standard-library environment and teaching flow
+        run: |
+          python -I -S try_demo.py --check
+          python -I -S try_demo.py --no-open --out-dir "${{ runner.temp }}/beginner-demo"
+      - name: Linux launcher
+        if: runner.os == 'Linux'
+        run: sh Start-Demo.sh --no-open --out-dir "${{ runner.temp }}/shell-demo"
+      - name: Windows launcher
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: Start-Demo.cmd --no-open --out-dir "${{ runner.temp }}/cmd-demo"

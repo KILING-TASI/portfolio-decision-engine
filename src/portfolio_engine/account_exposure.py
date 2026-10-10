@@ -4,7 +4,7 @@ import json
 import math
 import re
 
-from .data_bridge import lookthrough
+from .disclosed_structure import lookthrough
 from .disclosure_time import observation_day
 from .validation import InputError
 

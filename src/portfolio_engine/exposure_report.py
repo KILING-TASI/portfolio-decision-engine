@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 from .io import write_json
+from .user_explanation import limit_text
 
 
 def save_exposure_report(spec, result, directory):
@@ -15,7 +16,7 @@ def save_exposure_report(spec, result, directory):
         rows += f'<tr data-kind="{escape(k, quote=True)}"><td>{escape(r["security"])}</td><td>{escape(kinds.get(k,k))}</td><td data-value="{r["amount"]}">{r["amount"]:,.2f}</td><td data-value="{r["weight"]}">{r["weight"]:.2%}</td><td>{escape(r.get("issuer") or "未知/不适用")}</td><td>{escape(r.get("industry") or "未知/不适用")}</td><td>{escape(r["position_id"])}</td><td>{escape(timing.get("report_date") or result["valuation_date"])}</td><td>{escape(timing.get("published_at") or "未提供")}</td></tr>'
     cash = result["cash"]
     data = json.dumps({"input": spec, "result": result}, ensure_ascii=False, allow_nan=False).replace("<", "\\u003c")
-    notes = "".join(f"<li>{escape(x)}</li>" for x in result["limitations"])
+    notes = "".join(f"<li>{escape(limit_text(x))}</li>" for x in result["limitations"])
     html = '''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>声明持仓与披露敞口</title>
 <style>body{font-family:system-ui,'Microsoft YaHei',sans-serif;color:#19333e;background:#f2f6f8;margin:0}main{max-width:1250px;margin:auto;padding:28px}section{background:white;border-radius:12px;padding:22px;margin:18px 0}.badge{background:#fff2d6;padding:14px;border-radius:8px}table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:10px 6px;border-bottom:1px solid #dce5e9;text-align:left}button,select,input{padding:8px;margin:4px}a{color:#117467}.table{overflow:auto}li{margin:8px}</style><main>
 '''

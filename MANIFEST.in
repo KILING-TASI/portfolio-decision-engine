@@ -9,3 +9,5 @@ include LICENSE
 recursive-include licenses *.txt *.md *.json
 
 include SKILL.md
+
+include try_demo.py Start-Demo.cmd Start-Demo.sh BEGINNER.md

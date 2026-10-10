@@ -1,0 +1,4 @@
+
+Start-Demo.sh text eol=lf
+
+Start-Demo.cmd text eol=crlf

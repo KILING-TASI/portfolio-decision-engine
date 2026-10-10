@@ -2,15 +2,20 @@ from html import escape
 import json
 from pathlib import Path
 
-import pandas as pd
+import csv
 
 from .io import clean_json, write_json
+from .user_explanation import limit_text
 
 
 def save_cash_demand(spec, result, directory):
     root = Path(directory); write_json(root / "cash-demand.json", result)
     for i, s in enumerate(result["scenarios"]):
-        pd.DataFrame(s["daily_ledger"]).to_csv(root / f"cash-ledger-{i}.csv", index=False, encoding="utf-8-sig")
+        ledger=s["daily_ledger"]
+        columns=list(dict.fromkeys(key for row in ledger for key in row))
+        with (root / f"cash-ledger-{i}.csv").open('w',newline='',encoding='utf-8-sig') as handle:
+            writer=csv.DictWriter(handle,fieldnames=columns)
+            writer.writeheader();writer.writerows(ledger)
     rows = ""
     for s in result["scenarios"]:
         first = s["first_gap"]
@@ -18,7 +23,7 @@ def save_cash_demand(spec, result, directory):
         value = f'{first["amount"]:,.2f}' if first else "—"
         rows += f'<tr><td>{escape(s["id"])}</td><td>{escape(date)}</td><td>{value}</td><td>{s["peak_additional_net_cash_needed"]:,.2f}</td><td>{s["closing_available_cash_conditional"]:,.2f}</td><td>{s["closing_frozen_cash"]:,.2f}</td><td>{len(s["unknowns"])}</td></tr>'
     data = json.dumps(clean_json(result), ensure_ascii=False, allow_nan=False).replace("<", "\\u003c")
-    notes = "".join(f'<li>{escape(n)}</li>' for n in result["limitations"])
+    notes = "".join(f'<li>{escape(limit_text(n))}</li>' for n in result["limitations"])
     html = f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>现金需求压力情景</title>
 <style>body{{font-family:system-ui,'Microsoft YaHei',sans-serif;color:#19333e;background:#f2f6f8;margin:0}}main{{max-width:1250px;margin:auto;padding:28px}}section{{background:white;border-radius:12px;padding:22px;margin:18px 0}}.badge{{background:#fff2d6;padding:14px}}table{{width:100%;border-collapse:collapse;font-size:14px}}th,td{{padding:9px;border-bottom:1px solid #dce5e9;text-align:left}}.table{{overflow:auto}}select{{padding:8px}}pre{{white-space:pre-wrap;overflow-wrap:anywhere}}a{{color:#117467}}</style><main>
 <h1>现金需求压力情景</h1><p class="badge">{escape(result['data_kind'])}<br>起点估值日 {escape(result['valuation_date'])} → {escape(result['horizon_end'])}；{escape(result['currency'])} 基础金额单位；方法 {escape(result['method_version'])}<br>仅用户声明的条件测算，不是概率、实际成交或变现指令。</p>

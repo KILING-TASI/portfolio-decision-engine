@@ -1,5 +1,3 @@
-import numpy as np
-import pandas as pd
 
 
 class InputError(ValueError):
@@ -7,6 +5,8 @@ class InputError(ValueError):
 
 
 def returns_frame(data):
+    import numpy as np
+    import pandas as pd
     if not isinstance(data, pd.DataFrame) or data.empty:
         raise InputError("returns must be a nonempty DataFrame")
     if not isinstance(data.index, pd.DatetimeIndex):
@@ -22,6 +22,7 @@ def returns_frame(data):
 
 
 def vector(value, n, name, nonnegative=False):
+    import numpy as np
     result = np.broadcast_to(np.asarray(value, dtype=float), (n,)).copy()
     if not np.isfinite(result).all() or (nonnegative and (result < 0).any()):
         raise InputError(f"invalid {name}")
@@ -36,6 +37,7 @@ def weights(value, n):
 
 
 def covariance(value):
+    import numpy as np
     s = np.asarray(value, dtype=float)
     if s.ndim != 2 or s.shape[0] != s.shape[1] or not np.isfinite(s).all():
         raise InputError("invalid covariance matrix")
