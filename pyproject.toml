@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "portfolio-decision-engine"
-version = "0.8.2"
+version = "0.8.3"
 description = "Transparent portfolio research with drawdown budgets"
 readme = "README.md"
 license = "MIT"
