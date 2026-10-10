@@ -1,0 +1,101 @@
+{
+  "status": "synthetic teaching input; not real fund events or authenticated complete coverage",
+  "workbench_bundle": {
+    "type": "research-bundle",
+    "asOf": "2025-01-08",
+    "exampleType": "teaching-only",
+    "rows": [
+      {
+        "kind": "fund",
+        "code": "teaching-fund",
+        "name": "人工净值样本",
+        "historyBasis": "nav-with-distributions",
+        "source": "https://example.org/teaching-nav",
+        "history": [
+          {
+            "date": "2025-01-02",
+            "nav": 1
+          },
+          {
+            "date": "2025-01-03",
+            "nav": 0.9
+          },
+          {
+            "date": "2025-01-06",
+            "nav": 0.495
+          },
+          {
+            "date": "2025-01-07",
+            "nav": 0.5
+          },
+          {
+            "date": "2025-01-08",
+            "nav": 0.51
+          }
+        ]
+      }
+    ]
+  },
+  "event_declarations": {
+    "teaching-fund": {
+      "event_coverage": "declared_complete_for_window",
+      "events": [
+        {
+          "date": "2025-01-03",
+          "cash_per_old_unit": 0.1,
+          "new_units_per_old_unit": 1,
+          "source_url": "https://example.org/teaching-dividend"
+        },
+        {
+          "date": "2025-01-06",
+          "cash_per_old_unit": 0,
+          "new_units_per_old_unit": 2,
+          "source_url": "https://example.org/teaching-split"
+        }
+      ]
+    }
+  },
+  "currency_declaration": "CNY",
+  "workbench_distribution_input": {
+    "code": "teaching-fund",
+    "asOf": "2025-01-08",
+    "sourceUrl": "https://example.org/teaching-nav",
+    "history": [
+      {
+        "date": "2025-01-02",
+        "nav": 1
+      },
+      {
+        "date": "2025-01-03",
+        "nav": 0.9
+      },
+      {
+        "date": "2025-01-06",
+        "nav": 0.495
+      },
+      {
+        "date": "2025-01-07",
+        "nav": 0.5
+      },
+      {
+        "date": "2025-01-08",
+        "nav": 0.51
+      }
+    ],
+    "events": [
+      {
+        "date": "2025-01-03",
+        "cashPerOldUnit": 0.1,
+        "newUnitsPerOldUnit": 1,
+        "sourceUrl": "https://example.org/teaching-dividend"
+      },
+      {
+        "date": "2025-01-06",
+        "cashPerOldUnit": 0,
+        "newUnitsPerOldUnit": 2,
+        "sourceUrl": "https://example.org/teaching-split"
+      }
+    ],
+    "eventCoverage": "verified-complete-for-window"
+  }
+}

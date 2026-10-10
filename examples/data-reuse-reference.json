@@ -1,0 +1,84 @@
+{
+  "status": "passed_supported_subset",
+  "fixture_sha256": "8c77db41bf83c66c23d1320348b2b2230b5013c65605141df87773fcac083c77",
+  "engine_source_commit": "c5d7361cba2924e35aa6478a8e234d54e10fa15d",
+  "workbench_commit": "9cd2edd8fcc9debfbeded8ff1a4787d2454acf3f",
+  "workbench_method_sha256": "acb969e275c98a83be60385cffce68feed7d9ea7a74d59f9b05c110090dc6d9d",
+  "engine_series": [
+    1.0,
+    1.0,
+    1.1,
+    1.1111111111111112,
+    1.1333333333333333
+  ],
+  "workbench_reinvest_series": [
+    1.0,
+    1.0,
+    1.1,
+    1.1111111111111112,
+    1.1333333333333333
+  ],
+  "return_differences": "<=1e-15",
+  "engine_metadata": {
+    "return_type": "total_return",
+    "source": "research bundle adapter; per-asset source records retained",
+    "currency": "CNY",
+    "assets": [
+      {
+        "code": "teaching-fund",
+        "currency": "CNY",
+        "source_url": "https://example.org/teaching-nav",
+        "basis": "same_date_nav_reinvestment",
+        "event_verification": "input_declared_not_independently_verified",
+        "limitations": [
+          "same-date reinvestment is a research assumption, not cash settlement or verified product entitlement"
+        ],
+        "upstream": {},
+        "input_sha256": "fd681131547a8f9de8c28e192aa830857dd0eb1de91932f5505cb397f2efdc77"
+      }
+    ],
+    "as_of": "2025-01-08",
+    "frequency": "daily"
+  },
+  "engine_quality": {
+    "frequency": "daily",
+    "periods_per_year": 252,
+    "frequency_basis": "spacing_inferred",
+    "calendar_status": "not_provided",
+    "calendar_verified": false,
+    "coverage": null,
+    "limitations": [
+      "spacing is not exchange-calendar or point-in-time verification"
+    ]
+  },
+  "failures": [
+    {
+      "case": "unknown-event-coverage",
+      "engine": "rejected",
+      "workbench": "rejected",
+      "engine_reason": "NAV conversion requires an explicit complete-event declaration and events list",
+      "workbench_reason": "分红/拆分记录未核验完整，不能假设缺失为无事件"
+    },
+    {
+      "case": "missing-event-quantity",
+      "engine": "rejected",
+      "workbench": "rejected",
+      "engine_reason": "event quantity is required",
+      "workbench_reason": "事件未给出分红或拆分数量，不默认无事件"
+    },
+    {
+      "case": "event-before-initial-date",
+      "engine": "rejected",
+      "workbench": "rejected",
+      "engine_reason": "events must be unique, observed and after the initial date",
+      "workbench_reason": "事件须落在观察日及起点之后；同日现金与拆分请合并为一条事件"
+    },
+    {
+      "case": "raw-price-cannot-relabel-total-return",
+      "engine": "rejected",
+      "reason": "workbench quotes/raw prices cannot be converted to total return"
+    }
+  ],
+  "scope": "same-date reinvestment teaching only; no real data collection/source/page/availability/settlement verification; cash dividend and DCA paths not claimed equivalent",
+  "metadata_equivalence": "not claimed; original bundle and optional sidecar preserve fields missing from normalized adapter, including teaching labels and timing/source semantics"
+}

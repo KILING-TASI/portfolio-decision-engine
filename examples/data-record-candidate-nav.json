@@ -1,0 +1,404 @@
+{
+  "candidate_status": "local_candidate_not_cross_repo_standard",
+  "production_support": "illustrative optional sidecar; existing prepare input unchanged; no candidate parser/CLI introduced",
+  "input_snapshot_sha256": "8c77db41bf83c66c23d1320348b2b2230b5013c65605141df87773fcac083c77",
+  "original_payload": {
+    "status": "synthetic teaching input; not real fund events or authenticated complete coverage",
+    "workbench_bundle": {
+      "type": "research-bundle",
+      "asOf": "2025-01-08",
+      "exampleType": "teaching-only",
+      "rows": [
+        {
+          "kind": "fund",
+          "code": "teaching-fund",
+          "name": "人工净值样本",
+          "historyBasis": "nav-with-distributions",
+          "source": "https://example.org/teaching-nav",
+          "history": [
+            {
+              "date": "2025-01-02",
+              "nav": 1
+            },
+            {
+              "date": "2025-01-03",
+              "nav": 0.9
+            },
+            {
+              "date": "2025-01-06",
+              "nav": 0.495
+            },
+            {
+              "date": "2025-01-07",
+              "nav": 0.5
+            },
+            {
+              "date": "2025-01-08",
+              "nav": 0.51
+            }
+          ]
+        }
+      ]
+    },
+    "event_declarations": {
+      "teaching-fund": {
+        "event_coverage": "declared_complete_for_window",
+        "events": [
+          {
+            "date": "2025-01-03",
+            "cash_per_old_unit": 0.1,
+            "new_units_per_old_unit": 1,
+            "source_url": "https://example.org/teaching-dividend"
+          },
+          {
+            "date": "2025-01-06",
+            "cash_per_old_unit": 0,
+            "new_units_per_old_unit": 2,
+            "source_url": "https://example.org/teaching-split"
+          }
+        ]
+      }
+    },
+    "currency_declaration": "CNY",
+    "workbench_distribution_input": {
+      "code": "teaching-fund",
+      "asOf": "2025-01-08",
+      "sourceUrl": "https://example.org/teaching-nav",
+      "history": [
+        {
+          "date": "2025-01-02",
+          "nav": 1
+        },
+        {
+          "date": "2025-01-03",
+          "nav": 0.9
+        },
+        {
+          "date": "2025-01-06",
+          "nav": 0.495
+        },
+        {
+          "date": "2025-01-07",
+          "nav": 0.5
+        },
+        {
+          "date": "2025-01-08",
+          "nav": 0.51
+        }
+      ],
+      "events": [
+        {
+          "date": "2025-01-03",
+          "cashPerOldUnit": 0.1,
+          "newUnitsPerOldUnit": 1,
+          "sourceUrl": "https://example.org/teaching-dividend"
+        },
+        {
+          "date": "2025-01-06",
+          "cashPerOldUnit": 0,
+          "newUnitsPerOldUnit": 2,
+          "sourceUrl": "https://example.org/teaching-split"
+        }
+      ],
+      "eventCoverage": "verified-complete-for-window"
+    }
+  },
+  "records": [
+    {
+      "record_id": "teaching-nav-2025-01-02",
+      "subject_id": "teaching-fund",
+      "metric_id": "unit_nav_input",
+      "value": 1,
+      "unit": null,
+      "currency": "CNY",
+      "observation_time": "2025-01-02",
+      "period_start": null,
+      "period_end": null,
+      "published_at": null,
+      "effective_at": null,
+      "acquired_at": null,
+      "available_at": null,
+      "time_precision": {
+        "observation_time": "day",
+        "timezone": null
+      },
+      "producer": "original artificial fixture author, not a fund manager",
+      "provider": "manual_teaching_fixture",
+      "interface": "research-bundle legacy input",
+      "source_url": "https://example.org/teaching-nav",
+      "raw_sha256": null,
+      "source_version": null,
+      "parser_version": null,
+      "method_version": null,
+      "verification_status": "artificial_input_only; underlying market facts not verified",
+      "missing": {
+        "unit": "legacy source did not explicitly state NAV unit definition",
+        "published_at": "not provided",
+        "effective_at": "not provided",
+        "acquired_at": "no acquisition of market original in this example",
+        "available_at": "cannot infer from observation or generation time",
+        "raw_sha256": "no market/fund original bytes; input snapshot hash separately recorded",
+        "source_version": "no original revision identifier",
+        "parser_version": "existing adapter has source fingerprint, no separate parser-version contract",
+        "method_version": "existing NAV method basis/source fingerprint, no separate method-version identifier",
+        "timezone": "date-only is not a timestamp"
+      },
+      "conflicts": [],
+      "coverage": {
+        "event_coverage": "input declaration only, not independently verified",
+        "calendar": "not authenticated"
+      },
+      "rights": {
+        "fixture": "authorised original artificial data",
+        "external_data": "not licensed by root MIT"
+      },
+      "extensions": {
+        "original_history_row": {
+          "date": "2025-01-02",
+          "nav": 1
+        },
+        "professional_history_basis": "nav-with-distributions",
+        "currency_basis": "explicit caller declaration",
+        "derived_return_method": "same_date_nav_reinvestment; not fact overwrite"
+      }
+    },
+    {
+      "record_id": "teaching-nav-2025-01-03",
+      "subject_id": "teaching-fund",
+      "metric_id": "unit_nav_input",
+      "value": 0.9,
+      "unit": null,
+      "currency": "CNY",
+      "observation_time": "2025-01-03",
+      "period_start": null,
+      "period_end": null,
+      "published_at": null,
+      "effective_at": null,
+      "acquired_at": null,
+      "available_at": null,
+      "time_precision": {
+        "observation_time": "day",
+        "timezone": null
+      },
+      "producer": "original artificial fixture author, not a fund manager",
+      "provider": "manual_teaching_fixture",
+      "interface": "research-bundle legacy input",
+      "source_url": "https://example.org/teaching-nav",
+      "raw_sha256": null,
+      "source_version": null,
+      "parser_version": null,
+      "method_version": null,
+      "verification_status": "artificial_input_only; underlying market facts not verified",
+      "missing": {
+        "unit": "legacy source did not explicitly state NAV unit definition",
+        "published_at": "not provided",
+        "effective_at": "not provided",
+        "acquired_at": "no acquisition of market original in this example",
+        "available_at": "cannot infer from observation or generation time",
+        "raw_sha256": "no market/fund original bytes; input snapshot hash separately recorded",
+        "source_version": "no original revision identifier",
+        "parser_version": "existing adapter has source fingerprint, no separate parser-version contract",
+        "method_version": "existing NAV method basis/source fingerprint, no separate method-version identifier",
+        "timezone": "date-only is not a timestamp"
+      },
+      "conflicts": [],
+      "coverage": {
+        "event_coverage": "input declaration only, not independently verified",
+        "calendar": "not authenticated"
+      },
+      "rights": {
+        "fixture": "authorised original artificial data",
+        "external_data": "not licensed by root MIT"
+      },
+      "extensions": {
+        "original_history_row": {
+          "date": "2025-01-03",
+          "nav": 0.9
+        },
+        "professional_history_basis": "nav-with-distributions",
+        "currency_basis": "explicit caller declaration",
+        "derived_return_method": "same_date_nav_reinvestment; not fact overwrite"
+      }
+    },
+    {
+      "record_id": "teaching-nav-2025-01-06",
+      "subject_id": "teaching-fund",
+      "metric_id": "unit_nav_input",
+      "value": 0.495,
+      "unit": null,
+      "currency": "CNY",
+      "observation_time": "2025-01-06",
+      "period_start": null,
+      "period_end": null,
+      "published_at": null,
+      "effective_at": null,
+      "acquired_at": null,
+      "available_at": null,
+      "time_precision": {
+        "observation_time": "day",
+        "timezone": null
+      },
+      "producer": "original artificial fixture author, not a fund manager",
+      "provider": "manual_teaching_fixture",
+      "interface": "research-bundle legacy input",
+      "source_url": "https://example.org/teaching-nav",
+      "raw_sha256": null,
+      "source_version": null,
+      "parser_version": null,
+      "method_version": null,
+      "verification_status": "artificial_input_only; underlying market facts not verified",
+      "missing": {
+        "unit": "legacy source did not explicitly state NAV unit definition",
+        "published_at": "not provided",
+        "effective_at": "not provided",
+        "acquired_at": "no acquisition of market original in this example",
+        "available_at": "cannot infer from observation or generation time",
+        "raw_sha256": "no market/fund original bytes; input snapshot hash separately recorded",
+        "source_version": "no original revision identifier",
+        "parser_version": "existing adapter has source fingerprint, no separate parser-version contract",
+        "method_version": "existing NAV method basis/source fingerprint, no separate method-version identifier",
+        "timezone": "date-only is not a timestamp"
+      },
+      "conflicts": [],
+      "coverage": {
+        "event_coverage": "input declaration only, not independently verified",
+        "calendar": "not authenticated"
+      },
+      "rights": {
+        "fixture": "authorised original artificial data",
+        "external_data": "not licensed by root MIT"
+      },
+      "extensions": {
+        "original_history_row": {
+          "date": "2025-01-06",
+          "nav": 0.495
+        },
+        "professional_history_basis": "nav-with-distributions",
+        "currency_basis": "explicit caller declaration",
+        "derived_return_method": "same_date_nav_reinvestment; not fact overwrite"
+      }
+    },
+    {
+      "record_id": "teaching-nav-2025-01-07",
+      "subject_id": "teaching-fund",
+      "metric_id": "unit_nav_input",
+      "value": 0.5,
+      "unit": null,
+      "currency": "CNY",
+      "observation_time": "2025-01-07",
+      "period_start": null,
+      "period_end": null,
+      "published_at": null,
+      "effective_at": null,
+      "acquired_at": null,
+      "available_at": null,
+      "time_precision": {
+        "observation_time": "day",
+        "timezone": null
+      },
+      "producer": "original artificial fixture author, not a fund manager",
+      "provider": "manual_teaching_fixture",
+      "interface": "research-bundle legacy input",
+      "source_url": "https://example.org/teaching-nav",
+      "raw_sha256": null,
+      "source_version": null,
+      "parser_version": null,
+      "method_version": null,
+      "verification_status": "artificial_input_only; underlying market facts not verified",
+      "missing": {
+        "unit": "legacy source did not explicitly state NAV unit definition",
+        "published_at": "not provided",
+        "effective_at": "not provided",
+        "acquired_at": "no acquisition of market original in this example",
+        "available_at": "cannot infer from observation or generation time",
+        "raw_sha256": "no market/fund original bytes; input snapshot hash separately recorded",
+        "source_version": "no original revision identifier",
+        "parser_version": "existing adapter has source fingerprint, no separate parser-version contract",
+        "method_version": "existing NAV method basis/source fingerprint, no separate method-version identifier",
+        "timezone": "date-only is not a timestamp"
+      },
+      "conflicts": [],
+      "coverage": {
+        "event_coverage": "input declaration only, not independently verified",
+        "calendar": "not authenticated"
+      },
+      "rights": {
+        "fixture": "authorised original artificial data",
+        "external_data": "not licensed by root MIT"
+      },
+      "extensions": {
+        "original_history_row": {
+          "date": "2025-01-07",
+          "nav": 0.5
+        },
+        "professional_history_basis": "nav-with-distributions",
+        "currency_basis": "explicit caller declaration",
+        "derived_return_method": "same_date_nav_reinvestment; not fact overwrite"
+      }
+    },
+    {
+      "record_id": "teaching-nav-2025-01-08",
+      "subject_id": "teaching-fund",
+      "metric_id": "unit_nav_input",
+      "value": 0.51,
+      "unit": null,
+      "currency": "CNY",
+      "observation_time": "2025-01-08",
+      "period_start": null,
+      "period_end": null,
+      "published_at": null,
+      "effective_at": null,
+      "acquired_at": null,
+      "available_at": null,
+      "time_precision": {
+        "observation_time": "day",
+        "timezone": null
+      },
+      "producer": "original artificial fixture author, not a fund manager",
+      "provider": "manual_teaching_fixture",
+      "interface": "research-bundle legacy input",
+      "source_url": "https://example.org/teaching-nav",
+      "raw_sha256": null,
+      "source_version": null,
+      "parser_version": null,
+      "method_version": null,
+      "verification_status": "artificial_input_only; underlying market facts not verified",
+      "missing": {
+        "unit": "legacy source did not explicitly state NAV unit definition",
+        "published_at": "not provided",
+        "effective_at": "not provided",
+        "acquired_at": "no acquisition of market original in this example",
+        "available_at": "cannot infer from observation or generation time",
+        "raw_sha256": "no market/fund original bytes; input snapshot hash separately recorded",
+        "source_version": "no original revision identifier",
+        "parser_version": "existing adapter has source fingerprint, no separate parser-version contract",
+        "method_version": "existing NAV method basis/source fingerprint, no separate method-version identifier",
+        "timezone": "date-only is not a timestamp"
+      },
+      "conflicts": [],
+      "coverage": {
+        "event_coverage": "input declaration only, not independently verified",
+        "calendar": "not authenticated"
+      },
+      "rights": {
+        "fixture": "authorised original artificial data",
+        "external_data": "not licensed by root MIT"
+      },
+      "extensions": {
+        "original_history_row": {
+          "date": "2025-01-08",
+          "nav": 0.51
+        },
+        "professional_history_basis": "nav-with-distributions",
+        "currency_basis": "explicit caller declaration",
+        "derived_return_method": "same_date_nav_reinvestment; not fact overwrite"
+      }
+    }
+  ],
+  "not_mapped": [
+    "dividend/split event semantics remain in original_payload and professional extensions, not flattened as received cash",
+    "published/effective/acquired/available unknown preserved",
+    "no schema/enum/provider/frequency unification"
+  ],
+  "derived_reference": "data-reuse-reference.json"
+}

@@ -31,3 +31,6 @@ cash-demand-demo.json 为原创人工现金需求情景，金额、收入、支�
 
 
 `observed-review-demo.json` 为专用旧观察方法迁移输入，`observed-review-reference.json` 绑定原工作台源码与15完整结果/11失败案例；全部为教学资料，非真实账户。新方法与原生回测XIRR及PR8窄桥分别版本化，详见 [工作台现金迁移说明](../docs/workbench-cashflow-integration.md)。
+
+
+`data-reuse-teaching.json`/`data-reuse-reference.json` 是既有基金净值+分红拆分局部复用对照，非真实取得数据。`data-record-candidate-nav.json` 仅可选候选旁挂，完整保留原payload；未知时点/原件/单位/版本不补齐，不作为生产统一schema。详见 [数据接入指南](../docs/data-bridge.md)。
