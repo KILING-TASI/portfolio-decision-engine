@@ -90,12 +90,26 @@ def main(argv=None):
     m2.add_argument("--returns",required=True);m2.add_argument("--config",required=True);m2.add_argument("--out",required=True)
     m2demo=commands.add_parser("m2-demo",help="small reproducible full M2 rolling evaluation")
     m2demo.add_argument("--out",required=True);m2demo.add_argument("--fast",action="store_true")
+    compatibility=commands.add_parser("workbench-buy-hold",help="explicit limited workbench historical path contract")
+    compatibility.add_argument("--input",required=True);compatibility.add_argument("--reference");compatibility.add_argument("--out",required=True)
     args=parser.parse_args(argv)
     try:
         if args.command=="verify":
             result=verify(args.directory);print(json.dumps(result,ensure_ascii=False,indent=2))
             return 0 if result["status"]=="stored_content_verified" else 2
         with atomic_output(args.out) as stage:
+            if args.command=="workbench-buy-hold":
+                from .workbench_contract import compatible_history,compare_legacy_reference
+                spec=read_json(args.input);result,path=compatible_history(spec)
+                (stage/"source-input.json").write_bytes(Path(args.input).read_bytes())
+                if args.reference:
+                    reference=read_json(args.reference);result["comparison"]=compare_legacy_reference(result,reference)
+                    result["equivalence_status"]=result["comparison"]["status"]
+                    (stage/"legacy-reference.json").write_bytes(Path(args.reference).read_bytes())
+                write_json(stage/"compatibility-result.json",result)
+                if path is not None:path.daily.to_csv(stage/"ledger.csv",encoding="utf-8-sig")
+                manifest(stage);print(f"Compatibility result: {Path(args.out).resolve()}")
+                return 0 if result["status"]=="calculated_supported_subset" and result.get("equivalence_status") not in {"input_mismatch","not_equivalent"} else 2
             if args.command in {"m2-evaluate","m2-demo"}:
                 from .m2_evaluation import m2_walk_forward
                 from .m2_report import save_m2_evaluation

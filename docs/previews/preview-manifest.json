@@ -1,0 +1,97 @@
+{
+  "schema": "teaching-report-preview-v1",
+  "engine_version": "0.7.0",
+  "code_commit": "0a370ad4b6d6bbd7869ad9ba6864d741a212d415",
+  "generated_at": "2026-10-09T19:00:18+08:00",
+  "data_kind": "synthetic_teaching_not_market_performance",
+  "seed": 42,
+  "screenshots": {
+    "allocation.png": "5e954ea633fbb92526849610e615e1fd82412645ab72b6371fd555ce374a1475",
+    "m2-windows.png": "8b277629208c7fb7e487602aaec16722e7453c1bdd62f77651d516fa5cb04e93",
+    "lookthrough.png": "e51043f06485756f1e8c69bcc70dde8dc7fabdc012ba579ce32b9d43dcfe5fc5"
+  },
+  "cases": [
+    {
+      "case": "allocation",
+      "source_report": "demo/report.html",
+      "source_sha256": "df72049fae26ae46a93add87fa550901b4896050889a8ca7f53c5b5103e0d320",
+      "excerpt_sha256": "edf9c4ed32eb9e2460ce2f322711828af0819f8c0f66fa71356e89a2399a2a49",
+      "sections": [
+        "冻结权重后的留出区间比较",
+        "相对基准的收益与风险取舍"
+      ]
+    },
+    {
+      "case": "m2-windows",
+      "source_report": "m2/m2-report.html",
+      "source_sha256": "d142787cf3fa3684dfa0eeef4d5d608748c5c7866ccada75d4b3be6247f51dbb",
+      "excerpt_sha256": "89dcc2520d03d8e233d7ad465140bee0192d29c36d09f7c1cf4b72f6a073ab7b",
+      "sections": [
+        "每个窗口实际执行什么",
+        "窗口记录"
+      ]
+    },
+    {
+      "case": "lookthrough",
+      "source_report": "demo/report.html",
+      "source_sha256": "df72049fae26ae46a93add87fa550901b4896050889a8ca7f53c5b5103e0d320",
+      "excerpt_sha256": "1d8c4abf234680756b8ad8307f79e0f86526a87dcc8549658ad36958ee735657",
+      "sections": [
+        "披露持仓穿透"
+      ]
+    }
+  ],
+  "input_archives": {
+    "demo": {
+      "inputs/config.json": "4589eea253a3c064bba1d8446e3fffba0d71c3a09f9a16111a35113418ac855b",
+      "inputs/factors.csv": "82f03baf883325526c21216fb3d612b06a1c21a114942e93c802a1d11c3f88bc",
+      "inputs/lookthrough.json": "f3a20cc8d1cfdb435a3bd2f1dc7817d515a00f972fd3c826c40b3c58d84d48f2",
+      "inputs/orders.csv": "9c2ad6713b7b0d319d5145c3795c209c75ad51003b3d48b33e45220f4abd4b6d",
+      "inputs/premium.json": "23d50a4e9c9de922fa02aa93f2bd7ccf13d48d04402c314b5ed92ed1972d4268",
+      "inputs/returns.csv": "038c57fd9eb63a5847973776ee1cab5380ab26d808a2a969d15b4a2e899d56fc",
+      "source-config.json": "4589eea253a3c064bba1d8446e3fffba0d71c3a09f9a16111a35113418ac855b",
+      "source-input.csv": "038c57fd9eb63a5847973776ee1cab5380ab26d808a2a969d15b4a2e899d56fc"
+    },
+    "m2": {
+      "inputs/config.json": "4589eea253a3c064bba1d8446e3fffba0d71c3a09f9a16111a35113418ac855b",
+      "inputs/factors.csv": "82f03baf883325526c21216fb3d612b06a1c21a114942e93c802a1d11c3f88bc",
+      "inputs/lookthrough.json": "f3a20cc8d1cfdb435a3bd2f1dc7817d515a00f972fd3c826c40b3c58d84d48f2",
+      "inputs/orders.csv": "9c2ad6713b7b0d319d5145c3795c209c75ad51003b3d48b33e45220f4abd4b6d",
+      "inputs/premium.json": "23d50a4e9c9de922fa02aa93f2bd7ccf13d48d04402c314b5ed92ed1972d4268",
+      "inputs/returns.csv": "038c57fd9eb63a5847973776ee1cab5380ab26d808a2a969d15b4a2e899d56fc",
+      "source-config.json": "cbad05f3d73f68ada210c2ab1c0d93ca3fee738effa0d68783924241804ba3f8",
+      "source-input.csv": "038c57fd9eb63a5847973776ee1cab5380ab26d808a2a969d15b4a2e899d56fc"
+    }
+  },
+  "m2_test_periods": [
+    {
+      "fit_end": "2021-08-31",
+      "calibration_end": "2021-08-31",
+      "test_start": "2021-09-01",
+      "test_end": "2022-02-23"
+    },
+    {
+      "fit_end": "2022-02-23",
+      "calibration_end": "2022-02-23",
+      "test_start": "2022-02-24",
+      "test_end": "2022-08-18"
+    },
+    {
+      "fit_end": "2022-08-18",
+      "calibration_end": "2022-08-18",
+      "test_start": "2022-08-19",
+      "test_end": "2023-02-10"
+    }
+  ],
+  "renderer": "Actual Chrome/Edge headless render; visual inspection is a separate step",
+  "visual_review": {
+    "date": "2026-10-09",
+    "status": "inspected",
+    "checked": [
+      "Chinese text, version/date/teaching labels visible",
+      "all numeric rows and M2 table columns visible",
+      "no private accounts or external source text",
+      "allocation tradeoffs, M2 window boundaries and unknown weights retained"
+    ]
+  }
+}

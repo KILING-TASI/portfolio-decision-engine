@@ -29,3 +29,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## 工作台兼容参考
+
+限定买入持有契约参考 research-workbench 提交 051846168d7590991c75afc001abb97a89b1d3ed 的 portfolio_stress.py。参考 JSON 由其纯数学 portfolio_path 函数生成；未复制整套报告或修改工作台。固定摘要及范围见 docs/workbench-contracts.md。本项目总体许可状态未改变。

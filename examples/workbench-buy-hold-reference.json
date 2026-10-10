@@ -1,0 +1,43 @@
+{
+  "schema_version": "workbench-buy-hold-reference-v1",
+  "payload_sha256": "d1712594ce03b88537ed8938aef2a16ada38da82f5824762fe2adc90978f48ba",
+  "reference_method": {
+    "name": "portfolio_stress.py:portfolio_path",
+    "script_sha256": "5500bc821d3c166a6aafd478c03b835c7d6dd6636a28ecfb30399a1a914c74c9",
+    "function_ast_sha256": "6098905ebd019cfa75c50220d1bb54512504af61d9b2e028beb84ee2b2d55a57",
+    "checked_on": "2026-10-09",
+    "scope": "read-only installed method; identical file hash to GitHub reference snapshot"
+  },
+  "compatible_fields": {
+    "totalReturnPct": 10.000000000000009,
+    "maximumDrawdownPct": -9.999999999999998,
+    "returnContributions": [
+      {
+        "code": "demo-a",
+        "contributionPp": 6.000000000000005
+      },
+      {
+        "code": "demo-b",
+        "contributionPp": 4.0000000000000036
+      }
+    ],
+    "path": [
+      {
+        "date": "2026-01-02",
+        "wealth": 1.0
+      },
+      {
+        "date": "2026-01-05",
+        "wealth": 0.9
+      },
+      {
+        "date": "2026-01-06",
+        "wealth": 0.98
+      },
+      {
+        "date": "2026-01-07",
+        "wealth": 1.1
+      }
+    ]
+  }
+}
