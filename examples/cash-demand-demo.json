@@ -1,0 +1,253 @@
+{
+  "schema": "cash-demand-input-v1",
+  "account": {
+    "schema": "account-exposure-input-v1",
+    "amount_unit": "base",
+    "currency": "CNY",
+    "valuation_date": "2026-10-09",
+    "as_of": "2026-10-09",
+    "data_kind": "合成教学账户与现金需求 · 非真实账户或市场绩效",
+    "positions": [
+      {
+        "position_id": "fund-lot",
+        "economic_lot_id": "fund-lot",
+        "kind": "fund",
+        "node": "fund-demo",
+        "amount": 40000,
+        "currency": "CNY",
+        "valuation_date": "2026-10-09",
+        "source": "原创教学输入，不是账户或市场披露"
+      },
+      {
+        "position_id": "stock-lot",
+        "economic_lot_id": "stock-lot",
+        "kind": "stock",
+        "security": "STOCK_A",
+        "amount": 15000,
+        "currency": "CNY",
+        "valuation_date": "2026-10-09",
+        "source": "原创教学输入，不是账户或市场披露",
+        "origin": "direct_account_lot"
+      },
+      {
+        "position_id": "bond-lot",
+        "economic_lot_id": "bond-lot",
+        "kind": "bond",
+        "security": "BOND_A",
+        "amount": 20000,
+        "currency": "CNY",
+        "valuation_date": "2026-10-09",
+        "source": "原创教学输入，不是账户或市场披露",
+        "origin": "direct_account_lot"
+      },
+      {
+        "position_id": "convertible-lot",
+        "economic_lot_id": "convertible-lot",
+        "kind": "bond",
+        "security": "CB_A",
+        "amount": 10000,
+        "currency": "CNY",
+        "valuation_date": "2026-10-09",
+        "source": "原创教学输入，不是账户或市场披露",
+        "origin": "direct_account_lot"
+      },
+      {
+        "position_id": "cash-lot",
+        "economic_lot_id": "cash-lot",
+        "kind": "cash",
+        "security": "ACCOUNT_CASH",
+        "amount": 15000,
+        "currency": "CNY",
+        "valuation_date": "2026-10-09",
+        "source": "原创教学输入，不是账户或市场披露",
+        "origin": "direct_account_lot",
+        "frozen_amount": 5000
+      }
+    ],
+    "nodes": {
+      "fund-demo": {
+        "currency": "CNY",
+        "source_reference": "原创教学输入，不是账户或市场披露",
+        "report_date": "2026-06-30",
+        "published_at": "2026-08-30",
+        "available_at": "2026-08-30",
+        "holdings": [
+          {
+            "kind": "stock",
+            "id": "STOCK_A",
+            "weight": 0.5
+          },
+          {
+            "kind": "bond",
+            "id": "BOND_A",
+            "weight": 0.2
+          },
+          {
+            "kind": "cash",
+            "id": "FUND_CASH",
+            "weight": 0.1
+          }
+        ]
+      }
+    },
+    "securities": {
+      "STOCK_A": {
+        "kind": "stock",
+        "source": "原创教学输入，不是账户或市场披露",
+        "issuer": "发行人A（教学）",
+        "issuer_source": "原创教学输入，不是账户或市场披露",
+        "industry": "制造（教学）",
+        "industry_source": "原创教学输入，不是账户或市场披露"
+      },
+      "BOND_A": {
+        "kind": "bond",
+        "instrument_type": "plain_bond",
+        "source": "原创教学输入，不是账户或市场披露",
+        "issuer": "发行人B（教学）",
+        "issuer_source": "原创教学输入，不是账户或市场披露",
+        "modified_duration": 4,
+        "terms_source": "教学修正久期声明，不是实券条款",
+        "terms_as_of": "2026-09-30"
+      },
+      "CB_A": {
+        "kind": "bond",
+        "instrument_type": "convertible_bond",
+        "source": "原创教学输入，不是账户或市场披露",
+        "issuer": "发行人C（教学）",
+        "issuer_source": "原创教学输入，不是账户或市场披露"
+      },
+      "FUND_CASH": {
+        "kind": "cash",
+        "source": "原创教学输入，不是账户或市场披露"
+      },
+      "ACCOUNT_CASH": {
+        "kind": "cash",
+        "source": "原创教学输入，不是账户或市场披露"
+      }
+    },
+    "rate_scenarios": [
+      {
+        "id": "rate_up_100bp",
+        "rate_change": 0.01
+      },
+      {
+        "id": "rate_down_100bp",
+        "rate_change": -0.01
+      }
+    ]
+  },
+  "horizon_end": "2026-10-31",
+  "cashflows": [
+    {
+      "id": "expense-1",
+      "economic_event_id": "expense-1",
+      "kind": "necessary_expense",
+      "amount": 10000,
+      "date": "2026-10-12",
+      "source": "显式教学假设，不是账户或到账凭证"
+    },
+    {
+      "id": "income-1",
+      "economic_event_id": "income-1",
+      "kind": "income",
+      "amount": 12000,
+      "date": "2026-10-15",
+      "source": "显式教学假设，不是账户或到账凭证"
+    },
+    {
+      "id": "expense-2",
+      "economic_event_id": "expense-2",
+      "kind": "necessary_expense",
+      "amount": 20000,
+      "date": "2026-10-20",
+      "source": "显式教学假设，不是账户或到账凭证"
+    },
+    {
+      "id": "expense-3",
+      "economic_event_id": "expense-3",
+      "kind": "necessary_expense",
+      "amount": 5000,
+      "date": "2026-10-28",
+      "source": "显式教学假设，不是账户或到账凭证"
+    }
+  ],
+  "frozen_releases": [
+    {
+      "id": "release-1",
+      "economic_event_id": "release-1",
+      "position_id": "cash-lot",
+      "amount": 5000,
+      "date": "2026-10-18",
+      "condition": "教学限制解除",
+      "condition_met": true,
+      "source": "显式教学假设，不是账户或到账凭证"
+    }
+  ],
+  "planned_liquidations": [
+    {
+      "id": "sale-1",
+      "economic_event_id": "sale-1",
+      "position_id": "bond-lot",
+      "book_amount": 10000,
+      "trade_date": "2026-10-13",
+      "source": "显式教学假设，不是账户或到账凭证"
+    }
+  ],
+  "liquidity": {
+    "bond-lot": {
+      "can_sell": true,
+      "haircut": 0,
+      "fee_rate": 0.01,
+      "fee_timing": "deduct_from_settlement_proceeds",
+      "settlement_days": 2,
+      "earliest_sale_date": "2026-10-10",
+      "source": "显式教学假设，不是账户或到账凭证",
+      "settlement_day_basis": "calendar"
+    },
+    "stock-lot": {
+      "can_sell": true,
+      "haircut": 0.1,
+      "fee_rate": 0.01,
+      "fee_timing": "deduct_from_settlement_proceeds",
+      "settlement_days": 3,
+      "earliest_sale_date": "2026-10-10",
+      "source": "显式教学假设，不是账户或到账凭证",
+      "settlement_day_basis": "calendar"
+    },
+    "fund-lot": {
+      "can_sell": null,
+      "haircut": null,
+      "fee_rate": null,
+      "settlement_days": null,
+      "source": "显式教学假设，不是账户或到账凭证"
+    },
+    "convertible-lot": {
+      "can_sell": false,
+      "source": "显式教学假设，不是账户或到账凭证"
+    }
+  },
+  "scenarios": [
+    {
+      "id": "normal",
+      "income_multiplier": 1,
+      "additional_haircut": 0,
+      "settlement_delay_days": 0,
+      "freeze_release_enabled": true
+    },
+    {
+      "id": "income_interruption_and_discount",
+      "income_multiplier": 0,
+      "income_change_from": "2026-10-10",
+      "additional_haircut": 0.3,
+      "settlement_delay_days": 3,
+      "freeze_release_enabled": true
+    },
+    {
+      "id": "freeze_cannot_release",
+      "income_multiplier": 1,
+      "additional_haircut": 0,
+      "settlement_delay_days": 0,
+      "freeze_release_enabled": false
+    }
+  ]
+}

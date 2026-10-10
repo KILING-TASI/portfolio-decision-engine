@@ -45,3 +45,8 @@ jobs:
         run: |
           python -m portfolio_engine statistics-demo --out reports/ci-statistics
           python -m portfolio_engine verify reports/ci-statistics
+
+      - name: Conditional cash demand teaching scenarios
+        run: |
+          python -m portfolio_engine cash-demand --input examples/cash-demand-demo.json --out reports/ci-cash-demand
+          python -m portfolio_engine verify reports/ci-cash-demand

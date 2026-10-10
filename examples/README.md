@@ -23,3 +23,5 @@ premium.json 和 lookthrough.json 也是教学输入。collection-request.json �
 workbench-buy-hold.json 是人工总回报指数示例；reference 文件来自固定工作台计算函数的同输入对照，仅用于限定兼容验收。见 [契约说明](../docs/workbench-contracts.md)。
 
 account-exposure-demo.json 为人工账户与披露；account-exposure-limited-real.json 仅复用已有真实基金身份/取数范围元信息，金额是教学值、无底层披露及真实净值数值。见[账户敞口口径](../docs/account-exposure.md)。
+
+cash-demand-demo.json 为原创人工现金需求情景，金额、收入、支出、解冻与到账条件均为教学假设。见[现金需求口径](../docs/cash-demand.md)。
