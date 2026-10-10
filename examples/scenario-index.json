@@ -1,0 +1,56 @@
+{
+  "scope": "synthetic teaching only; no module expansion or real coverage",
+  "entry": "python examples/run_scenarios.py --out NEW",
+  "cases": [
+    {
+      "id": "deposit-no-performance",
+      "kind": "normal",
+      "reuse": "test_engine.test_cashflow_is_not_performance",
+      "judgement": "cash deposit raises wealth but TWR/XIRR/profit remain zero"
+    },
+    {
+      "id": "cash-release-pressure",
+      "kind": "normal/pressure",
+      "reuse": "test_cash_demand.test_dated_pressure_and_cash_conservation",
+      "judgement": "normal1900; interrupted discounted delay8070 first gap/13070 peak; frozen3100"
+    },
+    {
+      "id": "cash-delayed-after-horizon",
+      "kind": "boundary",
+      "reuse": "test_cash_demand.test_late_receipt_cannot_cover_earlier_gap",
+      "judgement": "late proceeds cannot cover earlier3000 gap/8000 peak"
+    },
+    {
+      "id": "cash-unknown-evidence",
+      "kind": "missing-evidence",
+      "reuse": "test_cash_demand.test_missing_liquidity_terms_not_assumed_zero_or_timely",
+      "judgement": "full balance not estimable; unknown is not zero"
+    },
+    {
+      "id": "reject-double-cash",
+      "kind": "failure",
+      "reuse": "test_cash_demand.test_reject_double_count_or_invalid_dates",
+      "judgement": "duplicate economic event blocked"
+    },
+    {
+      "id": "fees-monthly-rebalance",
+      "kind": "hand-calculated",
+      "reuse": "test_engine.test_backtest_hand_calculated_drift_and_fees; CLI/whole monthly ledger added",
+      "judgement": "fixed50/50: initial100/1.01; later fee=.01*abs(h1-h2); check every wealth/fee row"
+    },
+    {
+      "id": "budget-no-solution",
+      "kind": "boundary",
+      "reuse": "test_engine.test_drawdown_infeasible_no_relaxation_and_determinism + test_decision.test_no_budget_solution_never_presented_as_selection",
+      "judgement": "each asset daily loss>=.99%,20-day drawdown>1e-6; selected null; reference not budget solution"
+    }
+  ],
+  "additional_failure": "existing result rejected; every original output hash unchanged",
+  "not_covered": [
+    "real data/accounts/settlement",
+    "integer lots/minimum commission/taxes",
+    "option-like structures/probability extensions",
+    "full macro or market collection",
+    "visual certification"
+  ]
+}

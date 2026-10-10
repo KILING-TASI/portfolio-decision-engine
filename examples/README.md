@@ -34,3 +34,6 @@ cash-demand-demo.json 为原创人工现金需求情景，金额、收入、支�
 
 
 `data-reuse-teaching.json`/`data-reuse-reference.json` 是既有基金净值+分红拆分局部复用对照，非真实取得数据。`data-record-candidate-nav.json` 仅可选候选旁挂，完整保留原payload；未知时点/原件/单位/版本不补齐，不作为生产统一schema。详见 [数据接入指南](../docs/data-bridge.md)。
+
+
+`run_scenarios.py`是本仓已安装CLI的有界实例入口，资源为本目录已有cash-demand-demo.json与observed-review-demo.json；`scenario-index.json`映射复用的原测试与独立预期。源包提供脚本/资源，wheel负责运行模块；不依赖工作台/其他自家仓。CI在单仓隔离venv内调用并存新报告，实际到账/投资有效性/视觉未认证。
