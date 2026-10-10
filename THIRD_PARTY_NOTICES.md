@@ -53,3 +53,8 @@ research-workbench 与 cn-fund-lookthrough 的原始 MIT 文本分别保存于 l
 ## 统计方法参考
 
 新增统计方法卡参考 QRM 作者书目、Glasserman 出版社公开目录、Bailey/López de Prado 作者公开论文及 CFA/GIPS 官方资料，链接和实际读取范围见 docs/statistical-validation-methods.md。没有复制受版权保护正文、图表、作者配套代码或数据；两个反例、实现和说明为独立原创，不把参考阅读登记成代码移植。第三方正文不随本仓库 MIT 重新授权。
+
+
+## 第一批观察收益算法搬迁
+
+`src/portfolio_engine/observed_review.py` 的 `number`、`calculate` 和150次二分 `xirr` 从 research-workbench 提交 `21543ea9a8419c56db8d1844ce8f1e17ae48307d` 搬迁，保持旧观察语义；原版权为2026 research-workbench contributors，MIT全文保留于 `licenses/research-workbench-MIT.txt`，模块头部也保留署名。本次不是把上游算法重新署名为本仓库原创。外围版本/隔离运行/冻结封装属于本次新增实现。函数来源和原文件摘要在 `examples/observed-review-reference.json`；工作台保留解释与报告职责，旧原生回测求根不被同名替换。

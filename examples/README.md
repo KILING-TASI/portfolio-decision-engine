@@ -28,3 +28,6 @@ cash-demand-demo.json 为原创人工现金需求情景，金额、收入、支�
 
 
 `workbench-observed-cashflow.json` 为流前/流后估值的合成教学输入；`workbench-observed-reference.json` 冻结四组同输入工作台结果与源码摘要，不是真实账户。兼容范围见 [现金联调契约](../docs/workbench-cashflow-integration.md)。
+
+
+`observed-review-demo.json` 为专用旧观察方法迁移输入，`observed-review-reference.json` 绑定原工作台源码与15完整结果/11失败案例；全部为教学资料，非真实账户。新方法与原生回测XIRR及PR8窄桥分别版本化，详见 [工作台现金迁移说明](../docs/workbench-cashflow-integration.md)。
