@@ -14,7 +14,7 @@
 
 比较不同配置的收益与回撤，核对资金进出，计算不同条件下的现金缺口。输出可打开的报告、逐日账本和输入记录，方便检查每个结论怎么算出来。
 
-当前版本：[v0.9.0](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.0)。完整源码、wheel、sdist 和校验清单在同一发布页；历史报告及旧下载包按各自版本阅读。
+当前版本：[v0.9.1](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.1)。完整源码、wheel、sdist 和校验清单在同一发布页；历史报告及旧下载包按各自版本阅读。
 
 自然语言使用：保留完整仓库资源，按 [Skill 指引](SKILL.md)注册到支持本地 Skill 的助手；CLI 安装与 Skill 注册分别完成。可以独立使用，无需工作台。
 
@@ -40,9 +40,9 @@
 
 ## 安装和首次试用
 
-安装包见[发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.0)，提供完整源码、wheel、sdist 和校验清单。源码按下面步骤安装；下载 wheel 后，将安装命令末尾的 `.` 换成该 wheel 文件路径。pip 安装不会自动注册 AI 工具中的 Skill。
+安装包见[发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.1)，提供完整源码、wheel、sdist 和校验清单。源码按下面步骤安装；下载 wheel 后，将安装命令末尾的 `.` 换成该 wheel 文件路径。pip 安装不会自动注册 AI 工具中的 Skill。
 
-安装包版本为 `0.9.0`。统一安装入口需要 Python 3.10 或以上。在完整源码目录新建自己的 Python 环境，下面的 Windows 命令不需要激活脚本：
+安装包版本为 `0.9.1`。统一安装入口需要 Python 3.10 或以上。在完整源码目录新建自己的 Python 环境，下面的 Windows 命令不需要激活脚本：
 
 ```powershell
 python -m venv .venv
@@ -165,3 +165,19 @@ v0.8.0 已于 2026-10-10 发布。安装依赖需要联网，教学演示离线�
 ## 验证范围
 
 源码教学启动、软件环境查询和安装后教学入口分别验证；软件就绪不等于真实资料已取得。中文问答需要助手按本仓Skill准备已声明输入，没有宣称任意自然语言自动发现或全市场数据闭环。旧报告、历史tag与案例证据保留。
+
+
+本轮新增因子横截面与研究试验留档。独立入口、底稿与限制见 [EXPANSION.md](EXPANSION.md)。
+
+
+[15类使用者的任务路径、术语口径与验收边界](USER_SCENARIOS.md)。
+
+
+共同采集与观察表的单位、时间及版本范围见 [FORMAT_SCOPE.md](FORMAT_SCOPE.md)。宏观、微观和规则事件保留各自口径，不混作净值。
+
+## v0.9.1 本轮补强
+
+新增独立标准库因子IC/分层、时点和试验泄漏检查；接入标准净值/观察表；轻量路径不新增科学计算依赖。各仓独立使用要求继续保留，CRM不在本轮。历史报告、tag和原始证据摘要不改写。
+
+
+[本轮审计范围与未认证事项](AUDIT_SCOPE.md)。

@@ -1,0 +1,21 @@
+{
+  "teaching": true,
+  "trials": [
+    {
+      "id": "trial-1",
+      "recordedAt": "2026-02-01T10:00:00+08:00",
+      "status": "completed",
+      "dataVersion": "teaching",
+      "parameters": {
+        "factor": "teaching"
+      },
+      "selectionRule": "仅教学演示，不选最优",
+      "selected": true,
+      "testTouchedDuringSelection": false,
+      "trainEnd": "2025-06-30",
+      "labelEnd": "2025-07-02",
+      "testStart": "2025-08-01"
+    }
+  ],
+  "asOf": "2026-02-01T11:00:00+08:00"
+}

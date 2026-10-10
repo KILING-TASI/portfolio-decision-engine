@@ -122,6 +122,6 @@ def save_report(report,path,output):
 <section><h2>风险卡片</h2><table>{risk_rows}</table><p>Sharpe：{escape(str(risk.get('sharpe','—')))}；分块区间：{escape(str(risk.get('sharpe_bootstrap',{}).get('interval','—')))}。有效风险资产数：{escape(str(risk.get('effective_risk_assets','—')))}。</p></section>
 {supplement_section}
 <section><h2>参考配置的全历史描述净值</h2><p>参考方法：{label(safe.get('reference_method','—'))}。权重使用训练数据估计，本图不是全历史样本外业绩。</p>{svg}</section>
-<section><h2>下载与完整结果</h2><p>费用仅为输入声明的线性模拟交易费，不表示所有实际费用已包含，也不是 GIPS 合规或净费后认证。</p><p><a href="report.json">完整 JSON</a> · <a href="ledger.csv">账户账本</a> · <a href="transactions.csv">模拟交易</a></p><details><summary>查看全部模块与假设</summary><pre>{detail}</pre></details></section></main></html>'''
+<section><h2>下载与完整结果</h2><p>费用仅为输入声明的线性模拟交易费，不表示所有实际费用已包含，也不是 GIPS 合规或净费后认证。</p><p><a href="report.json">完整 JSON</a> · <a href="ledger.csv">账户账本</a> · <a href="transactions.csv">模拟交易</a></p><details><summary>查看全部模块与假设</summary><pre>{detail}</pre></details></section><details><summary>指标怎么读</summary><p>最大回撤是历史从高点跌下来的幅度，不能当成未来损失上限。风险预算是模型参数，不是保本额度。训练筛选与留出比较分开；一段留出不能证明全部未来情景可靠。资金缺口与模型损失分开核对。</p></details></main></html>'''
     (out/"report.html").write_text(html,encoding="utf-8")
     return out/"report.html"
