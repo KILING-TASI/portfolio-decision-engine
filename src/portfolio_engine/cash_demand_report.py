@@ -2,7 +2,7 @@ from html import escape
 import json
 from pathlib import Path
 
-import pandas as pd
+import csv
 
 from .io import clean_json, write_json
 
@@ -10,7 +10,11 @@ from .io import clean_json, write_json
 def save_cash_demand(spec, result, directory):
     root = Path(directory); write_json(root / "cash-demand.json", result)
     for i, s in enumerate(result["scenarios"]):
-        pd.DataFrame(s["daily_ledger"]).to_csv(root / f"cash-ledger-{i}.csv", index=False, encoding="utf-8-sig")
+        ledger=s["daily_ledger"]
+        columns=list(dict.fromkeys(key for row in ledger for key in row))
+        with (root / f"cash-ledger-{i}.csv").open('w',newline='',encoding='utf-8-sig') as handle:
+            writer=csv.DictWriter(handle,fieldnames=columns)
+            writer.writeheader();writer.writerows(ledger)
     rows = ""
     for s in result["scenarios"]:
         first = s["first_gap"]

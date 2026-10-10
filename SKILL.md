@@ -22,3 +22,11 @@ description: 用户问组合风险集中、现金缺口、收益来源或情景�
 源码安装后用 `portfolio-decision-engine demo --out-dir reports/first-demo --auto-name` 验证教学流程。真实收益输入用 `python -m portfolio_engine run --returns RETURNS.csv --config CONFIG.json --out-dir reports/first-analysis`；账户敞口和现金需求按 `portfolio-decision-engine run --help` 选择对应原生子命令。注意仓库名入口的 run 是转发包装，原生模块的 run 是收益分析，不能混用。
 
 结果中的 degraded 表示部分方法或输入有缺口，逐项说明能回答和不能回答的内容。infeasible 表示声明约束下找不到可行方案，解释障碍，不据此推断整个组合必然有问题。口径及示例见 [README](README.md)、[使用说明](docs/usage.md)。
+
+## 普通用户与失败接续
+
+首次使用或资料无法组织时，读 [中文资料准备](BEGINNER.md)，先确认影响问题的来源、日期和单位；不要让用户填写技术JSON。软件缺组件时使用本仓 `doctor`，不把环境就绪当作来源核验。报告生成、数据取得、计算完成和证据核对分别解释；能回答的部分先交付，未知说明影响与补齐路径。
+
+## 轻量与完整分析分别调用
+
+金额敞口 `account-exposure`、现金需求 `cash-demand`、披露转换 `convert-lookthrough`、完整性检查 `verify` 和 `light-demo` 只用本仓标准库。历史风险、收益回归、M1–M7和约束优化需要 `[analysis]`，缺组件时解释必要性并给安装方式，不自动安装，不把轻量教学当完整模块交付。使用 `portfolio-decision-engine doctor --json` 可检查环境，数据和来源不在其核验范围。

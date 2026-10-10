@@ -4,15 +4,23 @@
 
 比较不同配置的收益与回撤，核对资金进出，计算不同条件下的现金缺口。输出可打开的报告、逐日账本和输入记录，方便检查每个结论怎么算出来。
 
-当前版本：[v0.8.3](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.3)。完整源码、wheel、sdist 和校验清单在同一发布页；历史报告及旧下载包按各自版本阅读。
+当前版本：[v0.9.0](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.0)。完整源码、wheel、sdist 和校验清单在同一发布页；历史报告及旧下载包按各自版本阅读。
 
 自然语言使用：保留完整仓库资源，按 [Skill 指引](SKILL.md)注册到支持本地 Skill 的助手；CLI 安装与 Skill 注册分别完成。可以独立使用，无需工作台。
 
+## 先看一份教学报告
+
+完整源码解压后，需要 Python 3.10+。Windows 可运行 `Start-Demo.cmd`；或在源码目录执行 `python try_demo.py`。Linux/macOS 用 `sh Start-Demo.sh`。不需要先执行 pip 安装，不自动下载数据或覆盖旧报告；缺 Python 会提示处理路径。
+
+换成自己的资料，先看[中文资料准备与错误处理](BEGINNER.md)。已安装 CLI 可运行 `portfolio-decision-engine doctor` 检查软件环境；它不检查资料或认证来源。
+
+未装科学计算包时，教学展示轻量金额敞口；完整历史风险、回归和优化需安装 `.[analysis]`，不能把轻量成功当成完整分析通过。
+
 ## 安装和首次试用
 
-本轮对应[发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.3)；下载时以实际上传的完整源码、wheel、sdist 与校验清单为准。源码按下面步骤安装；下载 wheel 后，将安装命令末尾的 `.` 换成该 wheel 文件路径。pip 安装不会自动注册 AI 工具中的 Skill。
+本轮对应[发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.0)；下载时以实际上传的完整源码、wheel、sdist 与校验清单为准。源码按下面步骤安装；下载 wheel 后，将安装命令末尾的 `.` 换成该 wheel 文件路径。pip 安装不会自动注册 AI 工具中的 Skill。
 
-本轮源码版本为 `0.8.3`。统一安装入口需要 Python 3.10 或以上。在完整源码目录新建自己的 Python 环境，下面的 Windows 命令不需要激活脚本：
+本轮源码版本为 `0.9.0`。统一安装入口需要 Python 3.10 或以上。在完整源码目录新建自己的 Python 环境，下面的 Windows 命令不需要激活脚本：
 
 ```powershell
 python -m venv .venv
@@ -21,9 +29,9 @@ python -m venv .venv
 .\.venv\Scripts\portfolio-decision-engine.exe demo --out-dir reports/demo --auto-name
 ```
 
-工具名与仓库名相同；在已激活的环境中可以直接输入工具名。Linux/macOS 使用 `.venv/bin/python` 和 `.venv/bin/portfolio-decision-engine`。教学结果写入当前工作目录；`--auto-name` 自动另选新名字，旧结果保留。不加该参数时，教学入口拒绝已有目录。`portfolio-decision-engine run --help` 查看原生参数，原来的命令继续兼容。本仓提供独立 CLI，并新增 [Skill 调用指引](SKILL.md)；Skill 使用须保留完整仓库资源，pip 不会自动注册。安装可能需要联网获取普通构建依赖；组合计算需要 NumPy、pandas、SciPy、scikit-learn、statsmodels；首次下载耗时取决于网络，已安装的环境无需重复下载。教学离线。下面保留原生入口及此前发行记录，本轮安装和版本以本节为准。
+工具名与仓库名相同；在已激活的环境中可以直接输入工具名。Linux/macOS 使用 `.venv/bin/python` 和 `.venv/bin/portfolio-decision-engine`。教学结果写入当前工作目录；`--auto-name` 自动另选新名字，旧结果保留。不加该参数时，教学入口拒绝已有目录。`portfolio-decision-engine run --help` 查看原生参数，原来的命令继续兼容。本仓提供独立 CLI，并新增 [Skill 调用指引](SKILL.md)；Skill 使用须保留完整仓库资源，pip 不会自动注册。安装可能需要联网获取普通构建依赖；轻量金额、敞口和现金分析无需科学计算包；完整历史风险、回归与优化按需安装 `[analysis]`。首次下载耗时取决于网络。教学离线。下面保留原生入口及此前发行记录，本轮安装和版本以本节为准。
 
-## 先跑一个例子
+## 完整分析例子（可选组件）
 
 需要 **Python 3.10 或以上**。下载或克隆本仓库，在仓库目录打开终端。安装时需要联网获取 NumPy、pandas、SciPy、scikit-learn、statsmodels 及其依赖；下面的教学演示离线运行，不获取真实行情。
 
@@ -31,7 +39,7 @@ Windows PowerShell：
 
 ```powershell
 py -3 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install .
+.\.venv\Scripts\python.exe -m pip install ".[analysis]"
 .\.venv\Scripts\python.exe -m portfolio_engine demo --fast --out reports/demo-01
 ```
 
@@ -40,7 +48,7 @@ py -3 -m venv .venv
 已有 Python 环境时，也可使用：
 
 ```sh
-python -m pip install .
+python -m pip install ".[analysis]"
 python -m portfolio_engine demo --fast --out reports/demo-02
 ```
 
@@ -131,3 +139,7 @@ v0.8.0 已于 2026-10-10 发布。安装依赖需要联网，教学演示离线�
 ## 自然语言使用
 
 向已注册本仓 Skill 的助手直接提问。助手整理输入、调用计算并先回答能确定的部分，再解释依据和缺口；无需安装工作台。新增指引自 v0.8.3 随包提供；更早的发行包保持原样。
+
+## 本轮验证范围
+
+源码教学启动、软件环境查询和安装后教学入口分别验证；软件就绪不等于真实资料已取得。中文问答需要助手按本仓Skill准备已声明输入，没有宣称任意自然语言自动发现或全市场数据闭环。旧报告、历史tag与案例证据保留。

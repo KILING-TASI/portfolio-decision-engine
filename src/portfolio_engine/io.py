@@ -3,13 +3,15 @@ import json
 import csv
 from pathlib import Path
 
-import numpy as np
-import pandas as pd
+import math
+import sys
 
 from .validation import InputError,returns_frame
 
 
 def load_returns(path,kind="returns"):
+    import numpy as np
+    import pandas as pd
     path=Path(path)
     with path.open(encoding="utf-8-sig",newline="") as handle:
         header=next(csv.reader(handle),[])
@@ -36,16 +38,18 @@ def load_returns(path,kind="returns"):
 def clean_json(value):
     if isinstance(value,dict):
         return {str(k):clean_json(v) for k,v in value.items()}
-    if isinstance(value,(list,tuple,np.ndarray)):
+    if isinstance(value,(list,tuple)):
         return [clean_json(v) for v in value]
-    if isinstance(value,(np.integer,)):
-        return int(value)
-    if isinstance(value,(np.bool_,)):
-        return bool(value)
-    if isinstance(value,(float,np.floating)):
-        return float(value) if np.isfinite(value) else None
-    if isinstance(value,(pd.Timestamp,)):
-        return value.isoformat()
+    if isinstance(value,float):
+        return float(value) if math.isfinite(value) else None
+    np = sys.modules.get('numpy')
+    pd = sys.modules.get('pandas')
+    if np is not None:
+        if isinstance(value,np.ndarray): return [clean_json(v) for v in value]
+        if isinstance(value,np.integer): return int(value)
+        if isinstance(value,np.bool_): return bool(value)
+        if isinstance(value,np.floating): return float(value) if np.isfinite(value) else None
+    if pd is not None and isinstance(value,pd.Timestamp): return value.isoformat()
     return value
 
 
