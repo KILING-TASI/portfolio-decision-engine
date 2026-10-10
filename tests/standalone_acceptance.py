@@ -14,6 +14,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--wheel", required=True)
     parser.add_argument("--out", required=True)
+    parser.add_argument("--scenario-resources", help="optional examples directory from this same repository")
     args = parser.parse_args()
     root = Path(args.out).resolve()
     root.mkdir(parents=True, exist_ok=False)
@@ -105,10 +106,20 @@ assert all(allowed(p) for p in sys.path if p)
     run([str(py), "-I", "-m", "portfolio_engine", "run", "--returns", str(demo / "source-input.csv"),
          "--config", str(bad), "--out", str(root / "failed")], 2)
     assert json.loads((root / "failed/failure.json").read_text("utf8"))["status"] == "blocked"
+    scenario_result = None
+    if args.scenario_resources:
+        resources = root / "scenario-resources"
+        resources.mkdir()
+        for name in ["run_scenarios.py", "cash-demand-demo.json", "observed-review-demo.json"]:
+            shutil.copyfile(Path(args.scenario_resources) / name, resources / name)
+        run([str(py), "-I", str(resources / "run_scenarios.py"), "--out", str(root / "scenarios")])
+        scenario_result = json.loads((root / "scenarios/scenario-results.json").read_text("utf8"))
+        assert scenario_result["status"] == "passed" and len(scenario_result["cases"]) == 7
     result = {"status": "independent_passed_for_synthetic_minimum", "wheel_sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
               "environment": "isolated directory, new venv and child HOME/cache; host still contains other repos",
               "commands": commands, "origin_probe": origin,
               "post_workflow_origins": json.loads((root / "post-demo-origins.json").read_text("utf8")),
+              "scenario_suite": scenario_result,
               "expected_unknown_weight": .14,
               "report_integrity": verified, "report_links": "passed", "teaching_not_market_coverage": True,
               "failures": ["existing output refused without overwrite", "missing requested optional input blocked"],

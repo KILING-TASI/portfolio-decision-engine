@@ -119,3 +119,8 @@ v0.4 文档是目标设计，不代表其中全部能力已经实现。首版的
 
 
 第一批旧观察收益计算迁移使用独立标准库模块，版本契约、安装与消费者去重清单统一见 [工作台现金迁移说明](docs/workbench-cashflow-integration.md)。报告、公司经营判断与综合评价仍由工作台负责；观察账本不等于交易或未来到账模拟。
+
+
+## 情景实例短入口
+
+安装本仓后，从本仓源码/源包目录运行 `python examples/run_scenarios.py --out reports/scenarios-NEW`，打开生成的scenario-index.html。[场景索引与已有覆盖](examples/scenario-index.json)列明入金零收益、解冻/延迟/缺口/unknown、费用月度再平衡和预算无解。复用已有手算与反例，保存输入/预期/实际/方法；全部教学，不当真实覆盖。输出目录必须新建，旧结果不改。
