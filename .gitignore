@@ -11,3 +11,9 @@ __pycache__/
 build/
 dist/
 reports/
+
+# Local Python installation/build outputs
+.venv/
+build/
+dist/
+*.egg-info/

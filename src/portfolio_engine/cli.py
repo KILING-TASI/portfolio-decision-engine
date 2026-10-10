@@ -224,9 +224,13 @@ def main(argv=None):
             manifest(stage)
         print(f"Report: {(Path(args.out)/'report.html').resolve()}")
         print(f"Status: {report['status']}; M2: {report['modules'].get('M2',{}).get('status','not_run')}")
+        print('结果目录：'+str(Path(args.out).resolve())+'\n请打开：'+str((Path(args.out)/'report.html').resolve()),file=sys.stderr)
+        if args.command == 'demo':
+            print('本次为教学模拟数据。degraded 表示报告保留了具体缺口，请查看报告中的已知边界。',file=sys.stderr)
         return 0 if report["status"] not in {"invalid_input","infeasible"} else 2
     except (InputError,ValueError,KeyError,OSError,TypeError) as exc:
         print(f"Invalid input: {exc}",file=sys.stderr)
+        print('下一步：核对输入、口径和依赖；输出已存在时换一个新名字，或通过 portfolio-decision-engine 入口使用 --auto-name。旧报告保留。',file=sys.stderr)
         if hasattr(args,"out") and not Path(args.out).exists():
             with atomic_output(args.out) as stage:
                 write_json(stage/"failure.json",{"status":"blocked","reason":str(exc),"next_step":"correct input and choose a new output directory"})
