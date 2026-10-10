@@ -49,3 +49,7 @@ SOFTWARE.
 research-workbench 与 cn-fund-lookthrough 的原始 MIT 文本分别保存于 licenses/，版权署名按实际文件保留；教学夹具与受参考影响的适配保留来源说明。skfolio、Riskfolio、arch、PortfolioAttribution 等属于选型或论文/算法参考，未作为复制实现或依赖收录；不能将参考阅读误写成代码移植。
 
 根 MIT 不授权天天基金/东方财富、腾讯等外部接口响应、公告、研报、行情、商标、字体或第三方资料。有限真实取数档案留在忽略的本地 reports/，不进入 Git、源码包或 wheel。教学预览仅含原创人工序列和生成结果，实际浏览器截图不附浏览器/系统字体文件；输入来源占位链接不是取得真实数据授权的证明。完整范围和未明事项见 docs/license-scope.md。
+
+## 统计方法参考
+
+新增统计方法卡参考 QRM 作者书目、Glasserman 出版社公开目录、Bailey/López de Prado 作者公开论文及 CFA/GIPS 官方资料，链接和实际读取范围见 docs/statistical-validation-methods.md。没有复制受版权保护正文、图表、作者配套代码或数据；两个反例、实现和说明为独立原创，不把参考阅读登记成代码移植。第三方正文不随本仓库 MIT 重新授权。

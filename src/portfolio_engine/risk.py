@@ -13,18 +13,26 @@ def maximum_drawdown(returns):
     return float(np.max(1-nav/np.maximum.accumulate(nav)))
 
 
-def expected_shortfall(returns, alpha=0.95):
+def expected_shortfall(returns, alpha=0.95, min_tail_observations=30):
     """Exact empirical tail integral, including fractional boundary mass."""
     r = np.asarray(returns, float)
-    if not 0<alpha<1 or not len(r) or not np.isfinite(r).all():
+    if r.ndim != 1 or not 0<alpha<1 or not len(r) or not np.isfinite(r).all() or type(min_tail_observations) is not int or min_tail_observations < 1:
         raise InputError("invalid ES input")
     losses = np.sort(-r)[::-1]
     tail = (1-alpha)*len(losses)
     whole = int(np.floor(tail))
     fraction = tail-whole
-    integral = losses[:whole].sum() + (fraction*losses[whole] if fraction>1e-12 else 0)
+    # Even tiny positive boundary mass matters when the entire tail is tiny.
+    # Dropping it could report ES=0 for a sample with a large worst loss.
+    integral = losses[:whole].sum() + (fraction*losses[whole] if fraction>0 else 0)
     return {"var":float(np.quantile(-r,alpha)), "es":float(integral/tail),
-            "tail_mass_observations":float(tail)}
+            "tail_mass_observations":float(tail), "observations":len(r), "alpha":alpha,
+            "tail_sample_status":"insufficient_data" if tail<min_tail_observations else "raw_mass_policy_met",
+            "min_tail_observations_policy":min_tail_observations,
+            "effective_independent_tail_observations":None,
+            "var_quantile_method":"numpy linear interpolation; retained for compatibility",
+            "es_method":"fractional empirical upper-loss tail integral",
+            "estimate_scope":"descriptive empirical estimate; raw tail mass is not an independent sample count or confidence guarantee"}
 
 
 def cf_quantile(skew, excess_kurtosis, alpha=0.95, z_range=(-4,4)):

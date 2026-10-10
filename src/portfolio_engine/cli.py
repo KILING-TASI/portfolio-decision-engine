@@ -94,12 +94,19 @@ def main(argv=None):
     compatibility.add_argument("--input",required=True);compatibility.add_argument("--reference");compatibility.add_argument("--out",required=True)
     exposure=commands.add_parser("account-exposure",help="declared account amounts and disclosed all-asset exposure")
     exposure.add_argument("--input",required=True);exposure.add_argument("--out",required=True)
+    statistics=commands.add_parser("statistics-demo",help="original statistical validation counterexamples, synthetic only")
+    statistics.add_argument("--out",required=True)
     args=parser.parse_args(argv)
     try:
         if args.command=="verify":
             result=verify(args.directory);print(json.dumps(result,ensure_ascii=False,indent=2))
             return 0 if result["status"]=="stored_content_verified" else 2
         with atomic_output(args.out) as stage:
+            if args.command=="statistics-demo":
+                from .statistical_cases import statistical_cases,save_statistical_cases
+                result=statistical_cases();save_statistical_cases(result,stage);manifest(stage)
+                print(f"Statistical report: {(Path(args.out)/'statistical-report.html').resolve()}")
+                return 0 if all(all(result[key]['acceptance'].values()) for key in ['tail_mc','selection_isolation']) else 2
             if args.command=="account-exposure":
                 from .account_exposure import account_exposure
                 from .exposure_report import save_exposure_report
