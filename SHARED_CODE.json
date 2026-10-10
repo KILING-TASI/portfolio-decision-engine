@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "fixed-shared-components/1",
+  "hashFormat": "UTF-8 with LF newlines",
+  "components": [
+    {
+      "localPath": "src/portfolio_engine/nav_collection/review_io.py",
+      "normalizedTextSha256": "c8e995fff7830ca02127ab5ba4605aa60e99c358a86635dece08ba92ab8afea5",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "cn_data_adapters/review_io.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/review_io.py",
+      "normalizedTextSha256": "c8e995fff7830ca02127ab5ba4605aa60e99c358a86635dece08ba92ab8afea5",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "cn_data_adapters/review_io.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/nav_collection/__main__.py",
+      "normalizedTextSha256": "569de538de517d523a1a6452b3f2cd22b4fd6a6cb9deb9318dd8c1106bb28436",
+      "canonicalRepository": "research-workbench",
+      "canonicalPath": "scripts/nav_collection/__main__.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/nav_collection/_contract.py",
+      "normalizedTextSha256": "e2f4aafefdabe809b4e049f5b50ef35bfdb1a9a1d78cd2ae625650f51c96407a",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "cn_data_adapters/contracts/collection.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/nav_collection/_observations.py",
+      "normalizedTextSha256": "a0913536e145c9676381b004cbd74a117abce8813d6c0ec6abfe2fb75ef27a33",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "cn_data_adapters/contracts/observations.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/nav_collection/nav.py",
+      "normalizedTextSha256": "54918a07f8e2ab0dcc87918ba88165ca30e6ffed4d06b308884be7bca178d68c",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "cn_data_adapters/nav.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/nav_collection/tables.py",
+      "normalizedTextSha256": "ab87db7c8a0caa2244af7e0d43f45f61924eb6abf2e1f7df4443647ddeb5100c",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "cn_data_adapters/tables.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/nav_collection/teaching.py",
+      "normalizedTextSha256": "14f328ebf4b74292f313b149d5da994f7f0f11938a71752c761d84d047d4a5f3",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "cn_data_adapters/teaching.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    }
+  ],
+  "scope": "This inventory covers discovered equal original Python text, not proof of all interfaces being equivalent; divergent variants are not merged"
+}
