@@ -1,4 +1,4 @@
-# 组合决策引擎
+# 组合研究
 
 [![原创代码 MIT](https://img.shields.io/badge/原创代码-MIT-green)](LICENSE)
 
@@ -25,6 +25,18 @@
 换成自己的资料，先看[中文资料准备与错误处理](BEGINNER.md)。已安装 CLI 可运行 `portfolio-decision-engine doctor` 检查软件环境；它不检查资料或认证来源。
 
 未装科学计算包时，教学展示轻量金额敞口；完整历史风险、回归和优化需安装 `.[analysis]`，不能把轻量成功当成完整分析通过。
+
+## 名称与使用入口
+
+| 用途 | 名称 |
+|---|---|
+| 中文展示名称 | 组合研究 |
+| GitHub 仓库／Python 发行包 | `portfolio-decision-engine` |
+| Skill 注册名 | `portfolio-decision-engine` |
+| 安装后的命令 | `portfolio-decision-engine` |
+| Python 模块 | `portfolio_engine` |
+
+中文名称用于介绍；安装、调用和已有记录沿用表中的技术标识。CLI 安装与 Skill 注册分别完成，使用 Skill 时保留完整仓库资源。
 
 ## 安装和首次试用
 
