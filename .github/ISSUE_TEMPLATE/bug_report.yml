@@ -1,0 +1,17 @@
+name: 问题反馈
+description: 安装、输入或结果与预期不符
+body:
+  - type: textarea
+    id: environment
+    attributes:
+      label: 版本与环境
+      description: 工具版本、操作系统、Python及调用入口
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 最短复现
+      description: 脱敏输入、执行步骤、预期与实际结果；不上传账号或受限原件
+    validations:
+      required: true
