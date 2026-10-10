@@ -4,11 +4,15 @@
 
 比较不同配置的收益与回撤，核对资金进出，计算不同条件下的现金缺口。输出可打开的报告、逐日账本和输入记录，方便检查每个结论怎么算出来。
 
+当前版本：[v0.8.3](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.3)。完整源码、wheel、sdist 和校验清单在同一发布页；历史报告及旧下载包按各自版本阅读。
+
+自然语言使用：保留完整仓库资源，按 [Skill 指引](SKILL.md)注册到支持本地 Skill 的助手；CLI 安装与 Skill 注册分别完成。可以独立使用，无需工作台。
+
 ## 安装和首次试用
 
-本轮对应[发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.2)；下载时以实际上传的完整源码、wheel、sdist 与校验清单为准。源码按下面步骤安装；下载 wheel 后，将安装命令末尾的 `.` 换成该 wheel 文件路径。pip 安装不会自动注册 AI 工具中的 Skill。
+本轮对应[发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.3)；下载时以实际上传的完整源码、wheel、sdist 与校验清单为准。源码按下面步骤安装；下载 wheel 后，将安装命令末尾的 `.` 换成该 wheel 文件路径。pip 安装不会自动注册 AI 工具中的 Skill。
 
-本轮源码版本为 `0.8.2`。统一安装入口需要 Python 3.10 或以上。在完整源码目录新建自己的 Python 环境，下面的 Windows 命令不需要激活脚本：
+本轮源码版本为 `0.8.3`。统一安装入口需要 Python 3.10 或以上。在完整源码目录新建自己的 Python 环境，下面的 Windows 命令不需要激活脚本：
 
 ```powershell
 python -m venv .venv
@@ -106,6 +110,9 @@ python -m pytest -q
 python -m build
 ```
 
+<details>
+<summary>历史版本与下载记录</summary>
+
 ## v0.8.0 下载与安装
 
 v0.8.0 已于 2026-10-10 发布。安装依赖需要联网，教学演示离线运行；下载后可先用校验文件核对 SHA256。
@@ -115,10 +122,12 @@ v0.8.0 已于 2026-10-10 发布。安装依赖需要联网，教学演示离线�
 - 源码 ZIP：解压后进入包含 `pyproject.toml` 的目录，执行首页的源码安装命令；七组场景脚本在 `examples` 中。
 - [中文发布说明](docs/release-v0.8.0.md)列出新增能力、保留限制与安装方式。
 
+</details>
+
 ## 输出目录参数
 
 原生子命令统一支持 `--out-dir`，旧 `--out` 保留为兼容别名，两者只能指定一个。参数接受新目录，不是文件名；例如 `portfolio-decision-engine run convert-lookthrough --input holdings.json --out-dir reports/lookthrough-first`。结果JSON和来源底稿保存在该目录中；重复运行换新目录，或在仓库名入口加 `--auto-name`。
 
 ## 自然语言使用
 
-向已注册本仓 Skill 的助手直接提问。助手整理输入、调用计算并先回答能确定的部分，再解释依据和缺口；无需安装工作台。新增指引在当前 main，旧发行包保持原样，未包含这次 Skill 文件。
+向已注册本仓 Skill 的助手直接提问。助手整理输入、调用计算并先回答能确定的部分，再解释依据和缺口；无需安装工作台。新增指引自 v0.8.3 随包提供；更早的发行包保持原样。
