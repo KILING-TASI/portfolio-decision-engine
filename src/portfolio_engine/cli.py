@@ -98,12 +98,21 @@ def main(argv=None):
     statistics.add_argument("--out",required=True)
     cash=commands.add_parser("cash-demand",help="conditional dated cash needs under explicit user scenarios")
     cash.add_argument("--input",required=True);cash.add_argument("--out",required=True)
+    observed=commands.add_parser("workbench-observed-cashflow",help="limited observed before/after external flow contract")
+    observed.add_argument("--input",required=True);observed.add_argument("--out",required=True)
     args=parser.parse_args(argv)
     try:
         if args.command=="verify":
             result=verify(args.directory);print(json.dumps(result,ensure_ascii=False,indent=2))
             return 0 if result["status"]=="stored_content_verified" else 2
         with atomic_output(args.out) as stage:
+            if args.command=="workbench-observed-cashflow":
+                from .workbench_cashflow import observed_cashflow
+                result=observed_cashflow(read_json(args.input))
+                (stage/"source-input.json").write_bytes(Path(args.input).read_bytes())
+                write_json(stage/"compatibility-result.json",result);manifest(stage)
+                print(f"Observed cashflow result: {Path(args.out).resolve()}")
+                return 0
             if args.command=="cash-demand":
                 from .cash_demand import cash_demand
                 from .cash_demand_report import save_cash_demand

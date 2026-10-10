@@ -1,0 +1,214 @@
+{
+  "reference_repository": "https://github.com/KILING-TASI/research-workbench",
+  "reference_commit": "8ba3cb3f49aeba1d972b488cfa80468e8252c2e9",
+  "reference_files": {
+    "portfolio_cashflow_review.py": "2154cbb13074407bdee204b8bb17fff8cbe9261909170cf4ec2e8a173ef56a20",
+    "fund_dca.py": "a69f620da4c4b96d2b97756e2b2a8abed350add4275ee21374c90e945e1f325e"
+  },
+  "scope": "synthetic same observed inputs, six fields only; native solvers not universally equivalent",
+  "absolute_tolerance": 1e-06,
+  "cases": [
+    {
+      "name": "contribution-and-ending-withdrawal",
+      "input": {
+        "schema": "workbench-observed-cashflow-input-v1",
+        "requested_method_version": "observed-flow-link-and-native-xirr-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "payload_sha256": "bd56a61cb4864458003934c3f67af46463c234f3f36e38b7ec2c0dd352f3195f",
+      "reference_fields": {
+        "twrPct": 15.500000000000025,
+        "xirrPct": 14.484608833963414,
+        "netExternalFlow": 40.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": 18.0
+      },
+      "reference_xirr_status": "calculated-conventional-flows",
+      "engine_xirr_status": "ok"
+    },
+    {
+      "name": "opening-flow",
+      "input": {
+        "schema": "workbench-observed-cashflow-input-v1",
+        "requested_method_version": "observed-flow-link-and-native-xirr-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 20,
+              "afterFlowValue": 120
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 110,
+              "externalFlow": 50,
+              "afterFlowValue": 160
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "payload_sha256": "0f7467e8022899680e7de632e082a24cd42a93a29f7c136993778e3b96a5be63",
+      "reference_fields": {
+        "twrPct": -3.749999999999998,
+        "xirrPct": -1.3774736174732183,
+        "netExternalFlow": 60.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": -2.0
+      },
+      "reference_xirr_status": "calculated-conventional-flows",
+      "engine_xirr_status": "ok"
+    },
+    {
+      "name": "fee-already-in-values",
+      "input": {
+        "schema": "workbench-observed-cashflow-input-v1",
+        "requested_method_version": "observed-flow-link-and-native-xirr-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 108,
+              "externalFlow": 50,
+              "afterFlowValue": 158
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 168,
+              "externalFlow": -10,
+              "afterFlowValue": 158
+            }
+          ]
+        }
+      },
+      "payload_sha256": "73ece7f55f5ac2e81a9c395f6bdb9cc84ded805739c144285e31ab0dd3f8cbbd",
+      "reference_fields": {
+        "twrPct": 14.835443037974683,
+        "xirrPct": 14.484608833963414,
+        "netExternalFlow": 40.0,
+        "openingValue": 100.0,
+        "endingValue": 158.0,
+        "profit": 18.0
+      },
+      "reference_xirr_status": "calculated-conventional-flows",
+      "engine_xirr_status": "ok"
+    },
+    {
+      "name": "nonconventional",
+      "input": {
+        "schema": "workbench-observed-cashflow-input-v1",
+        "requested_method_version": "observed-flow-link-and-native-xirr-v1",
+        "valuation_timing": "before-and-after-external-flow",
+        "fee_basis": "included-in-observed-values",
+        "frozen_basis": "included-in-total-value-not-available-cash",
+        "settlement_basis": "observed-values-not-guaranteed-receipts",
+        "payload": {
+          "exampleType": "teaching-only",
+          "cashFlowCoverage": "declared-complete",
+          "basis": "Synthetic observed total account values include fees and frozen cash; no verified receipts",
+          "currency": "CNY",
+          "amountUnit": "base",
+          "observations": [
+            {
+              "date": "2025-01-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 0,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-07-01",
+              "beforeFlowValue": 300,
+              "externalFlow": -200,
+              "afterFlowValue": 100
+            },
+            {
+              "date": "2025-10-01",
+              "beforeFlowValue": 100,
+              "externalFlow": 200,
+              "afterFlowValue": 300
+            },
+            {
+              "date": "2026-01-01",
+              "beforeFlowValue": 300,
+              "externalFlow": 0,
+              "afterFlowValue": 300
+            }
+          ]
+        }
+      },
+      "payload_sha256": "624a830c7baadeb60fb4f5c8e76551bdfd18d013ceb96e7cfd3dd80dde34a1b8",
+      "reference_fields": {
+        "twrPct": 200.0,
+        "xirrPct": null,
+        "netExternalFlow": 0.0,
+        "openingValue": 100.0,
+        "endingValue": 300.0,
+        "profit": 200.0
+      },
+      "reference_xirr_status": "unresolved-or-nonconventional-flows",
+      "engine_xirr_status": "unresolved_nonconventional"
+    }
+  ]
+}

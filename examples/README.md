@@ -25,3 +25,6 @@ workbench-buy-hold.json 是人工总回报指数示例；reference 文件来自�
 account-exposure-demo.json 为人工账户与披露；account-exposure-limited-real.json 仅复用已有真实基金身份/取数范围元信息，金额是教学值、无底层披露及真实净值数值。见[账户敞口口径](../docs/account-exposure.md)。
 
 cash-demand-demo.json 为原创人工现金需求情景，金额、收入、支出、解冻与到账条件均为教学假设。见[现金需求口径](../docs/cash-demand.md)。
+
+
+`workbench-observed-cashflow.json` 为流前/流后估值的合成教学输入；`workbench-observed-reference.json` 冻结四组同输入工作台结果与源码摘要，不是真实账户。兼容范围见 [现金联调契约](../docs/workbench-cashflow-integration.md)。

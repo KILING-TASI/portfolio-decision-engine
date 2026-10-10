@@ -24,3 +24,6 @@ python -m portfolio_engine verify reports/workbench-comparison
 ```
 
 教学输入的财富路径为 1、0.90、0.98、1.10，总收益 10%，兼容最大回撤 -10%，两资产贡献 6 和 4 个百分点。参考结果由只读工作台 `portfolio_stress.py` 中的 `portfolio_path` 计算生成，同输入全部数值差为零。固定来源 Git 提交 `051846168d7590991c75afc001abb97a89b1d3ed`；文件 SHA256 为 `5500bc821d3c166a6aafd478c03b835c7d6dd6636a28ecfb30399a1a914c74c9`。参考文件还记录函数摘要与输入摘要，比较时先检查输入绑定。
+
+
+后续现金/TWR/XIRR 与现金需求的可选接入见 [有界现金联调契约](workbench-cashflow-integration.md)。观察值复核和未来压力账本保持不同模型。
