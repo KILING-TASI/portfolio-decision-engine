@@ -108,3 +108,7 @@
 
 ### Pending first observed-review migration
 - Move the original workbench observed TWR and bounded 150-step bisection XIRR into a standard-library-only module, with exact legacy result/failure references and retained upstream MIT attribution. Keep native simulation and the original narrow v1 bridge unchanged. Consumer duplicate removal is separately verified in workbench.
+
+## v0.9.2 · 2026-10-11
+
+清理重复使用者页面的发布残留，新增英文项目入口及版本变更索引；独立使用和历史冻结记录保持。
