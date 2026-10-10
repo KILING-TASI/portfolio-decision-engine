@@ -48,6 +48,10 @@ def main():
         assert run.returncode == returncode, run.stderr[-1500:]
         actual = json.loads((output / result_file).read_text("utf8"))
         check(actual)
+        if (output / "report-manifest.json").exists():
+            manifest = json.loads((output / "report-manifest.json").read_text("utf8"))
+            for filename, digest in manifest["files"].items():
+                assert sha(output / filename) == digest
         save(folder / "actual.json", actual)
         cases.append({"id": name, "status": "passed", "expected": expected,
                       "returncode": run.returncode, "command": command,
@@ -163,6 +167,10 @@ def main():
         for row, ref in zip(ledger, expected):
             assert row["date"] == ref["date"] and abs(float(row["value"])-ref["value"]) < 1e-8
             assert abs(float(row["cost"])-ref["fee"]) < 1e-8
+        assert len(ledger) == len(expected) == 80
+        manifest = json.loads((output / "report-manifest.json").read_text("utf8"))
+        for filename, digest in manifest["files"].items():
+            assert sha(output / filename) == digest
         if losses:
             assert actual["modules"]["M1"]["allocation"]["status"] == "ok"
             assert actual["modules"]["M2"]["status"] == "infeasible" and actual["modules"]["M2"]["selected"] is None
@@ -180,7 +188,7 @@ def main():
     save(root / "scenario-results.json", {"status": "passed", "data_kind": "synthetic teaching only",
          "cases": cases, "output_exists_failure": "rejected; all old file hashes unchanged",
          "scope": "conditional arithmetic, not real accounts, actual receipts, probability or visual certification"})
-    rows = "".join(f'<tr><td>{escape(c["id"])}</td><td>通过</td><td><a href="{escape(c["report"])}">实际结果</a></td></tr>' for c in cases)
+    rows = "".join(f'<tr><td>{escape(c["id"])}</td><td>通过</td><td><a href="{escape(c["id"])}/expected.json">预期</a> · <a href="{escape(c["id"])}/actual.json">实际</a> · <a href="{escape(c["report"])}">报告</a></td></tr>' for c in cases)
     (root / "scenario-index.html").write_text('<meta charset="utf-8"><h1>组合引擎情景实例</h1><p>全部合成教学；非真实覆盖、到账保证或投资有效认证。</p><table>'+rows+'</table><p><a href="scenario-results.json">输入/预期/实际/方法与范围</a></p>', encoding="utf8")
     print(json.dumps({"status": "passed", "cases": len(cases), "output": str(root)}))
 
