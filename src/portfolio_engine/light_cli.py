@@ -63,4 +63,7 @@ def main(argv):
         return 0
     except (InputError,ValueError,KeyError,TypeError,OSError) as e:
         print('未完成轻量研究：'+str(e)+'\n下一步：核对输入口径与示例，使用新输出目录；原报告未覆盖。',file=__import__('sys').stderr)
+        if a.out and not a.out.exists():
+            with atomic_output(a.out) as stage:
+                write_json(stage/'failure.json',dict(status='blocked',reason=str(e),next_step='correct input and choose a new output directory'))
         return 2
