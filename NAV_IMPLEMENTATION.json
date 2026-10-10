@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "sourceCommits": {
+    "cn-research-contracts": "9e7dd2702b8cf0f7f1160f5f07b50800e0b59ffb",
+    "cn-data-adapters": "4cd8fe669662f5b7529915bba16bd645ec4a14aa"
+  },
+  "location": "src/portfolio_engine/nav_collection",
+  "sha256": {
+    "nav.py": "54918a07f8e2ab0dcc87918ba88165ca30e6ffed4d06b308884be7bca178d68c",
+    "review_io.py": "c8e995fff7830ca02127ab5ba4605aa60e99c358a86635dece08ba92ab8afea5",
+    "tables.py": "ab87db7c8a0caa2244af7e0d43f45f61924eb6abf2e1f7df4443647ddeb5100c",
+    "teaching.py": "14f328ebf4b74292f313b149d5da994f7f0f11938a71752c761d84d047d4a5f3",
+    "_contract.py": "e2f4aafefdabe809b4e049f5b50ef35bfdb1a9a1d78cd2ae625650f51c96407a",
+    "_observations.py": "a0913536e145c9676381b004cbd74a117abce8813d6c0ec6abfe2fb75ef27a33",
+    "__init__.py": "1a418cc815f06ddd726480ad5d995ed88d14422a3aba64a91dfb9eaed06b493d",
+    "__main__.py": "569de538de517d523a1a6452b3f2cd22b4fd6a6cb9deb9318dd8c1106bb28436"
+  },
+  "license": "MIT-original-KILING-TASI",
+  "scope": "固定随包原实现，单仓不要求安装共用仓；数据权利独立"
+}

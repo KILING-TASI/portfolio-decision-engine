@@ -30,3 +30,6 @@ description: 用户问组合风险集中、现金缺口、收益来源或情景�
 ## 轻量与完整分析分别调用
 
 金额敞口 `account-exposure`、现金需求 `cash-demand`、披露转换 `convert-lookthrough`、完整性检查 `verify` 和 `light-demo` 只用本仓标准库。历史风险、收益回归、M1–M7和约束优化需要 `[analysis]`，缺组件时解释必要性并给安装方式，不自动安装，不把轻量教学当完整模块交付。使用 `portfolio-decision-engine doctor --json` 可检查环境，数据和来源不在其核验范围。
+
+
+本轮新增因子横截面与研究试验留档。独立入口、底稿与限制见 [EXPANSION.md](EXPANSION.md)。

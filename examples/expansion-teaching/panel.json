@@ -1,0 +1,87 @@
+{
+  "asOf": "2026-02-01T10:00:00+08:00",
+  "groups": 2,
+  "universeDefinition": "原创教学三只证券含当期成员，非市场样本",
+  "universeVersion": "teaching-1",
+  "rows": [
+    {
+      "security": "teaching:0",
+      "signalDate": "2026-01-05",
+      "signalAt": "2026-01-05T10:00:00+08:00",
+      "factorAvailableAt": "2026-01-05T09:00:00+08:00",
+      "universeAvailableAt": "2026-01-05T09:00:00+08:00",
+      "returnStartAt": "2026-01-05T15:00:00+08:00",
+      "returnEndAt": "2026-01-07T15:00:00+08:00",
+      "returnAvailableAt": "2026-01-08T09:00:00+08:00",
+      "membershipAtSignal": true,
+      "factor": 0,
+      "forwardReturn": 0.0
+    },
+    {
+      "security": "teaching:1",
+      "signalDate": "2026-01-05",
+      "signalAt": "2026-01-05T10:00:00+08:00",
+      "factorAvailableAt": "2026-01-05T09:00:00+08:00",
+      "universeAvailableAt": "2026-01-05T09:00:00+08:00",
+      "returnStartAt": "2026-01-05T15:00:00+08:00",
+      "returnEndAt": "2026-01-07T15:00:00+08:00",
+      "returnAvailableAt": "2026-01-08T09:00:00+08:00",
+      "membershipAtSignal": true,
+      "factor": 1,
+      "forwardReturn": 0.01
+    },
+    {
+      "security": "teaching:2",
+      "signalDate": "2026-01-05",
+      "signalAt": "2026-01-05T10:00:00+08:00",
+      "factorAvailableAt": "2026-01-05T09:00:00+08:00",
+      "universeAvailableAt": "2026-01-05T09:00:00+08:00",
+      "returnStartAt": "2026-01-05T15:00:00+08:00",
+      "returnEndAt": "2026-01-07T15:00:00+08:00",
+      "returnAvailableAt": "2026-01-08T09:00:00+08:00",
+      "membershipAtSignal": true,
+      "factor": 2,
+      "forwardReturn": 0.02
+    },
+    {
+      "security": "teaching:0",
+      "signalDate": "2026-01-06",
+      "signalAt": "2026-01-06T10:00:00+08:00",
+      "factorAvailableAt": "2026-01-06T09:00:00+08:00",
+      "universeAvailableAt": "2026-01-06T09:00:00+08:00",
+      "returnStartAt": "2026-01-06T15:00:00+08:00",
+      "returnEndAt": "2026-01-07T15:00:00+08:00",
+      "returnAvailableAt": "2026-01-08T09:00:00+08:00",
+      "membershipAtSignal": true,
+      "factor": 0,
+      "forwardReturn": 0.0
+    },
+    {
+      "security": "teaching:1",
+      "signalDate": "2026-01-06",
+      "signalAt": "2026-01-06T10:00:00+08:00",
+      "factorAvailableAt": "2026-01-06T09:00:00+08:00",
+      "universeAvailableAt": "2026-01-06T09:00:00+08:00",
+      "returnStartAt": "2026-01-06T15:00:00+08:00",
+      "returnEndAt": "2026-01-07T15:00:00+08:00",
+      "returnAvailableAt": "2026-01-08T09:00:00+08:00",
+      "membershipAtSignal": true,
+      "factor": 1,
+      "forwardReturn": 0.01
+    },
+    {
+      "security": "teaching:2",
+      "signalDate": "2026-01-06",
+      "signalAt": "2026-01-06T10:00:00+08:00",
+      "factorAvailableAt": "2026-01-06T09:00:00+08:00",
+      "universeAvailableAt": "2026-01-06T09:00:00+08:00",
+      "returnStartAt": "2026-01-06T15:00:00+08:00",
+      "returnEndAt": "2026-01-07T15:00:00+08:00",
+      "returnAvailableAt": "2026-01-08T09:00:00+08:00",
+      "membershipAtSignal": true,
+      "factor": 2,
+      "forwardReturn": 0.02
+    }
+  ],
+  "teaching": true
+}

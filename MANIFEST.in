@@ -11,3 +11,14 @@ recursive-include licenses *.txt *.md *.json
 include SKILL.md
 
 include try_demo.py Start-Demo.cmd Start-Demo.sh BEGINNER.md
+
+include USER_SCENARIOS.md EXPANSION.md
+recursive-include examples/expansion-teaching *.json
+
+include FORMAT_SCOPE.md
+
+include EXPANSION_RELEASE.md
+
+include AUDIT_SCOPE.md
+
+include NAV_IMPLEMENTATION.json

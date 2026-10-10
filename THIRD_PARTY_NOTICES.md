@@ -58,3 +58,7 @@ research-workbench 与 cn-fund-lookthrough 的原始 MIT 文本分别保存于 l
 ## 第一批观察收益算法搬迁
 
 `src/portfolio_engine/observed_review.py` 的 `number`、`calculate` 和150次二分 `xirr` 从 research-workbench 提交 `21543ea9a8419c56db8d1844ce8f1e17ae48307d` 搬迁，保持旧观察语义；原版权为2026 research-workbench contributors，MIT全文保留于 `licenses/research-workbench-MIT.txt`，模块头部也保留署名。本次不是把上游算法重新署名为本仓库原创。外围版本/隔离运行/冻结封装属于本次新增实现。函数来源和原文件摘要在 `examples/observed-review-reference.json`；工作台保留解释与报告职责，旧原生回测求根不被同名替换。
+
+src/portfolio_engine/nav_collection固定随包携带同作者cn-data-adapters/cn-research-contracts v0.1.0的MIT实现；不包含第三方原始数据，源码一致性在扩展验收记录中核对。
+
+本轮新增研究复查、报告说明及合成教学为作者原创MIT；同作者随包通用I/O代码独立保留，不要求其他仓库安装。规则有限事实和来源链接不改变原文权利；未捆绑实际公告/研报PDF或私人账户资料。

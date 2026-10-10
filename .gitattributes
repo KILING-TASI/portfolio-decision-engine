@@ -2,3 +2,5 @@
 Start-Demo.sh text eol=lf
 
 Start-Demo.cmd text eol=crlf
+
+src/portfolio_engine/nav_collection/*.py text eol=lf
