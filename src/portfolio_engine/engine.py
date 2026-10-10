@@ -30,7 +30,7 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
                     "covariance_window","min_weight","max_weight","groups","black_litterman","bootstrap",
                     "require_china_bear_coverage","cashflows","initial_value","rebalance","threshold","flow_rule",
                     "current_holdings","current_cash","new_funds","locked_indices","migration_penalty",
-                    "brinson","factor_csv","orders_csv","initial_weights","input_kind","walk_forward","premium_file","lookthrough_file"}
+                    "brinson","factor_csv","orders_csv","initial_weights","input_kind","walk_forward","premium_file","lookthrough_file","lookthrough_historical"}
     if set(config)-allowed_config:
         raise InputError(f"unknown config fields: {sorted(set(config)-allowed_config)}")
     metadata=config.get("data",{})
@@ -57,6 +57,14 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
     risk_free=config.get("risk_free_annual",0.0)
     if not np.isfinite(risk_free) or risk_free<=-1:
         raise InputError("invalid risk free rate")
+    supplemental={};provenance_files={}
+    for field,calculator in [("premium_file",closing_premium),("lookthrough_file",lookthrough)]:
+        if config.get(field):
+            file=Path(base_dir or ".")/config[field]
+            evidence=read_json(file)
+            supplemental[field.removesuffix("_file")]=lookthrough(evidence,research_as_of=metadata.get("as_of",str(frame.index[-1].date())),
+                historical=config.get("lookthrough_historical",False)) if field=="lookthrough_file" else calculator(evidence)
+            provenance_files[field+"_sha256"]=hashlib.sha256(file.read_bytes()).hexdigest()
     sigma,cov_report=estimate_covariance(train,config.get("covariance_window",500))
     allocation=allocate(sigma,config.get("min_weight",0.0),config.get("max_weight",1.0),config.get("groups"))
     candidates=allocation["candidates"]
@@ -161,7 +169,6 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
                 "scope":"same training covariance estimate, not forecast or actual account drawdown",
                 "budget_status":"not_revalidated_after_migration"}
     attribution={"status":"insufficient_data","reason":"segment history/factors not supplied"}
-    provenance_files={}
     if config.get("brinson"):
         attribution={"brinson":brinson(**config["brinson"])}
     if config.get("factor_csv"):
@@ -187,12 +194,6 @@ def run_engine(returns,config,snapshot_id="in_memory",base_dir=None):
     modules={"M1":{"allocation":allocation,"covariance":cov_report,"black_litterman":bl},
              "M2":budget_report,"M3":attribution,"M4":migration,"M5":historical_stress(frame,w,costs=fees,periods=periods),
              "M6":trade,"M7":risk}
-    supplemental={}
-    for field,calculator in [("premium_file",closing_premium),("lookthrough_file",lookthrough)]:
-        if config.get(field):
-            file=Path(base_dir or ".")/config[field]
-            supplemental[field.removesuffix("_file")]=calculator(read_json(file))
-            provenance_files[field+"_sha256"]=hashlib.sha256(file.read_bytes()).hexdigest()
     wf_config=config.get("walk_forward",{})
     if not isinstance(wf_config,dict) or set(wf_config)-{"min_train","test_steps"}:
         raise InputError("walk_forward allows min_train and test_steps")

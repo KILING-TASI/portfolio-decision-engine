@@ -6,6 +6,8 @@ v0.6 的数据契约、净值分红/拆分再投、报告留档、未知仓位�
 
 ## research-workbench MIT
 
+新增cn-fund-lookthrough输入适配参考该用户仓库提交`72bf3651269ef156f3f002641b224a968adbb3e0`的公开输入契约；教学夹具由examples/demo.json改编。该仓库同样使用下列MIT与2026 research-workbench contributors署名。保留上游数据许可边界，未复制其计算核心作为依赖。
+
 MIT License
 
 Copyright (c) 2026 research-workbench contributors

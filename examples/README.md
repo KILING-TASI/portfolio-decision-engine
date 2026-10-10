@@ -17,3 +17,5 @@ python -m portfolio_engine verify reports/prepared-analysis
 ```
 
 premium.json 和 lookthrough.json 也是教学输入。collection-request.json 是在线请求格式示例，无教学行情附带；运行 collect 须显式 --online，不代表来源当前可用。
+
+待审cn-lookthrough-demo.json改编自cn-fund-lookthrough固定版本的教学输入，不是真实披露。运行`convert-lookthrough --input examples/cn-lookthrough-demo.json --out reports/cn-converted`可生成显式原生输入；出处与许可见THIRD_PARTY_NOTICES.md。
