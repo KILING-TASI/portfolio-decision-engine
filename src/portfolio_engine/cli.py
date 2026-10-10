@@ -100,11 +100,17 @@ def main(argv=None):
     cash.add_argument("--input",required=True);cash.add_argument("--out-dir", "--out", dest="out", required=True, help="新输出目录（不是JSON文件）；--out为兼容别名")
     observed=commands.add_parser("workbench-observed-cashflow",help="limited observed before/after external flow contract")
     observed.add_argument("--input",required=True);observed.add_argument("--out-dir", "--out", dest="out", required=True, help="新输出目录（不是JSON文件）；--out为兼容别名")
+    for command_parser in commands.choices.values():
+        if any(action.dest == 'out' for action in command_parser._actions):
+            command_parser.add_argument('--auto-name', action='store_true', help='另选新输出目录，保留已有结果')
     raw_args=list(sys.argv[1:] if argv is None else argv)
     output_options=[v for v in raw_args if v in {"--out", "--out-dir"} or v.startswith(("--out=", "--out-dir="))]
     if len(output_options)>1:
         parser.error("只能指定一个输出目录参数：--out-dir 或兼容别名 --out")
     args=parser.parse_args(raw_args)
+    if getattr(args, 'auto_name', False):
+        from ._entry import fresh_name
+        args.out = str(fresh_name(args.out))
     try:
         if args.command=="verify":
             result=verify(args.directory);print(json.dumps(result,ensure_ascii=False,indent=2))
