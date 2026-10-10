@@ -6,9 +6,9 @@
 
 ## 安装和首次试用
 
-本轮对应[发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.1)；下载时以实际上传的完整源码、wheel、sdist 与校验清单为准。源码按下面步骤安装；下载 wheel 后，将安装命令末尾的 `.` 换成该 wheel 文件路径。pip 安装不会自动注册 AI 工具中的 Skill。
+本轮对应[发布页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.8.2)；下载时以实际上传的完整源码、wheel、sdist 与校验清单为准。源码按下面步骤安装；下载 wheel 后，将安装命令末尾的 `.` 换成该 wheel 文件路径。pip 安装不会自动注册 AI 工具中的 Skill。
 
-本轮源码版本为 `0.8.1`。统一安装入口需要 Python 3.10 或以上。在完整源码目录新建自己的 Python 环境，下面的 Windows 命令不需要激活脚本：
+本轮源码版本为 `0.8.2`。统一安装入口需要 Python 3.10 或以上。在完整源码目录新建自己的 Python 环境，下面的 Windows 命令不需要激活脚本：
 
 ```powershell
 python -m venv .venv
@@ -114,3 +114,7 @@ v0.8.0 已于 2026-10-10 发布。安装依赖需要联网，教学演示离线�
 - wheel 安装：`python -m pip install portfolio_decision_engine-0.8.0-py3-none-any.whl`，然后运行 `python -m portfolio_engine demo --fast --out reports/demo-03`。安装需要联网获取上述普通依赖；教学运行离线。
 - 源码 ZIP：解压后进入包含 `pyproject.toml` 的目录，执行首页的源码安装命令；七组场景脚本在 `examples` 中。
 - [中文发布说明](docs/release-v0.8.0.md)列出新增能力、保留限制与安装方式。
+
+## 输出目录参数
+
+原生子命令统一支持 `--out-dir`，旧 `--out` 保留为兼容别名，两者只能指定一个。参数接受新目录，不是文件名；例如 `portfolio-decision-engine run convert-lookthrough --input holdings.json --out-dir reports/lookthrough-first`。结果JSON和来源底稿保存在该目录中；重复运行换新目录，或在仓库名入口加 `--auto-name`。
