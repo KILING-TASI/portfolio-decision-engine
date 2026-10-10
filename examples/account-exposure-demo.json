@@ -1,0 +1,136 @@
+{
+  "schema": "account-exposure-input-v1",
+  "amount_unit": "base",
+  "currency": "CNY",
+  "valuation_date": "2026-09-30",
+  "as_of": "2026-10-09",
+  "data_kind": "合成教学持仓与披露 · 非市场绩效",
+  "positions": [
+    {
+      "position_id": "fund-lot",
+      "economic_lot_id": "fund-lot",
+      "kind": "fund",
+      "node": "fund-demo",
+      "amount": 40000,
+      "currency": "CNY",
+      "valuation_date": "2026-09-30",
+      "source": "原创教学输入，不是账户或市场披露"
+    },
+    {
+      "position_id": "stock-lot",
+      "economic_lot_id": "stock-lot",
+      "kind": "stock",
+      "security": "STOCK_A",
+      "amount": 15000,
+      "currency": "CNY",
+      "valuation_date": "2026-09-30",
+      "source": "原创教学输入，不是账户或市场披露",
+      "origin": "direct_account_lot"
+    },
+    {
+      "position_id": "bond-lot",
+      "economic_lot_id": "bond-lot",
+      "kind": "bond",
+      "security": "BOND_A",
+      "amount": 20000,
+      "currency": "CNY",
+      "valuation_date": "2026-09-30",
+      "source": "原创教学输入，不是账户或市场披露",
+      "origin": "direct_account_lot"
+    },
+    {
+      "position_id": "convertible-lot",
+      "economic_lot_id": "convertible-lot",
+      "kind": "bond",
+      "security": "CB_A",
+      "amount": 10000,
+      "currency": "CNY",
+      "valuation_date": "2026-09-30",
+      "source": "原创教学输入，不是账户或市场披露",
+      "origin": "direct_account_lot"
+    },
+    {
+      "position_id": "cash-lot",
+      "economic_lot_id": "cash-lot",
+      "kind": "cash",
+      "security": "ACCOUNT_CASH",
+      "amount": 15000,
+      "currency": "CNY",
+      "valuation_date": "2026-09-30",
+      "source": "原创教学输入，不是账户或市场披露",
+      "origin": "direct_account_lot",
+      "frozen_amount": 5000
+    }
+  ],
+  "nodes": {
+    "fund-demo": {
+      "currency": "CNY",
+      "source_reference": "原创教学输入，不是账户或市场披露",
+      "report_date": "2026-06-30",
+      "published_at": "2026-08-30",
+      "available_at": "2026-08-30",
+      "holdings": [
+        {
+          "kind": "stock",
+          "id": "STOCK_A",
+          "weight": 0.5
+        },
+        {
+          "kind": "bond",
+          "id": "BOND_A",
+          "weight": 0.2
+        },
+        {
+          "kind": "cash",
+          "id": "FUND_CASH",
+          "weight": 0.1
+        }
+      ]
+    }
+  },
+  "securities": {
+    "STOCK_A": {
+      "kind": "stock",
+      "source": "原创教学输入，不是账户或市场披露",
+      "issuer": "发行人A（教学）",
+      "issuer_source": "原创教学输入，不是账户或市场披露",
+      "industry": "制造（教学）",
+      "industry_source": "原创教学输入，不是账户或市场披露"
+    },
+    "BOND_A": {
+      "kind": "bond",
+      "instrument_type": "plain_bond",
+      "source": "原创教学输入，不是账户或市场披露",
+      "issuer": "发行人B（教学）",
+      "issuer_source": "原创教学输入，不是账户或市场披露",
+      "modified_duration": 4,
+      "terms_source": "教学修正久期声明，不是实券条款",
+      "terms_as_of": "2026-09-30"
+    },
+    "CB_A": {
+      "kind": "bond",
+      "instrument_type": "convertible_bond",
+      "source": "原创教学输入，不是账户或市场披露",
+      "issuer": "发行人C（教学）",
+      "issuer_source": "原创教学输入，不是账户或市场披露"
+    },
+    "FUND_CASH": {
+      "kind": "cash",
+      "source": "原创教学输入，不是账户或市场披露"
+    },
+    "ACCOUNT_CASH": {
+      "kind": "cash",
+      "source": "原创教学输入，不是账户或市场披露"
+    }
+  },
+  "rate_scenarios": [
+    {
+      "id": "rate_up_100bp",
+      "rate_change": 0.01
+    },
+    {
+      "id": "rate_down_100bp",
+      "rate_change": -0.01
+    }
+  ]
+}

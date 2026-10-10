@@ -78,6 +78,8 @@ v0.7.0 基线为 65 项测试；待审 #1 为 86 项、#2 为 94 项，本分支
 
 ## 阅读入口
 
+- [声明账户敞口与现金占用](docs/account-exposure.md)：待审增量，普通债/转债与未知分开，支持排序、筛选及情景另存。
+
 - [披露资料接入路线与验收](docs/lookthrough-integration-roadmap.md)：v0.7 基础、待审 cn-fund-lookthrough 输入转换、真实资料与 M2 样本外验证优先级。
 - [M2完整滚动验证首版](docs/m2-walk-forward.md)：待审独立批次；每折重新生成候选、预算筛选并冻结，不将M1滚动比较冒充M2。
 
