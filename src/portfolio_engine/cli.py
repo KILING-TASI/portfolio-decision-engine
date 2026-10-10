@@ -86,12 +86,36 @@ def main(argv=None):
     conversion.add_argument("--out",required=True)
     conversion.add_argument("--as-of",help="additional research cutoff, cannot extend upstream input cutoff")
     conversion.add_argument("--historical",action="store_true",help="require declared source version available and frozen by cutoff")
+    m2=commands.add_parser("m2-evaluate",help="full rolling candidate regeneration and drawdown-budget selection")
+    m2.add_argument("--returns",required=True);m2.add_argument("--config",required=True);m2.add_argument("--out",required=True)
+    m2demo=commands.add_parser("m2-demo",help="small reproducible full M2 rolling evaluation")
+    m2demo.add_argument("--out",required=True);m2demo.add_argument("--fast",action="store_true")
     args=parser.parse_args(argv)
     try:
         if args.command=="verify":
             result=verify(args.directory);print(json.dumps(result,ensure_ascii=False,indent=2))
             return 0 if result["status"]=="stored_content_verified" else 2
         with atomic_output(args.out) as stage:
+            if args.command in {"m2-evaluate","m2-demo"}:
+                from .m2_evaluation import m2_walk_forward
+                from .m2_report import save_m2_evaluation
+                if args.command=="m2-demo":
+                    returns_path,original=make_demo(stage/"inputs",42,args.fast)
+                    old=read_json(original)
+                    config={k:old[k] for k in ["data","seed","min_weight","max_weight","costs","initial_value","bootstrap"]}
+                    config["bootstrap"].update(horizon=126,paths=100 if args.fast else 2000,max_paths=100 if args.fast else 4000,
+                        block_lengths=[10,20] if args.fast else [10,20,40,60],mc_tolerance=.05 if args.fast else .01)
+                    config["m2_walk_forward"]={"min_train":2000,"test_steps":126,"max_folds":3,"no_solution_policy":"cash"}
+                    config_path=stage/"m2-config.json";write_json(config_path,config)
+                else:
+                    returns_path,config_path=Path(args.returns),Path(args.config);config=read_json(config_path)
+                if not isinstance(config,dict):raise InputError("M2 config must be an object")
+                frame,snapshot=load_returns(returns_path,config.get("input_kind","returns"))
+                result,actual,baseline=m2_walk_forward(frame,config);result["data_snapshot_id"]=snapshot
+                save_m2_evaluation(result,actual,baseline,stage)
+                (stage/"source-input.csv").write_bytes(returns_path.read_bytes());(stage/"source-config.json").write_bytes(config_path.read_bytes())
+                manifest(stage);print(f"M2 evaluation: {(Path(args.out)/'m2-report.html').resolve()}")
+                return 0
             if args.command=="convert-lookthrough":
                 spec=read_json(args.input);value=cn_lookthrough_input(spec)
                 if args.as_of:value["evaluation_as_of"]=args.as_of
