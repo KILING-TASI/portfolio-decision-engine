@@ -2,7 +2,7 @@
 name: portfolio-decision-engine
 description: 用户问组合风险集中、现金缺口、收益来源、定投方案或退出现金情景时使用。调用本仓组合计算并解释数据范围，不执行调仓。
 metadata:
-  version: 0.9.4
+  version: 0.9.5
 license: MIT
 ---
 
