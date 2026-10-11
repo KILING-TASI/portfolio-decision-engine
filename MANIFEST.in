@@ -32,3 +32,5 @@ include RIGHTS_INDEX.json
 
 include SHARED_CODE.json
 recursive-include tools *.py
+
+include USAGE.md
