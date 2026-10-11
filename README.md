@@ -2,7 +2,7 @@
 
 比较配置、回撤、费用和现金需求，生成可核对的报告与账本。
 
-[![原创代码 MIT](https://img.shields.io/badge/原创代码-MIT-green)](LICENSE) · [当前发行版 v0.9.3](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.3) · [运行检查](https://github.com/KILING-TASI/portfolio-decision-engine/actions)
+[![原创代码 MIT](https://img.shields.io/badge/原创代码-MIT-green)](LICENSE) · [当前发行版 v0.9.4](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.4) · [运行检查](https://github.com/KILING-TASI/portfolio-decision-engine/actions)
 
 ## 能解决什么问题
 
@@ -12,7 +12,7 @@
 
 ## 快速开始
 
-从[发行页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.3)下载完整源码并解压，需要 Python 3.10 或以上。在源码目录执行：
+从[发行页](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.4)下载完整源码并解压，需要 Python 3.10 或以上。在源码目录执行：
 
 ```text
 python try_demo.py --no-open --out-dir reports/first-demo
@@ -56,3 +56,7 @@ portfolio-decision-engine --help
 [贡献说明](CONTRIBUTING.md) · [安全反馈](SECURITY.md) · [更新与清理](LIFECYCLE.md) · [English](README.en.md)
 
 [按问题选择其他工具](https://github.com/KILING-TASI/research-workbench/blob/main/references/tool-navigation.md)。共12个活跃仓，另有1个供旧记录复查的[历史契约仓](https://github.com/KILING-TASI/cn-research-contracts)。各仓分别发布；main的后续文档整理不改写旧发行包和冻结结果。
+
+## v0.9.4 本轮补强
+
+定投与退出现金流独立入口，保留原结果语义并补104项迁移核对。具体参数与边界见[使用说明](USAGE.md)。

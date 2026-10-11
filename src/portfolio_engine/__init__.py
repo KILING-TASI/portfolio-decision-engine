@@ -1,3 +1,3 @@
 """Portfolio research engine. All losses use a positive magnitude convention."""
 
-__version__ = '0.9.4.dev0'
+__version__ = '0.9.4'
