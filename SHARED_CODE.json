@@ -1,20 +1,12 @@
 {
   "schemaVersion": "fixed-shared-components/1",
-  "hashFormat": "UTF-8 with LF newlines",
+  "hashFormat": "UTF-8 with LF newlines; BOM ignored",
   "components": [
     {
-      "localPath": "src/portfolio_engine/nav_collection/review_io.py",
-      "normalizedTextSha256": "c8e995fff7830ca02127ab5ba4605aa60e99c358a86635dece08ba92ab8afea5",
-      "canonicalRepository": "cn-data-adapters",
-      "canonicalPath": "cn_data_adapters/review_io.py",
-      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
-      "licenseScope": "see repository third-party notices; inventory does not grant rights"
-    },
-    {
-      "localPath": "src/portfolio_engine/review_io.py",
-      "normalizedTextSha256": "c8e995fff7830ca02127ab5ba4605aa60e99c358a86635dece08ba92ab8afea5",
-      "canonicalRepository": "cn-data-adapters",
-      "canonicalPath": "cn_data_adapters/review_io.py",
+      "localPath": "src/portfolio_engine/nav_collection/__init__.py",
+      "normalizedTextSha256": "1a418cc815f06ddd726480ad5d995ed88d14422a3aba64a91dfb9eaed06b493d",
+      "canonicalRepository": "research-workbench",
+      "canonicalPath": "scripts/nav_collection/__init__.py",
       "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
       "licenseScope": "see repository third-party notices; inventory does not grant rights"
     },
@@ -51,6 +43,14 @@
       "licenseScope": "see repository third-party notices; inventory does not grant rights"
     },
     {
+      "localPath": "src/portfolio_engine/nav_collection/review_io.py",
+      "normalizedTextSha256": "c8e995fff7830ca02127ab5ba4605aa60e99c358a86635dece08ba92ab8afea5",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "cn_data_adapters/review_io.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
       "localPath": "src/portfolio_engine/nav_collection/tables.py",
       "normalizedTextSha256": "ab87db7c8a0caa2244af7e0d43f45f61924eb6abf2e1f7df4443647ddeb5100c",
       "canonicalRepository": "cn-data-adapters",
@@ -65,7 +65,23 @@
       "canonicalPath": "cn_data_adapters/teaching.py",
       "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
       "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/review_io.py",
+      "normalizedTextSha256": "c8e995fff7830ca02127ab5ba4605aa60e99c358a86635dece08ba92ab8afea5",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "cn_data_adapters/review_io.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "tools/check_shared_code.py",
+      "normalizedTextSha256": "ca56b58560ada0ca40e3c02ca71cfaf4a26d6962fd863b1d34e0673c5d65b8aa",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "tools/check_shared_code.py",
+      "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
+      "licenseScope": "see repository third-party notices; inventory does not grant rights"
     }
   ],
-  "scope": "This inventory covers discovered equal original Python text, not proof of all interfaces being equivalent; divergent variants are not merged"
+  "scope": "Git 跟踪的非空 Python 文件；排除 tests/test/build/dist 和 test_ 文件；按 UTF-8、LF、无 BOM 比较。相同文本不证明接口语义等价；历史固定版不要求跟随权威源最新版。"
 }
