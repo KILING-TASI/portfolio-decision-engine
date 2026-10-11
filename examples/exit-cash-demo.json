@@ -1,0 +1,53 @@
+{
+  "identity": {
+    "name": "验收"
+  },
+  "currency": "CNY",
+  "unit": "元",
+  "asOf": "2026-10-05",
+  "scenarios": [
+    {
+      "name": "同日期出口",
+      "costCoverage": "declared-complete",
+      "cashFlowCoverage": "declared-complete",
+      "flows": [
+        {
+          "date": "2025-01-01",
+          "kind": "investment",
+          "amount": {
+            "value": 100,
+            "basis": "assumption",
+            "note": "验收假设"
+          }
+        },
+        {
+          "date": "2026-01-01",
+          "kind": "proceeds",
+          "amount": {
+            "value": 110,
+            "basis": "assumption",
+            "note": "验收假设"
+          }
+        },
+        {
+          "date": "2026-01-01",
+          "kind": "fee",
+          "amount": {
+            "value": 1,
+            "basis": "assumption",
+            "note": "验收假设"
+          }
+        },
+        {
+          "date": "2026-01-01",
+          "kind": "tax",
+          "amount": {
+            "value": 0,
+            "basis": "assumption",
+            "note": "验收假设"
+          }
+        }
+      ]
+    }
+  ]
+}

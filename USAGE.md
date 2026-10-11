@@ -103,3 +103,6 @@ python -m build
 
 
 共同采集与观察表的单位、时间及版本范围见 [FORMAT_SCOPE.md](FORMAT_SCOPE.md)。宏观、微观和规则事件保留各自口径，不混作净值。
+
+
+本地待发布：[定投与退出现金流](CASH_MIGRATION.md)，轻量计算不需要完整分析扩展。

@@ -34,3 +34,7 @@ include SHARED_CODE.json
 recursive-include tools *.py
 
 include USAGE.md
+
+
+include CASH_MIGRATION.md
+recursive-include tests/fixtures *.json

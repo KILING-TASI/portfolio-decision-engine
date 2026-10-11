@@ -1,0 +1,44 @@
+{
+  "code": "000001",
+  "asOf": "2025-03-31",
+  "start": "2025-01-31",
+  "end": "2025-03-31",
+  "sourceUrl": "https://example.org/nav",
+  "eventCoverage": "verified-complete",
+  "eventEvidence": "fixture",
+  "history": [
+    {
+      "date": "2025-01-31",
+      "nav": 1
+    },
+    {
+      "date": "2025-02-28",
+      "nav": 1
+    },
+    {
+      "date": "2025-03-01",
+      "nav": 0.5
+    },
+    {
+      "date": "2025-03-31",
+      "nav": 0.5
+    }
+  ],
+  "events": [
+    {
+      "date": "2025-03-01",
+      "cashPerOldUnit": 0,
+      "newUnitsPerOldUnit": 2,
+      "sourceUrl": "https://example.org/split"
+    }
+  ],
+  "plans": [
+    {
+      "name": "monthly",
+      "frequency": "monthly",
+      "mode": "amount",
+      "value": 100,
+      "distribution": "reinvest"
+    }
+  ]
+}

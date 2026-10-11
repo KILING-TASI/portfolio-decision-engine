@@ -5,6 +5,9 @@ def main(argv=None):
     for stream in (sys.stdout,sys.stderr):
         if hasattr(stream,'reconfigure'):stream.reconfigure(encoding='utf-8')
     args=list(sys.argv[1:] if argv is None else argv)
+    if args and args[0] in ('scheduled-cash','exit-cash'):
+        from .cash_cli import main as cash_main
+        return cash_main(args)
     if args and args[0]=='doctor':
         from ._entry import doctor
         return doctor(args[1:])
