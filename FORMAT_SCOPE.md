@@ -17,4 +17,4 @@ python -m cn_data_adapters.tables normalize --input examples/tables-teaching.jso
 
 通用表的原始CSV以UTF-8文本内嵌input.json保存，rawSourceSha256仅对应CSV文本字节，不是假称保存了源站原始HTTP字节。如需HTTP原件，用各源采集留档。文件摘要不是来源签名、权利授权或数据真实性认证。
 
-独立合同校验：`cn-research-contracts validate-table --input 标准观察表.json`。从转换结果result.json提取snapshot对象作为标准表，不把整个报告当成表格式。规则信封另按原入口验证。没有宣称全部宏观/微观源已逐个迁移完成。
+独立格式校验：安装 `cn-data-adapters` 后运行 `cn-data-adapters validate-table --input 标准观察表.json`。从转换结果result.json提取snapshot对象作为标准表，不把整个报告当成表格式。规则信封另按原入口验证。没有宣称全部宏观/微观源已逐个迁移完成。
