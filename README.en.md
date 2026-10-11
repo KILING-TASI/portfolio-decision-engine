@@ -2,20 +2,35 @@
 
 Review portfolio scenarios, cash needs, point-in-time factor panels and experiment histories. Full historical analysis uses optional analysis dependencies; base installation remains lightweight.
 
-[中文说明](README.md) · [Skill instructions](SKILL.md) · [First run](BEGINNER.md) · [Changes](CHANGELOG.md)
+[中文说明](README.md) · [Release v0.9.5](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.5) · [Skill instructions](SKILL.md) · [Input preparation](BEGINNER.md)
 
-## Install and run
+Current release: **regular release**. Python **3.10+**. Base runtime dependencies: none. Optional extras: `analysis`. See [USAGE.md](USAGE.md) for scope.
 
-Clone this repository, enter its directory, and run `python -m pip install .`. Optional PDF or analysis components are documented in the Chinese README. To try the source-only teaching workflow without other repositories, run:
+## First run
+
+Download the [complete source ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.9.5/portfolio-decision-engine-v0.9.5-source.zip), extract it and enter the directory containing `try_demo.py`:
 
 ```console
 python try_demo.py --no-open --out-dir reports/first-demo
 ```
 
-Use a new output directory. Teaching data is synthetic; successful software execution does not verify original documents or complete data coverage. Installing the CLI does not automatically register the Skill: retain the complete repository resources when configuring the Skill in your assistant.
+Alternatively, clone `https://github.com/KILING-TASI/portfolio-decision-engine.git`, run `cd portfolio-decision-engine`, then execute the command above. Open the report at the path printed by the command. Teaching data is synthetic; use a new output directory and keep prior reports.
 
-## Boundaries and rights
+## CLI and Skill
 
-Each repository works independently; optional cross-repository calls need explicit configuration. Missing evidence stays unknown. No trade execution, profit guarantee, or institutional compliance certification is provided. Original code is MIT; third-party licenses and source-data rights remain separate. Do not redistribute source documents or data solely because the software uses MIT.
+From the source directory:
 
-[Chinese overview](README.md) · [Detailed commands](USAGE.md) · [Input preparation](BEGINNER.md) · [Version history](CHANGELOG.md).
+```console
+python -m pip install .
+portfolio-decision-engine --help
+```
+
+Repository and distribution: `portfolio-decision-engine`. Primary CLI: `portfolio-decision-engine`. Skill name in SKILL.md: `portfolio-decision-engine`. Installing the CLI does not register the Skill; configure the complete resources in an assistant that supports local Skills. Build or optional dependencies may require network access during installation.
+
+## Scope and rights
+
+Read the [Chinese capability boundaries](README.md#能力与边界) and [detailed commands](USAGE.md). Each tool can run independently; cross-tool calls need explicit configuration. Successful execution does not authenticate source documents, fill missing data or establish investment validity. No trade execution or guaranteed returns.
+
+Original code uses MIT. Third-party code and documents/data retain their own licenses and rights. Default-branch documentation edits do not rewrite released archives or frozen results.
+
+[Changes](CHANGELOG.md) · [Third-party rights](THIRD_PARTY_NOTICES.md) · [Contribution](CONTRIBUTING.md) · [Security](SECURITY.md)
