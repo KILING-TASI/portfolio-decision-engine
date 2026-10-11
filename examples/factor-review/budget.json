@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "factor-review/2",
+  "factorId": "teaching-value",
+  "factorVersion": "1",
+  "factorDefinition": "原创合成数值，用于验证计算边界，不是市场因子",
+  "factorSource": "原创教学输入，非真实市场或账户",
+  "asOf": "2026-02-01T10:00:00+08:00",
+  "teaching": true,
+  "parameters": {
+    "version": "teaching/1"
+  },
+  "account": {
+    "mode": "long-only-fixed-notional",
+    "currency": "CNY",
+    "cashReturn": 0,
+    "externalFlows": [],
+    "initialCash": 50,
+    "initialHoldings": {
+      "teaching:A": 50
+    },
+    "costBps": 10,
+    "periods": [
+      {
+        "startAt": "2026-01-05T10:00:00+08:00",
+        "endAt": "2026-01-06T10:00:00+08:00",
+        "availableAt": "2026-01-06T10:00:00+08:00",
+        "source": "原创教学输入，非真实市场或账户",
+        "assetReturns": {
+          "teaching:A": 0.1,
+          "teaching:B": 0.2
+        },
+        "trades": [
+          {
+            "security": "teaching:A",
+            "notional": -20,
+            "tradeAt": "2026-01-05T10:00:00+08:00",
+            "availableAt": "2026-01-05T10:00:00+08:00",
+            "canTrade": true,
+            "source": "原创教学输入，非真实市场或账户"
+          },
+          {
+            "security": "teaching:B",
+            "notional": 20,
+            "tradeAt": "2026-01-05T10:00:00+08:00",
+            "availableAt": "2026-01-05T10:00:00+08:00",
+            "canTrade": true,
+            "source": "原创教学输入，非真实市场或账户"
+          }
+        ]
+      },
+      {
+        "startAt": "2026-01-06T10:00:00+08:00",
+        "endAt": "2026-01-07T10:00:00+08:00",
+        "availableAt": "2026-01-07T10:00:00+08:00",
+        "source": "原创教学输入，非真实市场或账户",
+        "assetReturns": {
+          "teaching:A": -0.1,
+          "teaching:B": 0
+        },
+        "trades": []
+      }
+    ],
+    "settlementMode": "same-start-tradable-proceeds",
+    "settlementSource": "原创教学假设：卖出资金同一期初可交易，不代表基金实际到账"
+  },
+  "compute": false
+}

@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "factor-review/2",
+  "factorId": "teaching-composite",
+  "factorVersion": "1",
+  "factorDefinition": "原创合成数值，用于验证计算边界，不是市场因子",
+  "factorSource": "原创教学输入，非真实市场或账户",
+  "asOf": "2026-02-01T10:00:00+08:00",
+  "teaching": true,
+  "parameters": {
+    "version": "teaching/1"
+  },
+  "snapshotAt": "2026-01-05T10:00:00+08:00",
+  "factors": [
+    {
+      "id": "value",
+      "version": "1",
+      "definition": "原创教学value",
+      "source": "原创教学输入，非真实市场或账户"
+    },
+    {
+      "id": "quality",
+      "version": "1",
+      "definition": "原创教学quality",
+      "source": "原创教学输入，非真实市场或账户"
+    }
+  ],
+  "observations": [
+    {
+      "security": "teaching:0",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-0",
+      "marketCap": 100,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 0,
+        "quality": 0.0
+      }
+    },
+    {
+      "security": "teaching:1",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-1",
+      "marketCap": 111,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 1,
+        "quality": 1.1428571428571428
+      }
+    },
+    {
+      "security": "teaching:2",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-0",
+      "marketCap": 122,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 2,
+        "quality": 4.285714285714286
+      }
+    },
+    {
+      "security": "teaching:3",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-1",
+      "marketCap": 130,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 3,
+        "quality": 9.428571428571429
+      }
+    },
+    {
+      "security": "teaching:4",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-0",
+      "marketCap": 141,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 4,
+        "quality": 5.571428571428571
+      }
+    },
+    {
+      "security": "teaching:5",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-1",
+      "marketCap": 152,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 5,
+        "quality": 3.7142857142857144
+      }
+    },
+    {
+      "security": "teaching:6",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-0",
+      "marketCap": 160,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 6,
+        "quality": 3.857142857142857
+      }
+    },
+    {
+      "security": "teaching:7",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-1",
+      "marketCap": 171,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 7,
+        "quality": 6.0
+      }
+    },
+    {
+      "security": "teaching:8",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-0",
+      "marketCap": 182,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 8,
+        "quality": 10.142857142857142
+      }
+    },
+    {
+      "security": "teaching:9",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-1",
+      "marketCap": 190,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 9,
+        "quality": 5.285714285714286
+      }
+    },
+    {
+      "security": "teaching:10",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-0",
+      "marketCap": 201,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 10,
+        "quality": 2.428571428571429
+      }
+    },
+    {
+      "security": "teaching:11",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-1",
+      "marketCap": 212,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 11,
+        "quality": 1.5714285714285714
+      }
+    },
+    {
+      "security": "teaching:12",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-0",
+      "marketCap": 220,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 12,
+        "quality": 2.7142857142857144
+      }
+    },
+    {
+      "security": "teaching:13",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-1",
+      "marketCap": 231,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 13,
+        "quality": 5.857142857142858
+      }
+    },
+    {
+      "security": "teaching:14",
+      "valueAt": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T10:00:00+08:00",
+      "source": "原创教学输入，非真实市场或账户",
+      "industry": "teaching-sector-0",
+      "marketCap": 242,
+      "controlsEvidence": {
+        "source": "原创教学输入，非真实市场或账户",
+        "valueAt": "2026-01-05T10:00:00+08:00",
+        "availableAt": "2026-01-05T10:00:00+08:00"
+      },
+      "factors": {
+        "value": 14,
+        "quality": 11.0
+      }
+    }
+  ],
+  "combinationWeights": {
+    "value": 0.5,
+    "quality": 0.5
+  },
+  "neutralize": "industry-log-market-cap",
+  "orthogonalize": true
+}

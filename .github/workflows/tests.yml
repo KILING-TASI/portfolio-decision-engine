@@ -14,6 +14,7 @@ jobs:
       - run: python -m build
       - name: Install only this wheel in a clean venv and run minimum demo
         run: python tests/standalone_acceptance.py --wheel dist/*.whl --out "$RUNNER_TEMP/portfolio-standalone" --scenario-resources examples
+      - run: python tests/factor_cold_acceptance.py --wheel dist/*.whl --out "$RUNNER_TEMP/factor-standalone"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

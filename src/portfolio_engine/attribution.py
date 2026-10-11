@@ -53,7 +53,7 @@ def factor_attribution(excess_returns,factors,lags=None):
     if np.linalg.matrix_rank(design.to_numpy())<k+1:
         return {"status":"invalid_input","reason":"rank-deficient factors"}
     bandwidth=int(np.floor(4*(n/100)**(2/9))) if lags is None else lags
-    if not isinstance(bandwidth,int) or bandwidth<0 or bandwidth>=n:
+    if type(bandwidth) is not int or bandwidth<0 or bandwidth>=n:
         raise InputError("invalid HAC bandwidth")
     fit=sm.OLS(excess_returns,design).fit(cov_type="HAC",cov_kwds={"maxlags":bandwidth})
     vif={name:float(variance_inflation_factor(design.to_numpy(),i+1)) for i,name in enumerate(factors.columns)}
@@ -62,7 +62,16 @@ def factor_attribution(excess_returns,factors,lags=None):
             "p_values":fit.pvalues.to_dict(),"confidence_intervals":fit.conf_int().to_dict(orient="index"),
             "r_squared":float(fit.rsquared),"hac_lags":bandwidth,"vif":vif,
             "factor_correlations":factors.corr().to_dict(),"observations":n,
-            "interpretation":"descriptive exposures, not proof of skill or causality"}
+            "interpretation":"descriptive exposures, not proof of skill or causality",
+            "statistical_scope": {
+                "model": "OLS with HAC covariance", "parameter_null": "coefficient equals zero",
+                "p_values": "model-conditioned parameter tests, not factor-validity or future-profit probabilities",
+                "confidence_intervals": "parameter intervals conditional on supplied sample and model assumptions",
+                "selection_adjustment": "not implemented; selected factors and multiple tests can invalidate naive interpretation",
+                "sample_start": str(factors.index[0]), "sample_end": str(factors.index[-1]),
+                "hac_lags": bandwidth,
+                "limits": ["HAC does not certify data provenance or remove selection bias",
+                           "rank and sample checks do not prove independence, exogeneity or future performance"]}}
 
 
 def trade_counterfactual(returns,target,orders,cashflows=None,periods=252,**kwargs):

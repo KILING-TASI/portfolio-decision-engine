@@ -91,6 +91,7 @@ def main(argv=None):
         print(REPO + '：独立研究工具。')
         print('教学试用：' + REPO + ' demo --out-dir reports/demo --auto-name')
         print('原生入口：' + REPO + ' run --help（原有参数与计算口径保留）')
+        print('因子审查：' + REPO + ' factor --help；基础动作只需标准库。')
         if MODE == 'script':
             print('其他专题：' + REPO + ' script --help 查看已安装的脚本入口。')
         print('--auto-name 另选新输出名，保留旧文件；不会安装依赖或联网取数。')

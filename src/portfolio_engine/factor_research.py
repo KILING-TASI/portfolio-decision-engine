@@ -19,6 +19,9 @@ def corr(a,b):
     return sum((x-am)*(y-bm) for x,y in zip(a,b))/math.sqrt(aa*bb) if aa>0 and bb>0 else None
 
 def panel(spec):
+    if 'schemaVersion' in spec:
+        from .factor_contract import identity
+        identity(spec)
     cutoff=instant(spec['asOf']);groups=spec['groups']
     if isinstance(groups,bool) or not isinstance(groups,int) or not 2<=groups<=10:raise ValueError('分层数须2至10')
     if not spec.get('universeDefinition') or spec.get('universeVersion') is None:raise ValueError('须声明股票池定义及版本，避免无股票池依据')
@@ -49,7 +52,11 @@ def panel(spec):
     valid=[r['rankIC'] for r in stats if r['rankIC'] is not None]
     sd=statistics.stdev(valid) if len(valid)>1 else None
     mean=statistics.mean(valid) if valid else None
-    return {'methodVersion':'point-in-time-panel-review/1.0','conclusion':'先核对因子和股票池在信号时点是否可得，再计算逐日横截面相关和分层；这些结果尚不是可执行策略。','daily':stats,'excluded':excluded,'meanRankIC':mean,'rankICSampleStd':sd,'nonAnnualizedICIR':mean/sd if sd and mean is not None else None,'humanRows':[['可计算日期',len(stats)],['平均秩相关（rank IC）',mean],['未年化ICIR',mean/sd if sd and mean is not None else '未知：日期不足或波动为零']],'limitations':['IC是因子与随后收益的横截面相关，不是预测准确率','ICIR未年化，重叠收益与时间相关未校正，不输出置信概率','分层采用平均秩保持并列值同组，可能空组；价差未扣费且不是实际组合净收益','股票池及可得时点均由底稿声明，不能证明退市、停牌及复权数据完整','当前模块不包含自动取数、订单、行业市值中性化或完整因子生产平台']}
+    result = {'methodVersion':'point-in-time-panel-review/1.0','conclusion':'先核对因子和股票池在信号时点是否可得，再计算逐日横截面相关和分层；这些结果尚不是可执行策略。','daily':stats,'excluded':excluded,'meanRankIC':mean,'rankICSampleStd':sd,'nonAnnualizedICIR':mean/sd if sd and mean is not None else None,'humanRows':[['可计算日期',len(stats)],['平均秩相关（rank IC）',mean],['未年化ICIR',mean/sd if sd and mean is not None else '未知：日期不足或波动为零']],'limitations':['IC是因子与随后收益的横截面相关，不是预测准确率','ICIR未年化，重叠收益与时间相关未校正，不输出置信概率','分层采用平均秩保持并列值同组，可能空组；价差未扣费且不是实际组合净收益','股票池及可得时点均由底稿声明，不能证明退市、停牌及复权数据完整','当前模块不包含自动取数、订单、行业市值中性化或完整因子生产平台']}
+
+    if 'schemaVersion' in spec:
+        result['factorIdentity'] = identity(spec)
+    return result
 
 def trials(spec):
     rows=spec['trials'];cutoff=instant(spec['asOf']);ids=set();selected=[];failed=[]
@@ -68,4 +75,6 @@ def trials(spec):
         if date.fromisoformat(r['labelEnd'])>=test_start:raise ValueError('训练标签跨入测试区间，需清洗/隔离')
     return {'conclusion':'成功、失败和选型记录并列留存；试验次数只表示声明留档量，不能自动变成独立试验数或可信概率。','trialCount':len(rows),'selectedIds':selected,'failedOrBlockedIds':failed,'trials':rows,'humanRows':[['声明试验数',len(rows)],['失败或阻断数',len(failed)],['选择记录',', '.join(selected)]],'DSR':None,'realityCheck':None,'limitations':['不是完整回测框架或DSR/Reality Check实现','需试验相关性、收益矩及真正独立测试资料，不能只填尝试次数得到可信度','交易成本、幸存偏差和复权事件需要另核']}
 
-if __name__=='__main__':raise SystemExit(cli({'panel':panel,'trials':trials},'因子与研究试验复查'))
+if __name__=='__main__':
+    from .factor_cli import main
+    raise SystemExit(main())

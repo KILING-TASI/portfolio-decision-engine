@@ -2,13 +2,13 @@
 
 Review portfolio scenarios, cash needs, point-in-time factor panels and experiment histories. Full historical analysis uses optional analysis dependencies; base installation remains lightweight.
 
-[中文说明](README.md) · [Release v0.9.5](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.9.5) · [Skill instructions](SKILL.md) · [Input preparation](BEGINNER.md)
+[中文说明](README.md) · [Release v0.10.0](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.10.0) · [Skill instructions](SKILL.md) · [Input preparation](BEGINNER.md)
 
 Current release: **regular release**. Python **3.10+**. Base runtime dependencies: none. Optional extras: `analysis`. See [USAGE.md](USAGE.md) for scope.
 
 ## First run
 
-Download the [complete source ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.9.5/portfolio-decision-engine-v0.9.5-source.zip), extract it and enter the directory containing `try_demo.py`:
+Download the [complete source ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.10.0/portfolio-decision-engine-v0.10.0-source.zip), extract it and enter the directory containing `try_demo.py`:
 
 ```console
 python try_demo.py --no-open --out-dir reports/first-demo
@@ -34,3 +34,5 @@ Read the [Chinese capability boundaries](README.md#能力与边界) and [detaile
 Original code uses MIT. Third-party code and documents/data retain their own licenses and rights. Default-branch documentation edits do not rewrite released archives or frozen results.
 
 [Changes](CHANGELOG.md) · [Third-party rights](THIRD_PARTY_NOTICES.md) · [Contribution](CONTRIBUTING.md) · [Security](SECURITY.md)
+
+Factor review: `portfolio-decision-engine factor exposure --input examples/factor-review/exposure.json --out-dir reports/factor-exposure`. Base factor, exposure, cost and cash checks use the standard library; multi-factor modeling and budget computation require the optional analysis extra. Research spreads are separate from account returns, and missing coverage stays unknown. See [input contracts and limits](FACTOR_REVIEW.md).

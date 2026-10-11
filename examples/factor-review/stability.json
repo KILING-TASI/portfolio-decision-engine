@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "factor-review/2",
+  "factorId": "teaching-value",
+  "factorVersion": "1",
+  "factorDefinition": "原创合成数值，用于验证计算边界，不是市场因子",
+  "factorSource": "原创教学输入，非真实市场或账户",
+  "asOf": "2026-02-01T10:00:00+08:00",
+  "teaching": true,
+  "parameters": {
+    "version": "teaching/1"
+  },
+  "records": [
+    {
+      "at": "2026-01-05T10:00:00+08:00",
+      "availableAt": "2026-01-05T11:00:00+08:00",
+      "group": "teaching-2026",
+      "IC": 0.1
+    },
+    {
+      "at": "2026-01-06T10:00:00+08:00",
+      "availableAt": "2026-01-06T11:00:00+08:00",
+      "group": "teaching-2026",
+      "IC": -0.2
+    },
+    {
+      "at": "2026-01-07T10:00:00+08:00",
+      "availableAt": "2026-01-07T11:00:00+08:00",
+      "group": "teaching-2026",
+      "IC": null
+    },
+    {
+      "at": "2026-01-08T10:00:00+08:00",
+      "availableAt": "2026-01-08T11:00:00+08:00",
+      "group": "teaching-2026",
+      "IC": -0.1
+    },
+    {
+      "at": "2026-01-09T10:00:00+08:00",
+      "availableAt": "2026-01-09T11:00:00+08:00",
+      "group": "teaching-2026",
+      "IC": 0
+    },
+    {
+      "at": "2026-01-10T10:00:00+08:00",
+      "availableAt": "2026-01-10T11:00:00+08:00",
+      "group": "teaching-2026",
+      "IC": 0.3
+    }
+  ],
+  "minimumObservations": 3
+}

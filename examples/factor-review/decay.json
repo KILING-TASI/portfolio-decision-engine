@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "factor-review/2",
+  "factorId": "teaching-value",
+  "factorVersion": "1",
+  "factorDefinition": "原创合成数值，用于验证计算边界，不是市场因子",
+  "factorSource": "原创教学输入，非真实市场或账户",
+  "asOf": "2026-02-01T10:00:00+08:00",
+  "teaching": true,
+  "parameters": {
+    "version": "teaching/1"
+  },
+  "horizonBasis": "calendar-days",
+  "horizons": [
+    1,
+    5,
+    20
+  ],
+  "panels": {
+    "1": {
+      "asOf": "2026-02-01T10:00:00+08:00",
+      "groups": 2,
+      "universeDefinition": "原创教学三只证券含当期成员，非市场样本",
+      "universeVersion": "teaching-1",
+      "rows": [
+        {
+          "security": "teaching:0",
+          "signalDate": "2026-01-05",
+          "signalAt": "2026-01-05T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-05T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-05T09:00:00+08:00",
+          "returnStartAt": "2026-01-05T15:00:00+08:00",
+          "returnEndAt": "2026-01-06T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-06T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 0,
+          "forwardReturn": 0.0
+        },
+        {
+          "security": "teaching:1",
+          "signalDate": "2026-01-05",
+          "signalAt": "2026-01-05T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-05T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-05T09:00:00+08:00",
+          "returnStartAt": "2026-01-05T15:00:00+08:00",
+          "returnEndAt": "2026-01-06T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-06T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 1,
+          "forwardReturn": 0.01
+        },
+        {
+          "security": "teaching:2",
+          "signalDate": "2026-01-05",
+          "signalAt": "2026-01-05T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-05T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-05T09:00:00+08:00",
+          "returnStartAt": "2026-01-05T15:00:00+08:00",
+          "returnEndAt": "2026-01-06T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-06T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 2,
+          "forwardReturn": 0.02
+        },
+        {
+          "security": "teaching:0",
+          "signalDate": "2026-01-06",
+          "signalAt": "2026-01-06T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-06T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-06T09:00:00+08:00",
+          "returnStartAt": "2026-01-06T15:00:00+08:00",
+          "returnEndAt": "2026-01-07T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-07T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 0,
+          "forwardReturn": 0.0
+        },
+        {
+          "security": "teaching:1",
+          "signalDate": "2026-01-06",
+          "signalAt": "2026-01-06T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-06T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-06T09:00:00+08:00",
+          "returnStartAt": "2026-01-06T15:00:00+08:00",
+          "returnEndAt": "2026-01-07T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-07T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 1,
+          "forwardReturn": 0.01
+        },
+        {
+          "security": "teaching:2",
+          "signalDate": "2026-01-06",
+          "signalAt": "2026-01-06T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-06T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-06T09:00:00+08:00",
+          "returnStartAt": "2026-01-06T15:00:00+08:00",
+          "returnEndAt": "2026-01-07T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-07T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 2,
+          "forwardReturn": 0.02
+        }
+      ],
+      "teaching": true,
+      "schemaVersion": "factor-review/2",
+      "factorId": "teaching-value",
+      "factorVersion": "1",
+      "factorDefinition": "原创合成数值，用于验证计算边界，不是市场因子",
+      "factorSource": "原创教学输入，非真实市场或账户",
+      "parameters": {
+        "version": "teaching/1"
+      },
+      "horizon": 1,
+      "horizonBasis": "calendar-days"
+    },
+    "5": {
+      "asOf": "2026-02-01T10:00:00+08:00",
+      "groups": 2,
+      "universeDefinition": "原创教学三只证券含当期成员，非市场样本",
+      "universeVersion": "teaching-1",
+      "rows": [
+        {
+          "security": "teaching:0",
+          "signalDate": "2026-01-05",
+          "signalAt": "2026-01-05T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-05T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-05T09:00:00+08:00",
+          "returnStartAt": "2026-01-05T15:00:00+08:00",
+          "returnEndAt": "2026-01-10T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-10T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 0,
+          "forwardReturn": 0.0
+        },
+        {
+          "security": "teaching:1",
+          "signalDate": "2026-01-05",
+          "signalAt": "2026-01-05T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-05T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-05T09:00:00+08:00",
+          "returnStartAt": "2026-01-05T15:00:00+08:00",
+          "returnEndAt": "2026-01-10T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-10T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 1,
+          "forwardReturn": 0.01
+        },
+        {
+          "security": "teaching:2",
+          "signalDate": "2026-01-05",
+          "signalAt": "2026-01-05T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-05T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-05T09:00:00+08:00",
+          "returnStartAt": "2026-01-05T15:00:00+08:00",
+          "returnEndAt": "2026-01-10T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-10T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 2,
+          "forwardReturn": 0.02
+        },
+        {
+          "security": "teaching:0",
+          "signalDate": "2026-01-06",
+          "signalAt": "2026-01-06T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-06T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-06T09:00:00+08:00",
+          "returnStartAt": "2026-01-06T15:00:00+08:00",
+          "returnEndAt": "2026-01-11T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-11T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 0,
+          "forwardReturn": 0.0
+        },
+        {
+          "security": "teaching:1",
+          "signalDate": "2026-01-06",
+          "signalAt": "2026-01-06T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-06T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-06T09:00:00+08:00",
+          "returnStartAt": "2026-01-06T15:00:00+08:00",
+          "returnEndAt": "2026-01-11T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-11T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 1,
+          "forwardReturn": 0.01
+        },
+        {
+          "security": "teaching:2",
+          "signalDate": "2026-01-06",
+          "signalAt": "2026-01-06T10:00:00+08:00",
+          "factorAvailableAt": "2026-01-06T09:00:00+08:00",
+          "universeAvailableAt": "2026-01-06T09:00:00+08:00",
+          "returnStartAt": "2026-01-06T15:00:00+08:00",
+          "returnEndAt": "2026-01-11T15:00:00+08:00",
+          "returnAvailableAt": "2026-01-11T16:00:00+08:00",
+          "membershipAtSignal": true,
+          "factor": 2,
+          "forwardReturn": 0.02
+        }
+      ],
+      "teaching": true,
+      "schemaVersion": "factor-review/2",
+      "factorId": "teaching-value",
+      "factorVersion": "1",
+      "factorDefinition": "原创合成数值，用于验证计算边界，不是市场因子",
+      "factorSource": "原创教学输入，非真实市场或账户",
+      "parameters": {
+        "version": "teaching/1"
+      },
+      "horizon": 5,
+      "horizonBasis": "calendar-days"
+    }
+  }
+}

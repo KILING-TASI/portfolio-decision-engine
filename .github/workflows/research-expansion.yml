@@ -18,3 +18,4 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python -m unittest discover -s tests -p test_factor_research.py
+      - run: python -m unittest discover -s tests -p test_factor_investability.py

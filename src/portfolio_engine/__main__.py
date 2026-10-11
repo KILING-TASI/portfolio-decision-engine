@@ -5,6 +5,9 @@ def main(argv=None):
     for stream in (sys.stdout,sys.stderr):
         if hasattr(stream,'reconfigure'):stream.reconfigure(encoding='utf-8')
     args=list(sys.argv[1:] if argv is None else argv)
+    if args and args[0]=='factor':
+        from .factor_cli import main as factor_main
+        return factor_main(args[1:])
     if args and args[0] in ('scheduled-cash','exit-cash'):
         from .cash_cli import main as cash_main
         return cash_main(args)
@@ -12,7 +15,8 @@ def main(argv=None):
         from ._entry import doctor
         return doctor(args[1:])
     if not args or args[0] in ('--help','-h'):
-        print('轻量入口：account-exposure、cash-demand、convert-lookthrough、verify、light-demo、doctor。')
+        print('轻量入口：account-exposure、cash-demand、convert-lookthrough、verify、light-demo、doctor、factor。')
+        print('因子：factor panel/trials/series/exposure/cost/cashfit/decay/stability；multi 与 budget compute=true 需 [analysis]。')
         print('输出用 --out-dir 新目录，可加 --auto-name 保留旧结果。子命令 --help 查看字段。')
         print('完整历史分析：demo、run、m2-evaluate 等，需安装 .[analysis]；不会自动安装。')
         return 0

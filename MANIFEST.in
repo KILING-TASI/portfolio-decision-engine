@@ -38,3 +38,5 @@ include USAGE.md
 
 include CASH_MIGRATION.md
 recursive-include tests/fixtures *.json
+
+include FACTOR_REVIEW.md

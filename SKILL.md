@@ -1,8 +1,8 @@
 ---
 name: portfolio-decision-engine
-description: 用户问组合风险集中、现金缺口、收益来源、定投方案或退出现金情景时使用。调用本仓组合计算并解释数据范围，不执行调仓。
+description: 用户问组合风险集中、现金缺口、收益来源、定投方案、退出现金情景或因子进入组合的条件时使用。调用本仓组合计算并解释数据范围，不执行调仓。
 metadata:
-  version: 0.9.5
+  version: 0.10.0
 license: MIT
 ---
 
@@ -35,7 +35,7 @@ license: MIT
 金额敞口 `account-exposure`、现金需求 `cash-demand`、披露转换 `convert-lookthrough`、完整性检查 `verify` 和 `light-demo` 只用本仓标准库。历史风险、收益回归、M1–M7和约束优化需要 `[analysis]`，缺组件时解释必要性并给安装方式，不自动安装，不把轻量教学当完整模块交付。使用 `portfolio-decision-engine doctor --json` 可检查环境，数据和来源不在其核验范围。
 
 
-本轮新增因子横截面与研究试验留档。独立入口、底稿与限制见 [EXPANSION.md](EXPANSION.md)。
+因子问题先读 [条件审查](FACTOR_REVIEW.md)，由已有资料组织输入，使用 `portfolio-decision-engine factor 动作`。`series` 的毛价差不能当账户净值；`exposure` 分开解释已知贡献、已知部分均值与未知权重；`cost/cashfit` 需真实成交及可用现金条件。`multi` 和 `budget` 的实际模型计算需 analysis；基础动作及预算底稿导出只需标准库。缺价格、融券、日历或到账资料时保留未知，不能宣布策略可执行。旧 panel/trials 入口与冻结输入继续兼容。
 
 ## 定投与退出现金流（本轮更新）
 
