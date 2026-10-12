@@ -31,9 +31,9 @@ def main():
             raise AssertionError(result.stderr+result.stdout)
         return result.stdout
     if args.cnn:
-        install=['-I','-m','pip','install','torch']
+        install=['-I','-m','pip','install','torch>=2.6,<3','--only-binary=:all:']
         if args.dependency_wheelhouse:install+=['--no-index','--find-links',str(args.dependency_wheelhouse.resolve())]
-        else:install+=['--index-url','https://download.pytorch.org/whl/cpu']
+        else:install+=['--index-url','https://download.pytorch.org/whl/cpu','--extra-index-url','https://pypi.org/simple']
         run(install,network_blocked=False)
     run(['-I','-m','pip','install','--no-deps','--no-index',str(wheel)],network_blocked=False)
     prefix="import socket;def_block=lambda *a,**k:(_ for _ in ()).throw(RuntimeError('network disabled'));socket.socket.connect=def_block;socket.socket.connect_ex=def_block;socket.socket.sendto=def_block;socket.create_connection=def_block;"
