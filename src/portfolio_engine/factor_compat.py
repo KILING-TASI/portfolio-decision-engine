@@ -8,7 +8,7 @@ def provider():
         if error.name!='cn_factor_research':raise
         return dict(provider='frozen-pde-v0.12',version='0.12.0',reason='独立因子仓未安装')
     version=getattr(package,'__version__',None)
-    if not isinstance(version,str) or not re.fullmatch(r'0\.1\.\d+',version):
+    if not isinstance(version,str) or not re.fullmatch(r'0\.(?:1|2)\.\d+',version):
         return dict(provider='frozen-pde-v0.12',version='0.12.0',reason='已安装因子仓版本尚未通过本兼容入口验证')
     return dict(provider='cn-factor-research',version=version,reason='使用已安装的独立发行包')
 

@@ -8,7 +8,7 @@ class CompatibilityTests(unittest.TestCase):
         with patch.dict(sys.modules,{'cn_factor_research':None}):self.assertEqual(provider()['provider'],'frozen-pde-v0.12')
 
     def test_unvalidated_version_falls_back(self):
-        package=types.ModuleType('cn_factor_research');package.__version__='0.2.0'
+        package=types.ModuleType('cn_factor_research');package.__version__='0.3.0'
         with patch.dict(sys.modules,{'cn_factor_research':package}):self.assertEqual(provider()['provider'],'frozen-pde-v0.12')
 
     def test_supported_version_delegates(self):
@@ -20,5 +20,9 @@ class CompatibilityTests(unittest.TestCase):
 
     def test_no_other_command_rerouted(self):
         with self.assertRaises(ValueError):dispatch('account-exposure',[])
+
+    def test_daily_factor_release_retains_cnn_provider(self):
+        package=types.ModuleType('cn_factor_research');package.__version__='0.2.0'
+        with patch.dict(sys.modules,{'cn_factor_research':package}):self.assertEqual(provider()['provider'],'cn-factor-research')
 
 if __name__=='__main__':unittest.main()
