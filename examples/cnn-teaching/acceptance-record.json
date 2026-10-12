@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "cnn-teaching-acceptance/1",
+  "date": "2026-10-12",
+  "packageVersion": "0.11.0",
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "torch": "2.14.1+cpu",
+  "sampleCount": 64,
+  "channels": 5,
+  "lookbackRecords": 8,
+  "epochs": 4,
+  "seed": 17,
+  "inputSha256": "a407d28a087fcb245a11b7e518f81e76a3461d476fe84b9c7869d7423f70d8d2",
+  "runtimeNetworkBlocked": true,
+  "singleRepositoryWheel": true,
+  "emptyUserAndWorkingDirectories": true,
+  "sourceData": "original synthetic teaching only",
+  "commands": [
+    {
+      "command": "cnn validate",
+      "elapsedSeconds": 0.135164,
+      "networkBlocked": true
+    },
+    {
+      "command": "cnn train",
+      "elapsedSeconds": 4.162084,
+      "networkBlocked": true
+    },
+    {
+      "command": "cnn walk-forward",
+      "elapsedSeconds": 2.265602,
+      "networkBlocked": true
+    },
+    {
+      "command": "cnn predict",
+      "elapsedSeconds": 2.284439,
+      "networkBlocked": true
+    },
+    {
+      "command": "cnn bridge",
+      "elapsedSeconds": 0.135842,
+      "networkBlocked": true
+    }
+  ],
+  "tests": {
+    "fullPassed": 301,
+    "subtestsPassed": 138,
+    "cnnUnitTests": 21,
+    "legacyColdActions": 7
+  },
+  "scope": "One run per command including interpreter/import and report I/O; excludes dependency installation. Not a speed guarantee, maximum-size stress test or A-share performance validation.",
+  "reproduce": "python tests/cnn_cold_acceptance.py --wheel dist/portfolio_decision_engine-0.11.0-py3-none-any.whl --out NEW_DIRECTORY --cnn"
+}

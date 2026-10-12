@@ -3,6 +3,34 @@ on: [push, pull_request]
 permissions:
   contents: read
 jobs:
+  cnn:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.10'
+          - os: windows-latest
+            python: '3.12'
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pip install -e . --no-deps
+      - run: python -m unittest discover -s tests -p test_cnn.py -v
+      - run: python -m pip install build
+      - run: python -m build --wheel
+      - run: python tests/cnn_cold_acceptance.py --wheel dist/*.whl --out "${{ runner.temp }}/cnn-cold" --cnn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cnn-acceptance-${{ matrix.os }}-${{ matrix.python }}
+          path: ${{ runner.temp }}/cnn-cold/acceptance.json
+          retention-days: 7
   standalone:
     runs-on: ubuntu-latest
     steps:

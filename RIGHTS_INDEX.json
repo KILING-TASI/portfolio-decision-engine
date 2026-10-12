@@ -94,6 +94,386 @@
     {
       "path": "licenses/dependencies/statsmodels/licenses/LICENSE.txt",
       "sha256": "1ca78e1dec9dcebc55f3b96a862317f23e76422c5fc943568d955aad1f6b5fad"
+    },
+    {
+      "path": "licenses/dependencies/torch/LICENSE",
+      "sha256": "bd018feef8825e88181c84eb7e3aa4eafb8f08a20d9fd6ef948569610c4a3e43"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/FP16/LICENSE",
+      "sha256": "17e4f539024be2749ee729d1e2f01d24cef12ece8c9bf18e91a4349be29c80bf"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/FXdiv/LICENSE",
+      "sha256": "7cac00006125b1486a27e4801ed66357236e984c540bd323945ab7b66b078ec3"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/NNPACK/LICENSE",
+      "sha256": "ab09e33621f513ebdd1ef685b324f39c1f6bee9221d15600bafd958322df1231"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/NVTX/LICENSE.txt",
+      "sha256": "abdfd8a6738b27cd1504e091f77b682dbae928339f040b8a6f59a548245991a0"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/NVTX/docs/LICENSE.txt",
+      "sha256": "abdfd8a6738b27cd1504e091f77b682dbae928339f040b8a6f59a548245991a0"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/NVTX/python/LICENSE.txt",
+      "sha256": "abdfd8a6738b27cd1504e091f77b682dbae928339f040b8a6f59a548245991a0"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/NVTX/rust/LICENSE",
+      "sha256": "e165ed77854f47fb208850d23d935a9f0ab8bb4527381466beeb16025e2f6e9e"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/NVTX/tools/docs/github-markdown-css/license",
+      "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/VulkanMemoryAllocator/LICENSE.txt",
+      "sha256": "8d70e4cf2a9941f6454da71cd60e38484dd3e34810c824760d550e982af6d97a"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/XNNPACK/LICENSE",
+      "sha256": "63f519e15726f4c4f830bd958f694c84fecb4e0a4cacc527d2696bb71ef95ada"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/aiter/3rdparty/composable_kernel/LICENSE",
+      "sha256": "20f3b83dfda01bd18d285e0edbb9d044be6dde04cdf76a1ec18d9fc7127936bf"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/aiter/3rdparty/composable_kernel/docs/license.rst",
+      "sha256": "527eec8a9670f793119a685a3510369e5fd64b45515a885c7226641777ecff8b"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/aiter/LICENSE",
+      "sha256": "0baca809927cad448401b252ce3bae12687c2987597ad7088cf3423f872d5bcd"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/benchmark/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/composable_kernel/LICENSE",
+      "sha256": "20f3b83dfda01bd18d285e0edbb9d044be6dde04cdf76a1ec18d9fc7127936bf"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/composable_kernel/docs/license.rst",
+      "sha256": "527eec8a9670f793119a685a3510369e5fd64b45515a885c7226641777ecff8b"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/cpp-httplib/LICENSE",
+      "sha256": "4b45cbe16d7b71b89ae6127e26e0d90a029198ca5e958ad8e3d0b8bbed364d8b"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/cpuinfo/LICENSE",
+      "sha256": "8e7e60636c3aa0cb03571a1a841ce5697f9551ff92b3c426c2561613d15ade70"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/cpuinfo/deps/clog/LICENSE",
+      "sha256": "68a14c3e79add023eecd83d611e73f05b8bf1d16852efeb7eb4033a96736da9e"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/cudnn_frontend/LICENSE.txt",
+      "sha256": "3fc4b473a2c08768a8066bf7e4a58a1185060f3ad674f2ca9e2011bca4adf2ce"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/cutlass/LICENSE.txt",
+      "sha256": "ad1513ca983da737a6843364ad19e8424a56d860736c2da773b8c5be527e1475"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/cutlass/python/LICENSE.txt",
+      "sha256": "00bf1806f664ac1afe4221f5f04b384fb6f1ca6eb33efcb6dccf599eb06d08b9"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/LICENSE",
+      "sha256": "12c2370ec32e78115dcd71ba22cdcb1297320fdc4ade81f798136d42357c58b8"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/external/composable_kernel/LICENSE",
+      "sha256": "20f3b83dfda01bd18d285e0edbb9d044be6dde04cdf76a1ec18d9fc7127936bf"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/external/composable_kernel/docs/license.rst",
+      "sha256": "527eec8a9670f793119a685a3510369e5fd64b45515a885c7226641777ecff8b"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/external/cpuinfo/LICENSE",
+      "sha256": "8e7e60636c3aa0cb03571a1a841ce5697f9551ff92b3c426c2561613d15ade70"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/external/cpuinfo/deps/clog/LICENSE",
+      "sha256": "68a14c3e79add023eecd83d611e73f05b8bf1d16852efeb7eb4033a96736da9e"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/external/cutlass/LICENSE.txt",
+      "sha256": "80a7a18b73d41f64dd9ca881af35938f8de88b18c728703251f4c94d1299884d"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/external/cutlass/python/LICENSE.txt",
+      "sha256": "42fec630f410aa308f70a51a89fadcd19586fa620f9831a32bee528a9a10000e"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/external/googletest/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/external/hipify_torch/LICENSE.txt",
+      "sha256": "ecf819d55b17c2f091b3ba0934d044368aa0680d8a81374860306aa2b91aa1eb"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/fbgemm_gpu/docs/src/general/License.rst",
+      "sha256": "28e8a7bea8e35cc341133847d66ca4b34e7156724e31e7fb62e37872d4259416"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/fbgemm_gpu/experimental/hstu/LICENSE",
+      "sha256": "8c9ccb96c065e706135b6cbad279b721da6156e51f3a5f27c6b3329af9416d73"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/fbgemm_gpu/src/quantize_ops/mx/LICENSE",
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fbgemm/fbgemm_gpu/test/quantize/mx/LICENSE",
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flash-attention/LICENSE",
+      "sha256": "8c9ccb96c065e706135b6cbad279b721da6156e51f3a5f27c6b3329af9416d73"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flash-attention/csrc/composable_kernel/LICENSE",
+      "sha256": "20f3b83dfda01bd18d285e0edbb9d044be6dde04cdf76a1ec18d9fc7127936bf"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flash-attention/csrc/composable_kernel/docs/license.rst",
+      "sha256": "527eec8a9670f793119a685a3510369e5fd64b45515a885c7226641777ecff8b"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flash-attention/csrc/cutlass/LICENSE.txt",
+      "sha256": "80a7a18b73d41f64dd9ca881af35938f8de88b18c728703251f4c94d1299884d"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flash-attention/csrc/cutlass/python/LICENSE.txt",
+      "sha256": "42fec630f410aa308f70a51a89fadcd19586fa620f9831a32bee528a9a10000e"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flash-attention/flash_attn/cute/LICENSE",
+      "sha256": "8c9ccb96c065e706135b6cbad279b721da6156e51f3a5f27c6b3329af9416d73"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flash-attention/third_party/aiter/3rdparty/composable_kernel/LICENSE",
+      "sha256": "20f3b83dfda01bd18d285e0edbb9d044be6dde04cdf76a1ec18d9fc7127936bf"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flash-attention/third_party/aiter/3rdparty/composable_kernel/docs/license.rst",
+      "sha256": "527eec8a9670f793119a685a3510369e5fd64b45515a885c7226641777ecff8b"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flash-attention/third_party/aiter/LICENSE",
+      "sha256": "0baca809927cad448401b252ce3bae12687c2987597ad7088cf3423f872d5bcd"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flatbuffers/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flatbuffers/dart/LICENSE",
+      "sha256": "edd9b3459bee4c79b549a5ef66d06d12bd144ddb8d08e0b448fb421267f43dd5"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/flatbuffers/swift/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/fmt/LICENSE",
+      "sha256": "a65fcc5a1095fc33cc37e4fff69366e49d7e92f613558a2b95ed1b70e33758b4"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/gemmlowp/gemmlowp/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/gloo/LICENSE",
+      "sha256": "2afbc572cf7f60888159bc2ca48ba58f8adec06682ae5de820d61449d1eeea81"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/googletest/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/ideep/LICENSE",
+      "sha256": "a26add03107a53a605a89711b9b7dbd4f5dd668ae193a912e01a879366a23b0e"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/ideep/mkl-dnn/LICENSE",
+      "sha256": "e9fc874fc09801b9acf3411ba72394098473704d832d713404b6c4861a086318"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/ideep/mkl-dnn/third_party/gtest/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/ideep/mkl-dnn/third_party/opencl/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/kineto/LICENSE",
+      "sha256": "6f3d59b9103e72e5c977eecf61b261c2e1546a9be2995847e3ee2d31021fd39b"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/kineto/libkineto/third_party/dynolog_headers/LICENSE",
+      "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/kineto/libkineto/third_party/fmt/LICENSE",
+      "sha256": "07580f2a3b35709ce703d523f447b242f6dfec7582a8c0df102c7fa2849375f8"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/kineto/libkineto/third_party/googletest/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/llvm-openmp/LICENSE.txt",
+      "sha256": "68395143f21a9aa29b8232168c71892af5ec4f1ae2529571cd250a71c9e37a03"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/mimalloc/LICENSE",
+      "sha256": "82ade5d7d9b029044b5fbbc326207fc47c2d44ee4dd71e8a559c36d728217de9"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/miniz-3.0.2/LICENSE",
+      "sha256": "6f20fa7672b00e2e975c291df737cf227addf3ad32e36fef3fe0f416e4664d3d"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/mslk/LICENSE",
+      "sha256": "44519cbe722d7bf092cd7e0fa26558b9e3905b88fca4c0c278e2733a9f6b4cf9"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/mslk/external/composable_kernel/LICENSE",
+      "sha256": "20f3b83dfda01bd18d285e0edbb9d044be6dde04cdf76a1ec18d9fc7127936bf"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/mslk/external/composable_kernel/docs/license.rst",
+      "sha256": "527eec8a9670f793119a685a3510369e5fd64b45515a885c7226641777ecff8b"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/mslk/external/cutlass/LICENSE.txt",
+      "sha256": "80a7a18b73d41f64dd9ca881af35938f8de88b18c728703251f4c94d1299884d"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/mslk/external/cutlass/python/LICENSE.txt",
+      "sha256": "42fec630f410aa308f70a51a89fadcd19586fa620f9831a32bee528a9a10000e"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/mslk/external/googletest/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/mslk/external/hipify_torch/LICENSE.txt",
+      "sha256": "ecf819d55b17c2f091b3ba0934d044368aa0680d8a81374860306aa2b91aa1eb"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/mslk/mslk/attention/flash_attn/LICENSE",
+      "sha256": "8c9ccb96c065e706135b6cbad279b721da6156e51f3a5f27c6b3329af9416d73"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/onnx/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/onnx/third_party/pybind11/LICENSE",
+      "sha256": "83965b843b98f670d3a85bd041ed4b372c8ec50d7b4a5995a83ac697ba675dcb"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/perfetto/LICENSE",
+      "sha256": "9a682a56cffc9524dfa9b0b1c0dca9cb81a19e96d5bd0793aaf02c08a95ee7ca"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/protobuf/LICENSE",
+      "sha256": "6e5e117324afd944dcf67f36cf329843bc1a92229a8cd9bb573d7a83130fea7d"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/protobuf/third_party/benchmark/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/protobuf/third_party/googletest/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/protobuf/third_party/googletest/googlemock/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/protobuf/third_party/googletest/googlemock/scripts/generator/LICENSE",
+      "sha256": "5e0df8c845c742e76f2f64d2d9ce1b7e74a2422fddbc577ae6a56319083de0bf"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/protobuf/third_party/googletest/googletest/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/protobuf/third_party/utf8_range/LICENSE",
+      "sha256": "5a629d2b868081d8af08bbce5d038116f3a0e2e0d4ce9adf4d53f14e76b6b2e0"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/psimd/LICENSE",
+      "sha256": "984ce1e0b8ee89d234e28b960381f240e03a07a8031f35012f9c3256f56964e2"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/pthreadpool/LICENSE",
+      "sha256": "57814a606b4d0fb087d9a534919084b6c11b58a4174cb5a4aef200187780dc3a"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/pybind11/LICENSE",
+      "sha256": "83965b843b98f670d3a85bd041ed4b372c8ec50d7b4a5995a83ac697ba675dcb"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/python-peachpy/LICENSE.rst",
+      "sha256": "e6d6fdbfc09c9cc1bfc55946ca9690dd9276deeaed2b72ac7fc5c79bde80ff32"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/sleef/LICENSE.txt",
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/tensorpipe/LICENSE.txt",
+      "sha256": "f4dcef0d1f0520b414d5bfaeed8df02f188e4ec05c0a17bf1c18f25f6cc66245"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/tensorpipe/third_party/googletest/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/tensorpipe/third_party/googletest/googlemock/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/tensorpipe/third_party/googletest/googlemock/scripts/generator/LICENSE",
+      "sha256": "5e0df8c845c742e76f2f64d2d9ce1b7e74a2422fddbc577ae6a56319083de0bf"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/tensorpipe/third_party/googletest/googletest/LICENSE",
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/tensorpipe/third_party/libnop/LICENSE",
+      "sha256": "876e8f7432440974ee5543a2aa1344370ef1f2f7949ad98a1f3899cf722d5631"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/tensorpipe/third_party/libuv/LICENSE",
+      "sha256": "16de0c32b265cb7d46a6d3bd614f259dd4d693a5e26b3407b04aae8d73041f0c"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/tensorpipe/third_party/pybind11/LICENSE",
+      "sha256": "9a37ea54aa3cf12c7f3292799f20822ffd4b9b7142b36a7a9997b28c39264dc9"
+    },
+    {
+      "path": "licenses/dependencies/torch/third_party/tensorpipe/third_party/pybind11/tools/clang/LICENSE.TXT",
+      "sha256": "23c817ddf55e9a8ea332a376e6c23469c31a6c833516385cf0662767ba863276"
     }
   ],
   "dataRights": "Source-specific; not granted by code MIT",

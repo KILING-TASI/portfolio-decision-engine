@@ -2,9 +2,9 @@
 
 比较配置、回撤、费用和现金需求，生成可核对的报告与账本。
 
-[原创代码 MIT](LICENSE) · [发行说明](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.10.0) · [运行检查](https://github.com/KILING-TASI/portfolio-decision-engine/actions) · [English](README.en.md)
+[原创代码 MIT](LICENSE) · [发行说明](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.11.0) · [运行检查](https://github.com/KILING-TASI/portfolio-decision-engine/actions) · [English](README.en.md)
 
-当前发布：**v0.10.0 · 普通发行版**。Python **3.10+**；基础功能只需 Python，无第三方运行依赖。
+当前发布：**v0.11.0 · 普通发行版**。Python **3.10+**；基础功能只需 Python，无第三方运行依赖。
 
 [快速开始](#快速开始) · [使用自己的资料](#使用自己的资料) · [能力与边界](#能力与边界) · [文档与维护](#文档与维护)
 
@@ -21,7 +21,7 @@
 ## 快速开始
 
 1. 安装 Python 3.10 或以上版本。
-2. 下载[完整源码 ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.10.0/portfolio-decision-engine-v0.10.0-source.zip)并解压，进入包含 `try_demo.py` 的目录。
+2. 下载[完整源码 ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.11.0/portfolio-decision-engine-v0.11.0-source.zip)并解压，进入包含 `try_demo.py` 的目录。
 3. 在该目录打开终端，运行：
 
 ```console
@@ -49,7 +49,7 @@ python -m pip install .
 portfolio-decision-engine --help
 ```
 
-可选组件按需要安装：`analysis`。例如 `python -m pip install ".[analysis]"`；依赖范围见 [使用说明](USAGE.md)。安装时下载构建工具或可选依赖可能需要联网。
+可选组件按需要安装：`analysis`（历史分析）、`cnn`（CNN训练和预测）。例如 `python -m pip install ".[analysis]"`；依赖范围见 [使用说明](USAGE.md)。安装时下载构建工具或可选依赖可能需要联网。
 
 **助手 Skill**：按 [SKILL.md](SKILL.md) 配置，保留完整目录及其引用资源。安装 CLI 不会自动注册 Skill，也不表示已在第三方技能市场上架。
 
@@ -62,6 +62,8 @@ portfolio-decision-engine --help
 本仓可单独使用。需要跨工具功能时，再按说明安装并明确配置对应工具的位置。
 
 因子进入组合前，可用 `portfolio-decision-engine factor exposure --input examples/factor-review/exposure.json --out-dir reports/factor-exposure` 试用。基础因子、暴露、成本及现金核对只需标准库；完整字段与多因子依赖见 [因子条件审查](FACTOR_REVIEW.md)。
+
+CNN 因子研究使用独立可选组件，详见 [CNN安装、数据口径与滚动验证](CNN_RESEARCH.md)。先用 `cnn validate` 核对底稿，再训练；得分不是上涨概率，回顾性模拟不能冒充历史实盘。
 
 ## 能力与边界
 
@@ -79,6 +81,7 @@ portfolio-decision-engine --help
 - [审计范围](AUDIT_SCOPE.md)
 - [扩展专题](EXPANSION.md)
 - [因子条件审查与教学](FACTOR_REVIEW.md)
+- [CNN因子研究](CNN_RESEARCH.md)
 
 [贡献说明](CONTRIBUTING.md) · [安全反馈](SECURITY.md) · [更新与清理](LIFECYCLE.md)
 

@@ -62,3 +62,7 @@ research-workbench 与 cn-fund-lookthrough 的原始 MIT 文本分别保存于 l
 src/portfolio_engine/nav_collection固定随包携带同作者cn-data-adapters/cn-research-contracts v0.1.0的MIT实现；不包含第三方原始数据，源码一致性在扩展验收记录中核对。
 
 本轮新增研究复查、报告说明及合成教学为作者原创MIT；同作者随包通用I/O代码独立保留，不要求其他仓库安装。规则有限事实和来源链接不改变原文权利；未捆绑实际公告/研报PDF或私人账户资料。
+
+## 可选CNN依赖
+
+CNN模块与合成示例为本仓原创MIT实现，未复制论文代码或图像数据。PyTorch单独安装，未嵌入本仓wheel；本次CPU验证版本为2.14.1+cpu。该发行物原始许可文本保留于 `licenses/dependencies/torch/`，包括其附带组件说明，不能按本仓MIT重新授权。传递依赖由包管理器安装并保留各自许可；此记录不认证所有平台或未来组合。模型权重来自用户输入数据，训练、分发与商用仍须核对数据和模型的权利范围。
