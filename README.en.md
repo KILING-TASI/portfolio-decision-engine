@@ -43,4 +43,4 @@ Install `.[cnn]` for the original CPU OHLCV Conv1d regression module. Validation
 
 Explicit candle rules and gross-outcome studies use `pattern identify/study` without optional dependencies. `cnn compare` compares OHLCV, train-calibrated rules and causal geometry augmentation on the same frozen test samples. See [pattern contracts](PATTERN_RESEARCH.md).
 
-Factor generation and CNN research now have an independent home: [cn-factor-research](https://github.com/KILING-TASI/cn-factor-research). Existing CNN/pattern entries delegate to installed v0.1.x/v0.2.x or retain the frozen v0.12 fallback. No mandatory sibling dependency or automatic install.
+Factor generation and CNN research now have an independent home: [cn-factor-research](https://github.com/KILING-TASI/factor-research). Existing CNN/pattern entries delegate to installed v0.1.x/v0.2.x or retain the frozen v0.12 fallback. No mandatory sibling dependency or automatic install.

@@ -1,6 +1,6 @@
 # CNN 因子研究
 
-本页记录PDE冻结v0.12研究实现。后续因子增量以独立 [cn-factor-research](https://github.com/KILING-TASI/cn-factor-research) 为维护入口，旧命令兼容见 [迁移说明](FACTOR_MIGRATION.md)。
+本页记录PDE冻结v0.12研究实现。后续因子增量以独立 [cn-factor-research](https://github.com/KILING-TASI/factor-research) 为维护入口，旧命令兼容见 [迁移说明](FACTOR_MIGRATION.md)。
 CNN 把过去一段价格与成交量记录变成一个得分，再交给 PDE 检查。这里实现的是原创的一维 OHLCV 回归网络：两层卷积、平均池化、一个回归输出。它没有复制论文的二维K线图片模型，也没有认证真实A股预测效果。
 
 得分是声明期限内简单总收益的回归估计，可以为负，也可能低于 -100%；这说明模型估计有误，不应把输出强行裁成概率。模型本身不决定买入，不计算账户收益。

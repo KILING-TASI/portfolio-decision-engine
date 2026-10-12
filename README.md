@@ -63,7 +63,7 @@ portfolio-decision-engine --help
 
 因子进入组合前，可用 `portfolio-decision-engine factor exposure --input examples/factor-review/exposure.json --out-dir reports/factor-exposure` 试用。基础因子、暴露、成本及现金核对只需标准库；完整字段与多因子依赖见 [因子条件审查](FACTOR_REVIEW.md)。
 
-CNN、K线规则和因子研究已独立到 [cn-factor-research](https://github.com/KILING-TASI/cn-factor-research)。本仓负责组合敞口、成本、现金与约束；旧 `cnn/pattern` 入口保留。安装独立仓v0.1.x/v0.2.x时会委托其CLI，未安装时使用冻结v0.12兼容实现，不自动安装或读取兄弟仓。详见 [迁移兼容说明](FACTOR_MIGRATION.md)。
+CNN、K线规则和因子研究已独立到 [cn-factor-research](https://github.com/KILING-TASI/factor-research)。本仓负责组合敞口、成本、现金与约束；旧 `cnn/pattern` 入口保留。安装独立仓v0.1.x/v0.2.x时会委托其CLI，未安装时使用冻结v0.12兼容实现，不自动安装或读取兄弟仓。详见 [迁移兼容说明](FACTOR_MIGRATION.md)。
 
 ## 能力与边界
 
