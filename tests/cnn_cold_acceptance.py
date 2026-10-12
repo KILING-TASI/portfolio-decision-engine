@@ -44,6 +44,7 @@ def main():
     resources=Path(code("from portfolio_engine._entry import resources;print(resources())").strip())
     source=resources/'examples/cnn-teaching/train.json'
     assert source.is_file() and (resources/'CNN_RESEARCH.md').is_file()
+    code("import json,importlib.metadata;from portfolio_engine._entry import resources;d=importlib.metadata.distribution('portfolio-decision-engine');files={str(f).replace(chr(92),'/') for f in d.files};notices=json.loads((resources()/'licenses/dependency-license-snapshot.json').read_text(encoding='utf-8'));assert all('portfolio_decision_engine-'+d.version+'.dist-info/licenses/'+p in files for n in notices if n['distribution']=='torch' for p in n['original_license_files'])")
     code("import importlib.util;assert importlib.util.find_spec('pandas') is None;assert importlib.util.find_spec('scipy') is None;assert importlib.util.find_spec('sklearn') is None;assert importlib.util.find_spec('statsmodels') is None")
     command('validate',source,out/'validate')
     command('validate',source,out/'validate',2)
