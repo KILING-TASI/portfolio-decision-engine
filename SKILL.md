@@ -2,7 +2,7 @@
 name: portfolio-decision-engine
 description: 用户问组合风险集中、现金缺口、收益来源、定投方案、退出现金情景或因子进入组合的条件时使用。调用本仓组合计算并解释数据范围，不执行调仓。
 metadata:
-  version: 0.12.0
+  version: 0.13.0
 license: MIT
 ---
 
@@ -52,3 +52,7 @@ license: MIT
 ## 可解释K线形态
 
 用户问锤头、吞没、晨星等时，先读 [形态规则与统计](PATTERN_RESEARCH.md)。`pattern identify/study`仅需标准库；分别解释外形、前置趋势、已知收益及成交条件。正收益比例和方向符合比例不是交易胜率，缺口不能填零。`cnn compare`需可选CNN组件，使用预声明计划和同一测试样本；不据测试表现自动推荐赢家，不把几何增强说成模型已认识命名形态。
+
+## 独立因子仓与兼容
+
+因子生成、CNN和形态研究以 [cn-factor-research](https://github.com/KILING-TASI/cn-factor-research) 为维护入口。先读 [迁移兼容](FACTOR_MIGRATION.md)；本仓保留旧cnn/pattern入口，缺独立包时使用冻结v0.12实现，不自动安装。账户敞口、成本、现金及约束仍由本仓执行，不因拆仓删去。

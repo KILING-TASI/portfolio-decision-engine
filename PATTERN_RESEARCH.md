@@ -1,5 +1,6 @@
 # K线形态、条件统计与CNN对照
 
+本页记录PDE冻结v0.12研究实现。后续因子增量以独立 [cn-factor-research](https://github.com/KILING-TASI/cn-factor-research) 为维护入口，旧命令兼容见 [迁移说明](FACTOR_MIGRATION.md)。
 本仓新增11种可解释规则：十字线、锤头、上吊线、倒锤头、流星线、看涨/看跌吞没、晨星/暮星、三白兵/三只乌鸦。规则为原创 `original-candle-rules/1`，不是对第三方网站或TA-Lib算法的复刻。
 
 ## 单仓试用

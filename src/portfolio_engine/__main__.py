@@ -5,12 +5,9 @@ def main(argv=None):
     for stream in (sys.stdout,sys.stderr):
         if hasattr(stream,'reconfigure'):stream.reconfigure(encoding='utf-8')
     args=list(sys.argv[1:] if argv is None else argv)
-    if args and args[0]=='pattern':
-        from .candle_patterns import main as pattern_main
-        return pattern_main(args[1:])
-    if args and args[0]=='cnn':
-        from .cnn_cli import main as cnn_main
-        return cnn_main(args[1:])
+    if args and args[0] in ('pattern','cnn'):
+        from .factor_compat import dispatch
+        return dispatch(args[0],args[1:])
     if args and args[0]=='factor':
         from .factor_cli import main as factor_main
         return factor_main(args[1:])

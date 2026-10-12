@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "frozen-factor-compat/1",
+  "sourceVersion": "0.12.0",
+  "sourceCommit": "cd6a71a3015d060823ef58819040ada6ce5a5292",
+  "maintenanceHome": "https://github.com/KILING-TASI/cn-factor-research",
+  "files": [
+    {
+      "path": "src/portfolio_engine/cnn_contract.py",
+      "normalizedSha256": "897a37ab179b6ed05902e90bcf2cb997f9c41bdea50da6d639b76bc4bfcd0364"
+    },
+    {
+      "path": "src/portfolio_engine/cnn_engine.py",
+      "normalizedSha256": "50cb9d1205b5c778d3cf5d701ac03df3c308e55f3a544af80e4160b4b190175f"
+    },
+    {
+      "path": "src/portfolio_engine/cnn_cli.py",
+      "normalizedSha256": "765520fead72f7addf65071cf33cd5403c370fdbad502e8efb7ca7e43164fe12"
+    },
+    {
+      "path": "src/portfolio_engine/candle_patterns.py",
+      "normalizedSha256": "af04856a17f47b5344da50bc1a480ce2c5067f0015e80403ff73e2e45c3a43d2"
+    },
+    {
+      "path": "src/portfolio_engine/candle_comparison.py",
+      "normalizedSha256": "53a6a3e7127b89a4482be252e3ee6ccb671cefa3473d6d3f2f4ee1c7340ef2b0"
+    }
+  ],
+  "scope": "Mathematical research implementations frozen; CLI delegation and shared safety I/O maintained separately"
+}

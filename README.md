@@ -2,9 +2,9 @@
 
 比较配置、回撤、费用和现金需求，生成可核对的报告与账本。
 
-[原创代码 MIT](LICENSE) · [发行说明](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.12.0) · [运行检查](https://github.com/KILING-TASI/portfolio-decision-engine/actions) · [English](README.en.md)
+[原创代码 MIT](LICENSE) · [发行说明](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.13.0) · [运行检查](https://github.com/KILING-TASI/portfolio-decision-engine/actions) · [English](README.en.md)
 
-当前发布：**v0.12.0 · 普通发行版**。Python **3.10+**；基础功能只需 Python，无第三方运行依赖。
+当前发布：**v0.13.0 · 普通发行版**。Python **3.10+**；基础功能只需 Python，无第三方运行依赖。
 
 [快速开始](#快速开始) · [使用自己的资料](#使用自己的资料) · [能力与边界](#能力与边界) · [文档与维护](#文档与维护)
 
@@ -21,7 +21,7 @@
 ## 快速开始
 
 1. 安装 Python 3.10 或以上版本。
-2. 下载[完整源码 ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.12.0/portfolio-decision-engine-v0.12.0-source.zip)并解压，进入包含 `try_demo.py` 的目录。
+2. 下载[完整源码 ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.13.0/portfolio-decision-engine-v0.13.0-source.zip)并解压，进入包含 `try_demo.py` 的目录。
 3. 在该目录打开终端，运行：
 
 ```console
@@ -63,9 +63,7 @@ portfolio-decision-engine --help
 
 因子进入组合前，可用 `portfolio-decision-engine factor exposure --input examples/factor-review/exposure.json --out-dir reports/factor-exposure` 试用。基础因子、暴露、成本及现金核对只需标准库；完整字段与多因子依赖见 [因子条件审查](FACTOR_REVIEW.md)。
 
-CNN 因子研究使用独立可选组件，详见 [CNN安装、数据口径与滚动验证](CNN_RESEARCH.md)。先用 `cnn validate` 核对底稿，再训练；得分不是上涨概率，回顾性模拟不能冒充历史实盘。
-
-K线形态可用 `pattern identify/study` 做规则识别和条件统计；`cnn compare` 对照OHLCV、规则与几何增强。入口、阈值和CN成交边界见 [形态研究](PATTERN_RESEARCH.md)。
+CNN、K线规则和因子研究已独立到 [cn-factor-research](https://github.com/KILING-TASI/cn-factor-research)。本仓负责组合敞口、成本、现金与约束；旧 `cnn/pattern` 入口保留。安装独立仓v0.1.x时会委托其CLI，未安装时使用冻结v0.12兼容实现，不自动安装或读取兄弟仓。详见 [迁移兼容说明](FACTOR_MIGRATION.md)。
 
 ## 能力与边界
 

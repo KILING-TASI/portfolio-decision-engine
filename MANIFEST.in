@@ -44,3 +44,5 @@ include FACTOR_REVIEW.md
 include CNN_RESEARCH.md
 
 include PATTERN_RESEARCH.md
+
+include FACTOR_MIGRATION.md FACTOR_FROZEN_V012.json

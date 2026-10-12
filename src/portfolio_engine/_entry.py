@@ -94,6 +94,7 @@ def main(argv=None):
         print('因子审查：' + REPO + ' factor --help；基础动作只需标准库。')
         print('CNN研究：' + REPO + ' cnn --help；训练、预测需 [cnn]，输入校验只需标准库。')
         print('K线形态：' + REPO + ' pattern --help；识别/统计只需标准库，cnn compare 用可选组件对照。')
+        print('因子研究以独立 cn-factor-research 为维护入口；本仓保留冻结兼容实现，不自动安装。')
         if MODE == 'script':
             print('其他专题：' + REPO + ' script --help 查看已安装的脚本入口。')
         print('--auto-name 另选新输出名，保留旧文件；不会安装依赖或联网取数。')
