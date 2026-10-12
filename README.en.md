@@ -1,10 +1,10 @@
-# Portfolio scenario and factor research
+# Portfolio scenario research
 
 Review portfolio scenarios, cash needs, point-in-time factor panels and experiment histories. Full historical analysis uses optional analysis dependencies; base installation remains lightweight.
 
 [中文说明](README.md) · [Release v0.13.1](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.13.1) · [Skill instructions](SKILL.md) · [Input preparation](BEGINNER.md)
 
-Current release: **regular release**. Python **3.10+**. Base runtime dependencies: none. Optional extras: `analysis`. See [USAGE.md](USAGE.md) for scope.
+Current release: **v0.13.1 · regular release**. Python **3.10+**. Base runtime dependencies: none. Optional extras: `analysis`, `cnn`. See [USAGE.md](USAGE.md) for scope.
 
 ## First run
 
@@ -43,4 +43,4 @@ Install `.[cnn]` for the original CPU OHLCV Conv1d regression module. Validation
 
 Explicit candle rules and gross-outcome studies use `pattern identify/study` without optional dependencies. `cnn compare` compares OHLCV, train-calibrated rules and causal geometry augmentation on the same frozen test samples. See [pattern contracts](PATTERN_RESEARCH.md).
 
-Factor generation and CNN research now have an independent home: [cn-factor-research](https://github.com/KILING-TASI/factor-research). Existing CNN/pattern entries delegate to installed v0.1.x/v0.2.x or retain the frozen v0.12 fallback. No mandatory sibling dependency or automatic install.
+Factor generation and CNN research now have an independent home: [factor-research](https://github.com/KILING-TASI/factor-research). Existing CNN/pattern entries delegate to installed v0.1.x/v0.2.x or retain the frozen v0.12 fallback. No mandatory sibling dependency or automatic install.

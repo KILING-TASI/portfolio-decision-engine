@@ -55,4 +55,4 @@ license: MIT
 
 ## 独立因子仓与兼容
 
-因子生成、CNN和形态研究以 [cn-factor-research](https://github.com/KILING-TASI/factor-research) 为维护入口。先读 [迁移兼容](FACTOR_MIGRATION.md)；本仓保留旧cnn/pattern入口，缺独立包时使用冻结v0.12实现，不自动安装。账户敞口、成本、现金及约束仍由本仓执行，不因拆仓删去。
+因子生成、CNN和形态研究以 [factor-research](https://github.com/KILING-TASI/factor-research) 为维护入口。先读 [迁移兼容](FACTOR_MIGRATION.md)；本仓保留旧cnn/pattern入口，缺独立包时使用冻结v0.12实现，不自动安装。账户敞口、成本、现金及约束仍由本仓执行，不因拆仓删去。

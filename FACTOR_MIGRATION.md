@@ -1,6 +1,6 @@
 # 独立因子仓与PDE兼容
 
-因子生成、CNN、K线规则、面板与试验留档的维护入口为 [cn-factor-research](https://github.com/KILING-TASI/factor-research)。数据采集留在数据仓，账户敞口、成本、现金占用与组合约束留在PDE。
+因子生成、CNN、K线规则、面板与试验留档的维护入口为 [factor-research](https://github.com/KILING-TASI/factor-research)。数据采集留在数据仓，账户敞口、成本、现金占用与组合约束留在PDE。
 
 PDE既有 `cnn/pattern` 命令继续可用：
 
