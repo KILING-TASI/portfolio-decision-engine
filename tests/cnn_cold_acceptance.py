@@ -47,12 +47,17 @@ def main():
     code("import json,importlib.metadata;from portfolio_engine._entry import resources;d=importlib.metadata.distribution('portfolio-decision-engine');files={str(f).replace(chr(92),'/') for f in d.files};notices=json.loads((resources()/'licenses/dependency-license-snapshot.json').read_text(encoding='utf-8'));assert all('portfolio_decision_engine-'+d.version+'.dist-info/licenses/'+p in files for n in notices if n['distribution']=='torch' for p in n['original_license_files'])")
     code("import importlib.util;assert importlib.util.find_spec('pandas') is None;assert importlib.util.find_spec('scipy') is None;assert importlib.util.find_spec('sklearn') is None;assert importlib.util.find_spec('statsmodels') is None")
     command('validate',source,out/'validate')
+    pattern_source=resources/'examples/cnn-teaching/patterns.json'
+    for action in ('identify','study'):
+        run(['-I','-c',prefix+'from portfolio_engine._entry import main;raise SystemExit(main())','pattern',action,'--input',str(pattern_source),'--out-dir',str(out/('pattern-'+action))])
     command('validate',source,out/'validate',2)
     if not args.cnn:
         command('train',source,out/'missing',2)
+        command('compare',pattern_source,out/'missing-comparison',2)
         assert not (out/'missing').exists()
     else:
         command('train',source,out/'train');command('walk-forward',source,out/'rolling')
+        command('compare',pattern_source,out/'comparison')
         trained=json.loads((out/'train/result.json').read_text(encoding='utf-8'))
         receipt=code(f"from portfolio_engine.review_io import read,digest;print(digest(read({str(out/'train/receipt.json')!r})))").strip()
         spec=json.loads(source.read_text(encoding='utf-8'));spec['mode']='prediction';spec['samples']=spec['samples'][-4:]

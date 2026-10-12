@@ -36,17 +36,25 @@ def deterministic(torch, seed):
         torch.use_deterministic_algorithms(enabled, warn_only=warn)
 
 
-def network(torch):
+def network(torch, channels=5):
     nn = torch.nn
-    return nn.Sequential(nn.Conv1d(5, 8, 3, padding=1), nn.ReLU(),
+    return nn.Sequential(nn.Conv1d(channels, 8, 3, padding=1), nn.ReLU(),
                          nn.Conv1d(8, 8, 3, padding=1), nn.ReLU(),
                          nn.AdaptiveAvgPool1d(1), nn.Flatten(), nn.Linear(8, 1))
 
 
-def scaling(rows):
-    data = [contract.features(r) for r in rows]
+def feature_values(row,mode='ohlcv'):
+    values=contract.features(row)
+    if mode=='ohlcv':return values
+    if mode!='ohlcv-geometry':raise ValueError('不支持此特征模式')
+    from .candle_patterns import feature_channels
+    return values+feature_channels(row)
+
+
+def scaling(rows,mode='ohlcv'):
+    data = [feature_values(r,mode) for r in rows]
     means, scales = [], []
-    for channel in range(5):
+    for channel in range(len(data[0])):
         values = [v for sample in data for v in sample[channel]]
         means.append(statistics.mean(values))
         scales.append(statistics.pstdev(values) or 1.0)
@@ -54,12 +62,14 @@ def scaling(rows):
     yscale = statistics.pstdev(ys)
     if yscale <= 1e-12:
         raise ValueError('训练标签无有效变化，不能训练CNN')
-    return dict(means=means, scales=scales, targetMean=statistics.mean(ys), targetScale=yscale)
+    result=dict(means=means, scales=scales, targetMean=statistics.mean(ys), targetScale=yscale)
+    if mode!='ohlcv':result['featureMode']=mode
+    return result
 
 
 def tensor(torch, rows, scaler):
     values = [[[ (v - scaler['means'][c]) / scaler['scales'][c] for v in channel]
-               for c, channel in enumerate(contract.features(r))] for r in rows]
+               for c, channel in enumerate(feature_values(r,scaler.get('featureMode','ohlcv')))] for r in rows]
     x = torch.tensor(values, dtype=torch.float32)
     if not torch.isfinite(x).all():
         raise ValueError('标准化后超出浮点计算范围')
@@ -88,13 +98,13 @@ def metrics(rows, values):
                 daily=per_day, meanRankIC=statistics.mean(valid) if valid else None)
 
 
-def fit(spec, rows, fold):
+def fit(spec, rows, fold,feature_mode='ohlcv'):
     torch = runtime()
     groups, purged = contract.splits(spec, rows, fold)
     p = contract.parameters(spec)
-    scaler = scaling(groups['train'])
+    scaler = scaling(groups['train'],feature_mode)
     with deterministic(torch, p['seed']):
-        model = network(torch)
+        model = network(torch,len(scaler['means']))
         optimizer = torch.optim.Adam(model.parameters(), lr=p['learningRate'])
         x = tensor(torch, groups['train'], scaler)
         y = torch.tensor([(r['label']['forwardReturn']-scaler['targetMean'])/scaler['targetScale'] for r in groups['train']], dtype=torch.float32)
@@ -117,7 +127,8 @@ def fit(spec, rows, fold):
         model.load_state_dict(state)
         # Test labels are accessed only after validation has frozen the checkpoint.
         test_values = scores(torch, model, groups['test'], scaler)
-    artifact = dict(architecture=contract.ARCHITECTURE, signature=contract.signature(spec),
+    architecture=contract.ARCHITECTURE if feature_mode=='ohlcv' else 'ohlcv-geometry-conv1d-8x8-average/1'
+    artifact = dict(architecture=architecture, signature=contract.signature(spec),
                     scaler=scaler, weights={k:v.tolist() for k,v in state.items()},
                     torchVersion=torch.__version__, createdAt=datetime.now(timezone.utc).isoformat(),
                     simulatedAvailableAt=fold['testStart'], historicalAvailabilityCertified=False,

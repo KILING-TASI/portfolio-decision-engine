@@ -69,7 +69,7 @@ def main(argv=None):
     for stream in (sys.stdout,sys.stderr):
         if hasattr(stream,'reconfigure'): stream.reconfigure(encoding='utf-8')
     parser=argparse.ArgumentParser(description='CNN可选研究模块：CPU回归得分，非交易或盈利认证')
-    parser.add_argument('command',choices=('validate','train','walk-forward','predict','bridge'))
+    parser.add_argument('command',choices=('validate','train','walk-forward','predict','bridge','compare'))
     parser.add_argument('--input',required=True,type=Path)
     parser.add_argument('--out-dir',required=True,type=Path)
     parser.add_argument('--artifact-dir',type=Path)
@@ -85,6 +85,10 @@ def main(argv=None):
             result=contract.base(spec,excluded)
             result.update(conclusion='输入结构和声明时点通过检查；没有训练，也未认证原始数据。',
                           humanRows=[['合格样本',len(rows)],['排除样本',len(excluded)]])
+        elif options.command=='compare':
+            from .candle_comparison import compare
+            print('阶段：正在按预声明窗口做三路线对照。',file=sys.stderr)
+            result=compare(spec)
         elif options.command in ('train','walk-forward'):
             from .cnn_engine import train,walk_forward
             print('阶段：正在CPU拟合、验证选型和冻结后的测试评估。',file=sys.stderr)
@@ -100,7 +104,10 @@ def main(argv=None):
                     raise ValueError('预测须指定单模型训练目录和模型摘要')
                 from .cnn_engine import predict
                 result=predict(spec,archive['model'],options.model_fingerprint)
-        result['humanRows']=[['资料性质','原创合成教学样本' if result.get('dataKind')=='synthetic-teaching' else '用户声明历史底稿，未认证']]+result.get('humanRows',[])
+        human_rows=result.get('humanRows',[])
+        if not any(row[0]=='资料性质' for row in human_rows):
+            human_rows=[['资料性质','原创合成教学样本' if result.get('dataKind')=='synthetic-teaching' else '用户声明历史底稿，未认证']]+human_rows
+        result['humanRows']=human_rows
         print('阶段：计算完成，正在保存新报告与回执。',file=sys.stderr)
         output=publish(spec,result,options.out_dir,'CNN因子研究复查')
         print('报告已生成：'+str(output/'report.html'))

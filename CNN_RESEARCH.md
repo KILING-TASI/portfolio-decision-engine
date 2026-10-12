@@ -17,7 +17,7 @@ portfolio-decision-engine cnn train --input examples/cnn-teaching/train.json --o
 portfolio-decision-engine cnn walk-forward --input examples/cnn-teaching/train.json --out-dir reports/cnn-rolling
 ```
 
-CPU 安装可先按 [PyTorch 官方安装说明](https://pytorch.org/get-started/locally/) 选择对应平台；本模块只在 CPU 计算，不要求显卡。已有 wheel 时执行 `python -m pip install "路径/portfolio_decision_engine-0.11.0-py3-none-any.whl[cnn]"`。安装依赖需要网络，运行不联网。所有命令也可写为 `python -m portfolio_engine cnn ...`。
+CPU 安装可先按 [PyTorch 官方安装说明](https://pytorch.org/get-started/locally/) 选择对应平台；本模块只在 CPU 计算，不要求显卡。已有 wheel 时执行 `python -m pip install "路径/portfolio_decision_engine-0.12.0-py3-none-any.whl[cnn]"`。安装依赖需要网络，运行不联网。所有命令也可写为 `python -m portfolio_engine cnn ...`。
 
 示例是本仓原创的四只虚构证券、64个合成样本；记录日不代表中国交易日。`make_example.py` 仅说明示例来源，生成器拒绝覆盖已有示例。示例好成绩不代表实盘效果。
 

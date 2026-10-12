@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "pattern-teaching-acceptance/1",
+  "date": "2026-10-12",
+  "packageVersion": "0.12.0",
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "torch": "2.14.1+cpu",
+  "sampleCount": 64,
+  "epochs": 4,
+  "seed": 17,
+  "lookbackRecords": 8,
+  "inputFileSha256": "7aa30ee53dcad85fc9eefd4e3684bf087f06841c2c432c8af58ee7a9590a0896",
+  "unitTests": 323,
+  "subtests": 146,
+  "patternTests": 22,
+  "legacyCNNUnchanged": true,
+  "commands": [
+    {
+      "command": "cnn validate",
+      "elapsedSeconds": 0.124285,
+      "networkBlocked": true
+    },
+    {
+      "command": "pattern identify",
+      "elapsedSeconds": 0.147996,
+      "networkBlocked": true
+    },
+    {
+      "command": "pattern study",
+      "elapsedSeconds": 0.150912,
+      "networkBlocked": true
+    },
+    {
+      "command": "cnn train",
+      "elapsedSeconds": 4.071079,
+      "networkBlocked": true
+    },
+    {
+      "command": "cnn walk-forward",
+      "elapsedSeconds": 2.292479,
+      "networkBlocked": true
+    },
+    {
+      "command": "cnn compare",
+      "elapsedSeconds": 2.295103,
+      "networkBlocked": true
+    },
+    {
+      "command": "cnn predict",
+      "elapsedSeconds": 2.179419,
+      "networkBlocked": true
+    },
+    {
+      "command": "cnn bridge",
+      "elapsedSeconds": 0.1194,
+      "networkBlocked": true
+    }
+  ],
+  "comparison": [
+    {
+      "MSE": {
+        "ohlcv": 5.645468334552821e-05,
+        "geometry": 4.345590299937844e-05,
+        "rules": 7.644e-05
+      },
+      "geometryMSEImprovement": 1.2998780346149772e-05,
+      "testIds": [
+        "d26-a0",
+        "d26-a1",
+        "d26-a2",
+        "d26-a3",
+        "d28-a0",
+        "d28-a1",
+        "d28-a2",
+        "d28-a3",
+        "d30-a0",
+        "d30-a1",
+        "d30-a2",
+        "d30-a3"
+      ]
+    },
+    {
+      "MSE": {
+        "ohlcv": 5.750121806941434e-05,
+        "geometry": 4.6669193561961486e-05,
+        "rules": 7.596604938271605e-05
+      },
+      "geometryMSEImprovement": 1.083202450745285e-05,
+      "testIds": [
+        "d34-a0",
+        "d34-a1",
+        "d34-a2",
+        "d34-a3",
+        "d36-a0",
+        "d36-a1",
+        "d36-a2",
+        "d36-a3",
+        "d38-a0",
+        "d38-a1",
+        "d38-a2",
+        "d38-a3",
+        "d40-a0",
+        "d40-a1",
+        "d40-a2",
+        "d40-a3"
+      ]
+    }
+  ],
+  "scope": "Original synthetic teaching only; same paired test samples; no performance guarantee, causal attribution or A-share validation. Timing includes interpreter/import and report I/O, not installation.",
+  "reproduce": "python tests/cnn_cold_acceptance.py --wheel dist/portfolio_decision_engine-0.12.0-py3-none-any.whl --out NEW_DIRECTORY --cnn"
+}
