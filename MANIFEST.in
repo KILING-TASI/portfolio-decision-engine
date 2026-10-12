@@ -6,7 +6,7 @@ recursive-include examples *.csv *.json *.md *.py
 recursive-include tests *.py
 
 include LICENSE
-recursive-include licenses *.txt *.md *.json LICENSE license *.rst
+recursive-include licenses *
 
 include SKILL.md
 
