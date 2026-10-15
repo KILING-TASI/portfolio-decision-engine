@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "public-validation/1",
+  "repository": "portfolio-decision-engine",
+  "registeredOn": "2026-10-15",
+  "hashFormat": "UTF-8 with LF newlines; BOM ignored; original response hashes remain in original receipts",
+  "coverage": "limited-public-inputs",
+  "sourceAuthenticityCertified": false,
+  "evidence": [
+    {
+      "path": "examples/account-exposure-limited-real.json",
+      "kind": "mixed-teaching-and-public",
+      "normalizedSha256": "d8f9d1de47bd004676cf6c3d6833ea9508fac3659bc69e6c913eb30fe748c3d5",
+      "sourceUrls": [
+        "https://fund.eastmoney.com/pingzhongdata/000001.js",
+        "https://fund.eastmoney.com/pingzhongdata/110003.js"
+      ]
+    }
+  ],
+  "checkFiles": [],
+  "gaps": [
+    "真实有限净值身份与教学账户金额混合，不算真实账户验收",
+    "组合现金/可成交性须本人完整资料"
+  ],
+  "limits": "registry and selected counterexamples; no new original-document authentication or investment-effect certification"
+}

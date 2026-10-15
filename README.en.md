@@ -2,13 +2,13 @@
 
 Review portfolio scenarios, cash needs, point-in-time factor panels and experiment histories. Full historical analysis uses optional analysis dependencies; base installation remains lightweight.
 
-[中文说明](README.md) · [Release v0.13.1](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.13.1) · [Skill instructions](SKILL.md) · [Input preparation](BEGINNER.md)
+[中文说明](README.md) · [Release v0.13.2](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.13.2) · [Skill instructions](SKILL.md) · [Input preparation](BEGINNER.md)
 
-Current release: **v0.13.1 · regular release**. Python **3.10+**. Base runtime dependencies: none. Optional extras: `analysis`, `cnn`. See [USAGE.md](USAGE.md) for scope.
+Current release: **v0.13.2 · regular release**. Python **3.10+**. Base runtime dependencies: none. Optional extras: `analysis`, `cnn`. See [USAGE.md](USAGE.md) for scope.
 
 ## First run
 
-Download the [complete source ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.13.1/portfolio-decision-engine-v0.13.1-source.zip), extract it and enter the directory containing `try_demo.py`:
+Download the [complete source ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.13.2/portfolio-decision-engine-v0.13.2-source.zip), extract it and enter the directory containing `try_demo.py`:
 
 ```console
 python try_demo.py --no-open --out-dir reports/first-demo

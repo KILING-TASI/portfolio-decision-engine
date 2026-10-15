@@ -81,6 +81,70 @@
       "canonicalPath": "tools/check_shared_code.py",
       "syncPolicy": "fixed-with-distribution; review and regenerate manifest before replacing; no runtime source dependency",
       "licenseScope": "see repository third-party notices; inventory does not grant rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/candle_comparison.py",
+      "normalizedTextSha256": "53a6a3e7127b89a4482be252e3ee6ccb671cefa3473d6d3f2f4ee1c7340ef2b0",
+      "canonicalRepository": "factor-research",
+      "canonicalPath": "src/cn_factor_research/candle_comparison.py",
+      "syncPolicy": "fixed-with-distribution; existing PDE v0.12 compatibility copy is not upgraded at runtime",
+      "licenseScope": "see repository third-party notices; inventory does not grant data rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/factor_contract.py",
+      "normalizedTextSha256": "73a4cbbfa60b5744aa8148639f806d0f113bf6c02bb77f9d198023d75b275ca0",
+      "canonicalRepository": "factor-research",
+      "canonicalPath": "src/cn_factor_research/factor_contract.py",
+      "syncPolicy": "fixed-with-distribution; existing PDE v0.12 compatibility copy is not upgraded at runtime",
+      "licenseScope": "see repository third-party notices; inventory does not grant data rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/cnn_cli.py",
+      "normalizedTextSha256": "765520fead72f7addf65071cf33cd5403c370fdbad502e8efb7ca7e43164fe12",
+      "canonicalRepository": "factor-research",
+      "canonicalPath": "src/cn_factor_research/cnn_cli.py",
+      "syncPolicy": "fixed-with-distribution; existing PDE v0.12 compatibility copy is not upgraded at runtime",
+      "licenseScope": "see repository third-party notices; inventory does not grant data rights"
+    },
+    {
+      "localPath": "examples/cnn-teaching/make_example.py",
+      "normalizedTextSha256": "7c4d4dea9b983a9d6ca6f58f780250350f652db615c9907d88c2cf3ccbe6b81a",
+      "canonicalRepository": "factor-research",
+      "canonicalPath": "examples/cnn-teaching/make_example.py",
+      "syncPolicy": "fixed-with-distribution; existing PDE v0.12 compatibility copy is not upgraded at runtime",
+      "licenseScope": "see repository third-party notices; inventory does not grant data rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/cnn_contract.py",
+      "normalizedTextSha256": "897a37ab179b6ed05902e90bcf2cb997f9c41bdea50da6d639b76bc4bfcd0364",
+      "canonicalRepository": "factor-research",
+      "canonicalPath": "src/cn_factor_research/cnn_contract.py",
+      "syncPolicy": "fixed-with-distribution; existing PDE v0.12 compatibility copy is not upgraded at runtime",
+      "licenseScope": "see repository third-party notices; inventory does not grant data rights"
+    },
+    {
+      "localPath": "examples/cnn-teaching/make_patterns.py",
+      "normalizedTextSha256": "f2c024675078552fa48a2d3d11788a14c043b91a37cf43d7a2d5d5a33e945e56",
+      "canonicalRepository": "factor-research",
+      "canonicalPath": "examples/cnn-teaching/make_patterns.py",
+      "syncPolicy": "fixed-with-distribution; existing PDE v0.12 compatibility copy is not upgraded at runtime",
+      "licenseScope": "see repository third-party notices; inventory does not grant data rights"
+    },
+    {
+      "localPath": "src/portfolio_engine/factor_research.py",
+      "normalizedTextSha256": "fb0bee59560e230b2a937a7caa63b630344bec47dcc58c33aa7af106c634febc",
+      "canonicalRepository": "factor-research",
+      "canonicalPath": "src/cn_factor_research/factor_research.py",
+      "syncPolicy": "fixed-with-distribution; existing PDE v0.12 compatibility copy is not upgraded at runtime",
+      "licenseScope": "see repository third-party notices; inventory does not grant data rights"
+    },
+    {
+      "localPath": "tools/verify_public_validation.py",
+      "normalizedTextSha256": "70fd731cb66bc999d5f16b45ef410f1d92993e9cdbc424e8616b6c49da08c799",
+      "canonicalRepository": "cn-data-adapters",
+      "canonicalPath": "tools/verify_public_validation.py",
+      "syncPolicy": "fixed-with-distribution; no runtime dependency on sibling repositories",
+      "licenseScope": "original MIT; public data and references retain their own rights"
     }
   ],
   "scope": "Git 跟踪的非空 Python 文件；排除 tests/test/build/dist 和 test_ 文件；按 UTF-8、LF、无 BOM 比较。相同文本不证明接口语义等价；历史固定版不要求跟随权威源最新版。"

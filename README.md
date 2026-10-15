@@ -2,9 +2,9 @@
 
 比较配置、回撤、费用和现金需求，生成可核对的报告与账本。
 
-[原创代码 MIT](LICENSE) · [发行说明](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.13.1) · [运行检查](https://github.com/KILING-TASI/portfolio-decision-engine/actions) · [English](README.en.md)
+[原创代码 MIT](LICENSE) · [发行说明](https://github.com/KILING-TASI/portfolio-decision-engine/releases/tag/v0.13.2) · [运行检查](https://github.com/KILING-TASI/portfolio-decision-engine/actions) · [English](README.en.md)
 
-当前发布：**v0.13.1 · 普通发行版**。Python **3.10+**；基础功能只需 Python，无第三方运行依赖。
+当前发布：**v0.13.2 · 普通发行版**。Python **3.10+**；基础功能只需 Python，无第三方运行依赖。
 
 [快速开始](#快速开始) · [使用自己的资料](#使用自己的资料) · [能力与边界](#能力与边界) · [文档与维护](#文档与维护)
 
@@ -21,7 +21,7 @@
 ## 快速开始
 
 1. 安装 Python 3.10 或以上版本。
-2. 下载[完整源码 ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.13.1/portfolio-decision-engine-v0.13.1-source.zip)并解压，进入包含 `try_demo.py` 的目录。
+2. 下载[完整源码 ZIP](https://github.com/KILING-TASI/portfolio-decision-engine/releases/download/v0.13.2/portfolio-decision-engine-v0.13.2-source.zip)并解压，进入包含 `try_demo.py` 的目录。
 3. 在该目录打开终端，运行：
 
 ```console
@@ -87,3 +87,7 @@ CNN、K线规则和因子研究已独立到 [factor-research](https://github.com
 [贡献说明](CONTRIBUTING.md) · [安全反馈](SECURITY.md) · [更新与清理](LIFECYCLE.md)
 
 [按问题选择其他工具](https://github.com/KILING-TASI/research-workbench/blob/main/references/tool-navigation.md)；资料契约校验已并入[数据仓](https://github.com/KILING-TASI/cn-data-adapters/blob/main/CONTRACT_MIGRATION.md)。默认分支的文档整理不改写已发布的源码包和历史结果；版本变化见 [CHANGELOG.md](CHANGELOG.md)。
+
+## 公开底稿验收
+
+[覆盖登记](PUBLIC_VALIDATION.json)区分公开事实、混合教学与尚缺样本。运行 `python tools/verify_public_validation.py --run-checks --output reports/public-validation-v1.json` 可核对冻结文本与已登记反例；重复运行使用新文件。通过不表示重新认证原文或真实市场效果，未取得的样本仍列为缺口。
